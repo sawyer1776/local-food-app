@@ -2,9 +2,13 @@ import { NavLink, Route } from 'react-router-dom';
 import ButtonElement from '../UI/ButtonElement';
 import classes from './LandingPage.module.css';
 import NewSeller from './NewSeller.js';
+import AuthContext from '../storage/auth-context';
+import { useContext } from 'react';
 
 const LandingPage = (props) => {
-	console.log('at landing page');
+	const authCtx = useContext(AuthContext);
+
+	console.log('authContext', authCtx);
 	return (
 		<div>
 			<NavLink to="/new-seller">

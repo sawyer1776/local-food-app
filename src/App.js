@@ -16,19 +16,24 @@ import LandingPage from './componants/sections/LandingPage';
 import NewSeller from './componants/sections/NewSeller';
 import AllSellers from './componants/sections/AllSellers';
 import SellerAdminPage from './componants/sections/SellerAdminPage';
+import ProductPage from './componants/sections/ProductPage';
+import SellerPageRouter from './componants/sections/SellerPageRouter';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let currentProduct = {};
 let productStatic = {};
 let producerStatic = {};
 let producerId = '7de2hsj7oxu2rtc';
+let allSellersData = [];
+let allProductsData = [];
 
 function App() {
 	const [isLoaded, setLoaded] = useState(false);
 	const authCtx = useContext(AuthContext);
 
 	useEffect(() => {
-		const fetchStatic = async function () {
+		const fetchListedProducersProducts = async function () {
+			console.log('trying');
 			const responseProducts = await client.records.getList(
 				'products',
 				1,
@@ -39,10 +44,11 @@ function App() {
 			);
 			productStatic = responseProducts.items;
 			currentProduct = productStatic[0];
+			console.log('products static', productStatic);
 			setLoaded(true);
 		};
 
-		const fetchProducerStatic = async function () {
+		const fetchOneProducer = async function () {
 			const response = await client.records.getOne(
 				'producers',
 				producerId,
@@ -51,9 +57,37 @@ function App() {
 				}
 			);
 			producerStatic = response;
+			console.log('ProducerStatic', producerStatic);
 		};
-		fetchProducerStatic();
-		fetchStatic();
+		const fetchAllProducers = async function () {
+			const responseProducersData =
+				await client.records.getList(
+					'producers',
+					1,
+					1000,
+					{}
+				);
+			allSellersData = responseProducersData.items;
+
+			setLoaded(true);
+		};
+		const fetchAllProducts = async function () {
+			const responseProducts = await client.records.getList(
+				'products',
+				1,
+				1000
+			);
+			allProductsData = responseProducts.items;
+			setLoaded(true);
+		};
+
+		if (isLoaded) return;
+		if (!isLoaded) {
+			fetchAllProducers();
+			// fetchOneProducer();
+			// fetchListedProducersProducts();
+			fetchAllProducts();
+		}
 	}, []);
 
 	if (!isLoaded) {
@@ -69,12 +103,6 @@ function App() {
 			<Switch>
 				<Route path="/" exact>
 					<LandingPage />
-					<NavLink to="/seller-page">
-						Go to Seller Page
-					</NavLink>
-					<NavLink to="/create-new-page">
-						Create New Page
-					</NavLink>
 				</Route>
 
 				<Route
@@ -92,13 +120,23 @@ function App() {
 					<AllSellers />
 				</Route>
 
-				<Route path="/seller-page">
-					<SellerPage
-						key={producerStatic.id}
-						producer={producerStatic}
-						products={productStatic}
-					/>
+				<Route path={`/seller-page/:sellerId`}>
+					<SellerPage />
 				</Route>
+				<Route path={`/product/:productId`}>
+					<ProductPage />
+				</Route>
+
+				{/* 
+				{allProductsData.map((product) => (
+					<Route path={`/product/${product.id}`}>
+						<ProductPage
+							product={product}
+							key={product.id}
+						/>
+					</Route>
+				))} */}
+
 				<Route path="/create-new-page">
 					<InputsPage></InputsPage>
 				</Route>

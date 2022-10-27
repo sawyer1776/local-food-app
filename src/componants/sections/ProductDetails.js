@@ -5,7 +5,7 @@ const ProductDetails = (props) => {
 		<ul>
 			<h3>Details</h3>
 			<li>
-				{props.product.details.map((detail) => (
+				{props.details.items.map((detail) => (
 					<p>{detail}</p>
 				))}
 			</li>

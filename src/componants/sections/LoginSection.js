@@ -42,9 +42,16 @@ const LoginPage = (props) => {
 				`${enteredEmail}`,
 				`${enteredPassword}`
 			);
-			authCtx.login(authData.token, authData.user);
-			console.log(authData.token);
-			console.log(authData.user);
+			const producerId = await client.records.getList(
+				'producers',
+				1,
+				1,
+				{
+					filter: `owner_id = '${authData.user.id}'`,
+				}
+			);
+
+			authCtx.login(authData, producerId);
 		} else {
 			const createProfile = await client.users.create({
 				email: `${enteredEmail}`,
