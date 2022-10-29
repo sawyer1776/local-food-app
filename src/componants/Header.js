@@ -7,15 +7,22 @@ import { HiHome } from 'react-icons/hi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import classes from './Header.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
 	return (
 		<div className={classes.header}>
 			<GiHamburgerMenu className={classes.icon} />
-			<HiHome className={classes.icon} />
+			<NavLink to="/all-sellers">
+				<HiHome className={classes.icon} />
+			</NavLink>
 			<input type="text" placeholder="Search"></input>
-			<BsFillPersonFill className={classes.icon} />
-			<BsFillBasketFill className={classes.icon} />
+			<NavLink to="/profile/any">
+				<BsFillPersonFill className={classes.icon} />
+			</NavLink>
+			<NavLink to="/basket/any">
+				<BsFillBasketFill className={classes.icon} />
+			</NavLink>
 		</div>
 	);
 };

@@ -4,9 +4,10 @@ import ImgSlider from './ImgSlider';
 import ProductDetails from './ProductDetails';
 import classes from './ProductPage.module.css';
 import ProductSnapshotList from './ProductSnapshotList';
-import { Link, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
 import { useState, useEffect } from 'react';
+
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
 let thisProduct = [];
@@ -22,13 +23,12 @@ const ProductPage = (props) => {
 			);
 			thisProduct = responseProduct;
 
-			console.log('product single', thisProduct);
 			const responseSeller = await client.records.getOne(
 				'producers',
 				thisProduct.producer_id
 			);
 			thisSellerData = responseSeller;
-			console.log('Page Seller Data', thisSellerData);
+
 			setLoaded(true);
 		};
 
@@ -63,7 +63,11 @@ const ProductPage = (props) => {
 						<h3>${thisProduct.price.toFixed(2)}</h3>
 						<p>per {thisProduct.unit}</p>
 					</div>
-					<p>{inStock(props)}</p>
+					<p>
+						{thisProduct.qty > 0
+							? 'Availble'
+							: 'Out of Stock'}
+					</p>
 				</div>
 
 				<p>qty</p>

@@ -1,6 +1,7 @@
 import PocketBase from 'pocketbase';
 import { useEffect, useState } from 'react';
 import SellerLink from './SellerLink';
+import LoadingSpinner from '../miniComponents/LoadingSpinner';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -10,17 +11,16 @@ const AllSellers = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	useEffect(() => {
 		const fetchProducers = async function () {
+			//PAGINATE with PARAMS
 			const responseProducersData =
 				await client.records.getList(
 					'producers',
 					1,
-					100,
+					25,
 					{}
 				);
 			allSellersData = responseProducersData.items;
-			console.log('response Data', allSellersData);
-			console.log(typeof allSellersData);
-			console.count();
+
 			setLoaded(true);
 		};
 		if (isLoaded) return;
@@ -28,7 +28,7 @@ const AllSellers = (props) => {
 	});
 
 	if (!isLoaded) {
-		return <h1>loading...</h1>;
+		return <LoadingSpinner />;
 	}
 	if (isLoaded) {
 		return (

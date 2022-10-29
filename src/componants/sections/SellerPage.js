@@ -3,9 +3,10 @@ import ImgSlider from './ImgSlider';
 import ButtonElement from '../UI/ButtonElement';
 import ProductSnapshot from './ProductSnapshot';
 import { useState, useEffect } from 'react';
-import { Link, Route, useParams } from 'react-router-dom';
-import ProductPage from './ProductPage';
+import { Link, useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
+import LoadingSpinner from '../miniComponents/LoadingSpinner';
+import AboutSection from './AboutSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
@@ -13,11 +14,12 @@ let productList = [];
 
 const SellerPage = (props) => {
 	let [showMore, setShowMore] = useState(false);
+	let [showAbout, setShowAbout] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
 	const params = useParams();
 	useEffect(() => {
 		const fetchListedProducersProducts = async function () {
-			console.log('trying');
+			//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
 			const responseProducts = await client.records.getList(
 				'products',
 				1,
@@ -27,9 +29,6 @@ const SellerPage = (props) => {
 				}
 			);
 			productList = responseProducts.items;
-
-			console.log('products', productList);
-			console.log('product Slice', productList.slice(0, 2));
 		};
 
 		const fetchSeller = async function () {
@@ -41,8 +40,9 @@ const SellerPage = (props) => {
 				}
 			);
 			thisSellerData = responseSeller;
-			console.log('Page Seller Data', thisSellerData);
+			console.log(thisSellerData);
 		};
+
 		const initFetch = async function () {
 			await fetchListedProducersProducts();
 			await fetchSeller();
@@ -62,26 +62,34 @@ const SellerPage = (props) => {
 			setShowMore(false);
 		}
 	};
+	const toggleShowAbout = function () {
+		if (showAbout == false) {
+			setShowAbout(true);
+		} else {
+			setShowAbout(false);
+		}
+	};
 
 	if (!isLoaded) {
-		return <h1>loading...</h1>;
+		return <LoadingSpinner />;
 	}
 	if (isLoaded) {
 		return (
 			<section className={classes.container}>
-				<h1>Seller Page</h1>
-				<p>{params.sellerId}</p>
 				<h2>{thisSellerData.producer_name}</h2>
 				<ImgSlider imgs={thisSellerData} />
-				<ButtonElement
-					buttonText="About"
-					className={classes.btn}
-				></ButtonElement>
-				<ButtonElement
-					buttonText="All Products"
-					className={classes.btn}
-				></ButtonElement>
-				<ul className={classes.featuredContainer}>
+				<button onClick={toggleShowAbout}>About</button>
+				{showAbout ? (
+					<AboutSection
+						aboutText={thisSellerData.description}
+					/>
+				) : null}
+				<button>All Products</button>
+
+				<ul
+					id="products-container"
+					className={classes.featuredContainer}
+				>
 					{productList.slice(0, 2).map((product) => (
 						<Link to={`/product/${product.id}`}>
 							<ProductSnapshot
