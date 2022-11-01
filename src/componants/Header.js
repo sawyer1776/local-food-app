@@ -17,10 +17,10 @@ const Header = (props) => {
 				<HiHome className={classes.icon} />
 			</NavLink>
 			<input type="text" placeholder="Search"></input>
-			<NavLink to="/profile/any">
+			<NavLink to="/profile">
 				<BsFillPersonFill className={classes.icon} />
 			</NavLink>
-			<NavLink to="/basket/any">
+			<NavLink to="/basket">
 				<BsFillBasketFill className={classes.icon} />
 			</NavLink>
 		</div>

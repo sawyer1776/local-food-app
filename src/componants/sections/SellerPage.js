@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
 import LoadingSpinner from '../miniComponents/LoadingSpinner';
 import AboutSection from './AboutSection';
+import PickupSection from './PickupSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
@@ -15,6 +16,7 @@ let productList = [];
 const SellerPage = (props) => {
 	let [showMore, setShowMore] = useState(false);
 	let [showAbout, setShowAbout] = useState(false);
+	let [showPickup, setShowPickup] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
 	const params = useParams();
 	useEffect(() => {
@@ -69,6 +71,13 @@ const SellerPage = (props) => {
 			setShowAbout(false);
 		}
 	};
+	const toggleShowPickup = function () {
+		if (showPickup == false) {
+			setShowPickup(true);
+		} else {
+			setShowPickup(false);
+		}
+	};
 
 	if (!isLoaded) {
 		return <LoadingSpinner />;
@@ -84,7 +93,10 @@ const SellerPage = (props) => {
 						aboutText={thisSellerData.description}
 					/>
 				) : null}
-				<button>All Products</button>
+				<button onClick={toggleShowPickup}>
+					Pickup / Meetup Options
+				</button>
+				{showPickup ? <PickupSection /> : null}
 
 				<ul
 					id="products-container"

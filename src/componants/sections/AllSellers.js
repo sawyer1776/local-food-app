@@ -37,6 +37,7 @@ const AllSellers = (props) => {
 				<div>
 					{allSellersData.map((seller) => (
 						<SellerLink
+							seller={seller}
 							name={seller.producer_name}
 							id={seller.id}
 							key={seller.id}

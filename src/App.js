@@ -53,11 +53,11 @@ function App() {
 					<NewSeller />
 				</Route>
 
-				<Route path="/profile/:profileId">
+				<Route path="/profile">
 					<ProfilePage />
 				</Route>
 
-				<Route path="/basket/:profileId">
+				<Route path="/basket">
 					<BasketPage />
 				</Route>
 			</Switch>

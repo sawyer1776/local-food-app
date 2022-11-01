@@ -38,14 +38,6 @@ const ProductPage = (props) => {
 		}
 	});
 
-	const inStock = function (props) {
-		if (thisProduct.qty > 0) {
-			return 'Available';
-		} else {
-			return 'Out Of Stock';
-		}
-	};
-
 	if (!isLoaded) return <h1>Loading...</h1>;
 
 	if (isLoaded)
