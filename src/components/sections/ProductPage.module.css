@@ -1,0 +1,19 @@
+.titleReviews {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title {
+	margin: 0;
+	padding: 0;
+}
+
+.priceAndUnit {
+	display: flex;
+	gap: 1rem;
+}
+
+.priceAndStock {
+	display: flex;
+	justify-content: space-between;
+}
