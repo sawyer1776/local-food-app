@@ -1,10 +1,10 @@
 import AuthContext from '../storage/auth-context';
 import { useContext, useEffect, useState } from 'react';
 import PocketBase from 'pocketbase';
-import LoginSection from './LoginSection';
-import ProductAdminItem from './ProductAdminItem';
-import InputsPage from './InputsPage';
-import LoadingSpinner from '../miniComponents/LoadingSpinner';
+import LoginSection from '../sections/LoginSection';
+import ProductAdminItem from '../UI/ProductAdminItem';
+import InputsSection from '../sections/InputsSection';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let adminData = null;
@@ -116,7 +116,7 @@ const SellerAdminPage = () => {
 				</li>
 				<li>
 					{addingAProduct ? (
-						<InputsPage
+						<InputsSection
 							addingProductFunc={addingProductFunc}
 						/>
 					) : null}

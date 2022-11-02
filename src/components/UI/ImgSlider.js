@@ -1,4 +1,3 @@
-import chicken from './chicken.jpg';
 import classes from './ImgSlider.module.css';
 
 const ImgSlider = (props) => {

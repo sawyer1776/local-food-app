@@ -1,4 +1,4 @@
-import LoginSection from './LoginSection';
+import LoginSection from '../sections/LoginSection';
 import AuthContext from '../storage/auth-context';
 import { useContext, useState } from 'react';
 import PocketBase from 'pocketbase';

@@ -1,7 +1,7 @@
 import PocketBase from 'pocketbase';
 import { useEffect, useState } from 'react';
-import SellerLink from './SellerLink';
-import LoadingSpinner from '../miniComponents/LoadingSpinner';
+import SellerLink from '../UI/SellerLink';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 

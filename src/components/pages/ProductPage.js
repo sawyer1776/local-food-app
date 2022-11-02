@@ -1,9 +1,9 @@
-import ReviewContainer from '../miniComponents/ReviewContainer';
+import ReviewContainer from '../UI/ReviewContainer';
 import ButtonElement from '../UI/ButtonElement';
-import ImgSlider from './ImgSlider';
-import ProductDetails from './ProductDetails';
+import ImgSlider from '../UI/ImgSlider';
+import ProductDetails from '../UI/ProductDetails';
 import classes from './ProductPage.module.css';
-import ProductSnapshotList from './ProductSnapshotList';
+
 import { useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
 import { useState, useEffect } from 'react';

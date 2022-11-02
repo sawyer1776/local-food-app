@@ -1,10 +1,6 @@
-import classes from './InputsPage.module.css';
+import classes from './InputsSection.module.css';
 import React, { useState, useContext } from 'react';
 import PocketBase from 'pocketbase';
-import ProductDetails from './ProductDetails';
-import ProductPage from './ProductPage';
-import IfProductSnapshot from './IfProductSnapshot';
-import ProductSnapshot from './ProductSnapshot';
 import AuthContext from '../storage/auth-context';
 
 const client = new PocketBase('http://127.0.0.1:8090');

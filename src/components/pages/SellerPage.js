@@ -1,13 +1,12 @@
 import classes from './SellerPage.module.css';
-import ImgSlider from './ImgSlider';
-import ButtonElement from '../UI/ButtonElement';
-import ProductSnapshot from './ProductSnapshot';
+import ImgSlider from '../UI/ImgSlider';
+import ProductSnapshot from '../UI/ProductSnapshot';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
-import LoadingSpinner from '../miniComponents/LoadingSpinner';
-import AboutSection from './AboutSection';
-import PickupSection from './PickupSection';
+import LoadingSpinner from '../UI/LoadingSpinner';
+import AboutSection from '../sections/AboutSection';
+import PickupSection from '../sections/PickupSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};

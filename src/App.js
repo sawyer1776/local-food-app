@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AuthContext from './components/storage/auth-context';
-import Header from './components/Header';
-import SellerPage from './components/sections/SellerPage.js';
-import LandingPage from './components/sections/LandingPage';
-import NewSeller from './components/sections/NewSeller';
-import AllSellers from './components/sections/AllSellers';
-import SellerAdminPage from './components/sections/SellerAdminPage';
-import ProductPage from './components/sections/ProductPage';
-import LoginPage from './components/sections/LoginSection';
+import Header from './components/sections/Header';
+import SellerPage from './components/pages/SellerPage.js';
+import LandingPage from './components/pages/LandingPage';
+import NewSeller from './components/pages/NewSellerPage';
+import AllSellersPage from './components/pages/AllSellersPage';
+import SellerAdminPage from './components/pages/SellerAdminPage';
+import ProductPage from './components/pages/ProductPage';
+import LoginSection from './components/sections/LoginSection';
 import ProfilePage from './ProfilePage';
-import BasketPage from './components/sections/BasketPage';
+import BasketPage from './components/pages/BasketPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -33,11 +33,11 @@ function App() {
 				</Route>
 
 				<Route path="/all-sellers">
-					<AllSellers />
+					<AllSellersPage />
 				</Route>
 
 				<Route path="/login">
-					<LoginPage />
+					<LoginSection />
 				</Route>
 
 				<Route

@@ -1,7 +1,7 @@
 import { NavLink, Route } from 'react-router-dom';
 import ButtonElement from '../UI/ButtonElement';
 import classes from './LandingPage.module.css';
-import NewSeller from './NewSeller.js';
+import NewSeller from './NewSellerPage.js';
 import AuthContext from '../storage/auth-context';
 import { useContext } from 'react';
 

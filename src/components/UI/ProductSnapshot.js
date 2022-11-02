@@ -1,7 +1,5 @@
 import classes from './ProductSnapshot.module.css';
-
-import chicken from './chicken.jpg';
-import ReviewContainer from '../miniComponents/ReviewContainer';
+import ReviewContainer from '../UI/ReviewContainer';
 
 const ProductSnapshot = (props) => {
 	return (
