@@ -1,19 +1,20 @@
 import classes from './InputsPage.module.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PocketBase from 'pocketbase';
 import ProductDetails from './ProductDetails';
 import ProductPage from './ProductPage';
 import IfProductSnapshot from './IfProductSnapshot';
 import ProductSnapshot from './ProductSnapshot';
+import AuthContext from '../storage/auth-context';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
-const Inputs = (props) => {
+const InputsPage = (props) => {
+	const authCtx = useContext(AuthContext);
 	const [title, setTitle] = useState('');
 	const [price, setPrice] = useState(0);
 	const [unit, setUnit] = useState('');
 	const [qty, setQty] = useState(0);
-	const [stars, setStars] = useState(0);
 	const [description, setDescription] = useState('');
 	const [details, setDetails] = useState('');
 	const [files, setFile] = useState('');
@@ -22,27 +23,15 @@ const Inputs = (props) => {
 		price: price,
 		unit: unit,
 		qty: qty,
-		stars: stars,
 		description: description,
 		details: details,
+		producer_id: authCtx.sellerPageId,
 	};
 
 	const record = async function () {
+		console.log('Submitting');
+		console.log(data);
 		await client.records.create('products', data);
-	};
-
-	const [productData, setProductData] = useState([]);
-
-	const fetchHandler = async function () {
-		const response = await client.records.getFullList(
-			'products',
-			5 /* batch size */,
-			{
-				sort: '-created',
-			}
-		);
-		setProductData(response);
-		console.log(response);
 	};
 
 	return (
@@ -76,13 +65,7 @@ const Inputs = (props) => {
 						setQty(event.target.value);
 					}}
 				/>
-				<label>Stars:</label>
-				<input
-					type="number"
-					onChange={(event) => {
-						setStars(event.target.value);
-					}}
-				/>
+
 				<label>Description:</label>
 				<input
 					type="text"
@@ -105,9 +88,8 @@ const Inputs = (props) => {
 			</div>
 
 			<button onClick={record}>Submit</button>
-			<button onClick={fetchHandler}>View</button>
 		</div>
 	);
 };
 
-export default Inputs;
+export default InputsPage;

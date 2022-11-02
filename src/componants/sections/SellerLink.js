@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import classes from './SellerLink.module.css';
 
 const SellerLink = (props) => {
-	console.log(props.seller['@collectionId']);
 	return (
 		<NavLink
 			className={classes.sellerLinkContainer}

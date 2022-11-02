@@ -20,11 +20,9 @@ export const AuthContextProvider = (props) => {
 	const userIsLoggedIn = !!token;
 
 	const loginHandler = (authData, producerId) => {
-		console.log('login handler');
 		setToken(authData.token);
 		setUser(authData.user);
 		if (producerId.items.length > 0) {
-			console.log('there is a producer id', producerId);
 			setSellerPageId(producerId.items[0].id);
 		}
 	};
@@ -32,7 +30,7 @@ export const AuthContextProvider = (props) => {
 	const logoutHandler = () => {
 		setToken(null);
 	};
-
+	// THIS IS THE ONE TO USE, DISABLED FOR TESTING
 	const contextValue = {
 		token: token,
 		user: user,
@@ -41,6 +39,15 @@ export const AuthContextProvider = (props) => {
 		login: loginHandler,
 		logout: logoutHandler,
 	};
+	// const contextValue = {
+	// 	token:
+	// 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2N…XIifQ.VmkfwAMj6hBVLTBoXzO8f9RN-iFMZj8MFGrUtUamxDs',
+	// 	user: { id: 'zighdqt8mozdiw6' },
+	// 	sellerPageId: 'zighdqt8mozdiw6',
+	// 	isLoggedIn: true,
+	// 	login: loginHandler,
+	// 	logout: logoutHandler,
+	//};
 
 	return (
 		<AuthContext.Provider value={contextValue}>

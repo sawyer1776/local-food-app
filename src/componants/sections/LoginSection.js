@@ -1,5 +1,10 @@
 import { NavLink, Route } from 'react-router-dom';
-import { useRef, useState, useContext } from 'react';
+import {
+	useRef,
+	useState,
+	useContext,
+	useEffect,
+} from 'react';
 import ButtonElement from '../UI/ButtonElement';
 import classes from './LoginSection.module.css';
 import PocketBase from 'pocketbase';
@@ -26,7 +31,8 @@ const LoginPage = (props) => {
 	};
 
 	const submitHandler = async (event) => {
-		event.preventDefault();
+		//REMOVE AFTER TESTING DUMMY LOGIN
+		// event.preventDefault();
 		console.log('Ouch');
 
 		//Validate inputs
@@ -38,9 +44,14 @@ const LoginPage = (props) => {
 		//Add Validation
 
 		if (loginOrCreateAcct === 'Login') {
+			//RETURN AFTER DUMMY LOGIN
+			// const authData = await client.users.authViaEmail(
+			// 	`${enteredEmail}`,
+			// 	`${enteredPassword}`
+			// );
 			const authData = await client.users.authViaEmail(
-				`${enteredEmail}`,
-				`${enteredPassword}`
+				`blackcreekproductions@gmail.com`,
+				`12345678`
 			);
 			const producerId = await client.records.getList(
 				'producers',
@@ -61,6 +72,10 @@ const LoginPage = (props) => {
 			console.log(createProfile);
 		}
 	};
+
+	useEffect(() => {
+		submitHandler();
+	});
 
 	return (
 		<section className={classes.loginContainer}>
