@@ -7,7 +7,7 @@
 	gap: 0.5rem;
 	height: 4rem;
 
-	background-color: #1f7a22;
+	background-color: var(--main-color);
 
 	z-index: 999;
 	border-bottom: 2px solid #103d13;

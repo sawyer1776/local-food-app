@@ -5,6 +5,7 @@ import LoginSection from '../sections/LoginSection';
 import ProductAdminItem from '../UI/ProductAdminItem';
 import InputsSection from '../sections/InputsSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import { toggleState } from '../storage/helper-functions';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let adminData = null;
@@ -46,14 +47,6 @@ const SellerAdminPage = () => {
 		setLoaded(true);
 	};
 
-	const toggleAddingAProduct = function () {
-		if (addingAProduct == false) {
-			setAddingAProduct(true);
-		} else {
-			setAddingAProduct(false);
-		}
-	};
-
 	const deleteProduct = async function (recordId) {
 		await client.records.delete('products', recordId);
 		setLoaded(false);
@@ -61,7 +54,7 @@ const SellerAdminPage = () => {
 	};
 
 	const addingProductFunc = () => {
-		toggleAddingAProduct();
+		toggleState(setAddingAProduct, addingAProduct);
 		setLoaded(false);
 		fetchData();
 	};
@@ -120,7 +113,14 @@ const SellerAdminPage = () => {
 							addingProductFunc={addingProductFunc}
 						/>
 					) : null}
-					<button onClick={toggleAddingAProduct}>
+					<button
+						onClick={() => {
+							toggleState(
+								setAddingAProduct,
+								addingAProduct
+							);
+						}}
+					>
 						{addingAProduct
 							? 'Nevermind '
 							: 'Add A Product'}

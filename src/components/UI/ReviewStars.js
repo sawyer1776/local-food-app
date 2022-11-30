@@ -1,4 +1,5 @@
 import classes from './ReviewStars.module.css';
+import { BsStarFill } from 'react-icons/bs';
 
 const ReviewStars = (props) => {
 	let totalStars = [];
@@ -6,7 +7,7 @@ const ReviewStars = (props) => {
 		totalStars.push(
 			//MAKE BETTER UNIQUE KEY LATER
 			<li className={classes.star} key={Math.random()}>
-				*
+				<BsStarFill />
 			</li>
 		);
 	}

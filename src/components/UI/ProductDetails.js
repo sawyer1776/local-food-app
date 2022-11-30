@@ -5,8 +5,8 @@ const ProductDetails = (props) => {
 		<ul>
 			<h3>Details</h3>
 			<li>
-				{props.details.items.map((detail) => (
-					<p>{detail}</p>
+				{props.details.items.map((detail, index) => (
+					<p key={index}>{detail}</p>
 				))}
 			</li>
 		</ul>

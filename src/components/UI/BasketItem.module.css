@@ -1,0 +1,27 @@
+.imgAndText {
+	display: flex;
+	gap: 0.5rem;
+}
+
+h3 {
+	text-align: left;
+}
+
+.priceAndQty {
+	display: flex;
+	justify-content: space-between;
+}
+
+.basketQty {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.basketBtns {
+	display: flex;
+	justify-content: space-between;
+}
+
+.qtyBtns {
+	display: flex;
+}

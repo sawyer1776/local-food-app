@@ -2,12 +2,15 @@ import classes from './InputsSection.module.css';
 import React, { useState, useContext } from 'react';
 import PocketBase from 'pocketbase';
 import AuthContext from '../storage/auth-context';
+//HAS TO BE HERE, function passed in calls it
+import { toggleState } from '../storage/helper-functions';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
 const InputsPage = (props) => {
 	const authCtx = useContext(AuthContext);
 	const [title, setTitle] = useState('');
+	const [titleIsValid, setTitleIsValid] = useState(true);
 	const [price, setPrice] = useState(0);
 	const [unit, setUnit] = useState('');
 	const [qty, setQty] = useState(0);
@@ -30,11 +33,24 @@ const InputsPage = (props) => {
 		await client.records.create('products', data);
 	};
 
+	const submitHandler = function () {
+		console.log('Submit Handler');
+		if (title.trim().length <= 0) {
+			console.log(title.trim());
+			setTitleIsValid(false);
+			return;
+		} else {
+			record();
+			props.addingProductFunc();
+		}
+	};
+
 	return (
 		<div>
 			<div className={classes.allInputs}>
 				<label>Product Title:</label>
 				<input
+					className={classes.invalid}
 					type="text"
 					onChange={(event) => {
 						setTitle(event.target.value);
@@ -83,14 +99,7 @@ const InputsPage = (props) => {
 				/>
 			</div>
 
-			<button
-				onClick={() => {
-					record();
-					props.addingProductFunc();
-				}}
-			>
-				Submit
-			</button>
+			<button onClick={submitHandler}>Submit</button>
 		</div>
 	);
 };

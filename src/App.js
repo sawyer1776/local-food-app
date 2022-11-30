@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useParams } from 'react-router-dom';
 import AuthContext from './components/storage/auth-context';
 import Header from './components/sections/Header';
 import SellerPage from './components/pages/SellerPage.js';
@@ -14,6 +14,7 @@ import BasketPage from './components/pages/BasketPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
+	const params = useParams();
 
 	return (
 		<main>

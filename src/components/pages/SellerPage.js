@@ -7,6 +7,8 @@ import PocketBase from 'pocketbase';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import AboutSection from '../sections/AboutSection';
 import PickupSection from '../sections/PickupSection';
+import { toggleState } from '../storage/helper-functions';
+import ReviewStars from '../UI/ReviewStars';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
@@ -56,50 +58,53 @@ const SellerPage = (props) => {
 		}
 	});
 
-	const toggleShowMore = function () {
-		if (showMore == false) {
-			setShowMore(true);
-		} else {
-			setShowMore(false);
-		}
-	};
-	const toggleShowAbout = function () {
-		if (showAbout == false) {
-			setShowAbout(true);
-		} else {
-			setShowAbout(false);
-		}
-	};
-	const toggleShowPickup = function () {
-		if (showPickup == false) {
-			setShowPickup(true);
-		} else {
-			setShowPickup(false);
-		}
-	};
-
 	if (!isLoaded) {
 		return <LoadingSpinner />;
 	}
 	if (isLoaded) {
 		return (
 			<section className={classes.container}>
-				<h2>{thisSellerData.producer_name}</h2>
+				<div className={classes.title}>
+					<div className={classes.titleAndReviews}>
+						<h2>{thisSellerData.producer_name}</h2>
+						<ul className={classes.reviewStarsContainer}>
+							<ReviewStars
+								className={classes.reviewStars}
+								stars={thisSellerData.reviews}
+							/>
+						</ul>
+					</div>
+					<h3 className={classes.subtitle}>
+						Backyard farm in the greater Opilika Al, area
+					</h3>
+				</div>
 				<ImgSlider imgs={thisSellerData} />
-				<button onClick={toggleShowAbout}>About</button>
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowAbout, showAbout);
+					}}
+				>
+					About
+				</button>
 				{showAbout ? (
 					<AboutSection
-						aboutText={thisSellerData.description}
+						aboutText={thisSellerData.about_description}
 					/>
 				) : null}
-				<button onClick={toggleShowPickup}>
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowPickup, showPickup);
+					}}
+				>
 					Pickup / Meetup Options
 				</button>
 				{showPickup ? <PickupSection /> : null}
 
 				<ul
 					id="products-container"
-					className={classes.featuredContainer}
+					className={classes.productsContainer}
 				>
 					{productList.slice(0, 2).map((product) => (
 						<Link to={`/product/${product.id}`}>
@@ -121,7 +126,9 @@ const SellerPage = (props) => {
 						))}
 				</ul>
 				<button
-					onClick={toggleShowMore}
+					onClick={() => {
+						toggleState(setShowMore, showMore);
+					}}
 					className={classes.moreBtn}
 				>
 					{showMore ? 'Show Less' : 'Show More'}

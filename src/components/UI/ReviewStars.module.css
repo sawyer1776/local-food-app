@@ -1,3 +1,4 @@
 .star {
-	font-size: 2.5rem;
+	color: var(--main-color);
+	height: 100%;
 }

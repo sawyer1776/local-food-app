@@ -3,10 +3,11 @@ import ButtonElement from '../UI/ButtonElement';
 import ImgSlider from '../UI/ImgSlider';
 import ProductDetails from '../UI/ProductDetails';
 import classes from './ProductPage.module.css';
-
+import { addToCart } from '../storage/helper-functions';
 import { useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../storage/auth-context';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
@@ -15,6 +16,8 @@ let thisProduct = [];
 const ProductPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const params = useParams();
+	const authCtx = useContext(AuthContext);
+
 	useEffect(() => {
 		const fetchThisProduct = async function () {
 			const responseProduct = await client.records.getOne(
@@ -63,7 +66,18 @@ const ProductPage = (props) => {
 				</div>
 
 				<p>qty</p>
-				<ButtonElement buttonText="Add To Basket" />
+				<button
+					onClick={() => {
+						addToCart(
+							thisProduct.title,
+							thisProduct.id,
+							authCtx.user.id,
+							1
+						);
+					}}
+				>
+					Add to Basket
+				</button>
 				<ButtonElement buttonText="Pick Up / Meetup Options" />
 				<p>{thisProduct.description}</p>
 				<ProductDetails details={thisProduct.details} />

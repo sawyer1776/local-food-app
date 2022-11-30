@@ -1,18 +1,59 @@
 .container {
-	margin: 0 1rem;
+	margin: 1rem;
+	width: calc(100vw - 2rem);
+	max-width: 1024px;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+
+	justify-content: center;
+	align-items: center;
 }
 
-.featuredContainer {
+.title {
+	align-self: flex-start;
+	width: 100%;
+}
+
+.titleAndReviews {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 0.5rem;
+}
+
+.reviewStars {
+	font-size: 1rem;
+}
+
+.reviewStarsContainer {
+	display: flex;
+	list-style: none;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+}
+
+.subtitle {
+	font-weight: 400;
+	font-size: 1rem;
+}
+
+.productsContainer {
 	list-style: none;
 	display: grid;
-	grid-template-columns: repeat(2, 50%);
-	gap: 1rem;
+	max-width: 100%;
+	grid-template-columns: repeat(2, 48.5%);
+	gap: 0rem;
 	justify-content: space-between;
 	padding: 0;
+	box-sizing: border-box;
+}
+.product {
+	background-color: red;
+	width: 100%;
+	height: 10rem;
 }
 .coverImg {
 	width: 100%;
@@ -21,6 +62,6 @@
 }
 
 .moreBtn {
-	font-size: large;
-	text-align: right;
+	align-self: flex-end;
+	font-size: 1rem;
 }
