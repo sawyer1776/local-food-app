@@ -9,16 +9,21 @@ import AboutSection from '../sections/AboutSection';
 import PickupSection from '../sections/PickupSection';
 import { toggleState } from '../storage/helper-functions';
 import ReviewStars from '../UI/ReviewStars';
+import MapSection from '../sections/MapSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
+
 let thisSellerData = {};
 let productList = [];
+let pickupList = [];
+let latLong = [];
 
 const SellerPage = (props) => {
-	let [showMore, setShowMore] = useState(false);
-	let [showAbout, setShowAbout] = useState(false);
-	let [showPickup, setShowPickup] = useState(false);
+	const [showMore, setShowMore] = useState(false);
+	const [showAbout, setShowAbout] = useState(false);
+	const [showPickup, setShowPickup] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
+	const [mapIsLoaded, setMapIsLoaded] = useState(false);
 	const params = useParams();
 	useEffect(() => {
 		const fetchListedProducersProducts = async function () {
@@ -33,6 +38,17 @@ const SellerPage = (props) => {
 			);
 			productList = responseProducts.items;
 		};
+		const fetchProducersPickups = async function () {
+			const responseProducts = await client.records.getList(
+				'pickup_meetups',
+				1,
+				10,
+				{
+					filter: `producer_id = '${params.sellerId}'`,
+				}
+			);
+			pickupList = responseProducts.items;
+		};
 
 		const fetchSeller = async function () {
 			const responseSeller = await client.records.getOne(
@@ -45,10 +61,42 @@ const SellerPage = (props) => {
 			thisSellerData = responseSeller;
 			console.log(thisSellerData);
 		};
+		const fetchLatLong = async function () {
+			let address = thisSellerData.address;
+			const request = new XMLHttpRequest();
+			request.open(
+				'GET',
+				`https://api.opencagedata.com/geocode/v1/json?q=${address}&countrycode=us&limit=1&key=c44325b9d11346f595aaca4bedc21234`
+			);
+			request.send();
+			request.addEventListener('load', function () {
+				const data = JSON.parse(this.responseText);
+				let lat = String(data.results[0].geometry.lat);
+				let indexOf = lat.indexOf('.');
+				lat = lat.slice(0, indexOf + 3);
+				lat = lat.concat('5');
+				let long = String(data.results[0].geometry.lng);
+				indexOf = long.indexOf('.');
+				long = long.slice(0, indexOf + 3);
+				long = long.concat('5');
+
+				latLong = [];
+				latLong.push(Number(lat));
+				latLong.push(Number(long));
+				console.log(latLong);
+				setMapIsLoaded(true);
+			});
+		};
 
 		const initFetch = async function () {
-			await fetchListedProducersProducts();
-			await fetchSeller();
+			const allFetches = async function () {
+				await fetchListedProducersProducts();
+				await fetchProducersPickups();
+				await fetchSeller();
+				await fetchLatLong();
+			};
+			await allFetches();
+			console.log(pickupList);
 			setLoaded(true);
 		};
 
@@ -88,9 +136,19 @@ const SellerPage = (props) => {
 					About
 				</button>
 				{showAbout ? (
-					<AboutSection
-						aboutText={thisSellerData.about_description}
-					/>
+					<>
+						<AboutSection
+							aboutText={thisSellerData.about_description}
+						/>
+						<button
+							className={classes.showLessBtn}
+							onClick={() => {
+								toggleState(setShowAbout, showAbout);
+							}}
+						>
+							Show Less
+						</button>
+					</>
 				) : null}
 				<button
 					className="wide"
@@ -100,7 +158,9 @@ const SellerPage = (props) => {
 				>
 					Pickup / Meetup Options
 				</button>
-				{showPickup ? <PickupSection /> : null}
+				{showPickup ? (
+					<PickupSection pickupMeetups={pickupList} />
+				) : null}
 
 				<ul
 					id="products-container"
@@ -133,6 +193,11 @@ const SellerPage = (props) => {
 				>
 					{showMore ? 'Show Less' : 'Show More'}
 				</button>
+				{mapIsLoaded ? (
+					<MapSection latLong={latLong}></MapSection>
+				) : (
+					'LOADING...'
+				)}
 			</section>
 		);
 	}

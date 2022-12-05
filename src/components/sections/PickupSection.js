@@ -1,8 +1,19 @@
+import classes from './PickupSection.module.css';
+import PickupMeetupItem from '../UI/PickupMeetupItem';
+
 const PickupSection = (props) => {
 	return (
-		<div>
-			<h1>Pickup Options Here</h1>
-		</div>
+		<section>
+			{props.pickupMeetups.map((pickupMeetup) => (
+				<PickupMeetupItem
+					className={classes.container}
+					info={pickupMeetup}
+				></PickupMeetupItem>
+			))}
+
+			{/* <h1>Pickup Options Here</h1>
+			<p>{props.pickupMeetups[0].location_name}</p> */}
+		</section>
 	);
 };
 

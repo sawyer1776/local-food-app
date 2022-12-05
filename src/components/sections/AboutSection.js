@@ -14,7 +14,6 @@ const AboutSection = function (props) {
 				)
 			)}
 
-			{/* <p>{props.aboutText}</p> */}
 			{/* Add Imgs */}
 		</section>
 	);

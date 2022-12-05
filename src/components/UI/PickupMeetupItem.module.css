@@ -1,0 +1,10 @@
+.time {
+	font-weight: 700;
+}
+
+.container {
+	width: 100%;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 0.125rem solid var(--main-color);
+}

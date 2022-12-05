@@ -18,17 +18,6 @@ const ProductSnapshot = (props) => {
 				</h3>
 
 				<p>Per {props.product.unit}</p>
-
-				{/* <div className={classes.reviewAndQty}>
-					<p className={classes.unit}>
-						per {props.product.unit}
-					</p>
-
-					<ReviewContainer
-						className={classes.stars}
-						product={props.product}
-					/>
-				</div> */}
 			</div>
 
 			<ul className={classes.stars}>

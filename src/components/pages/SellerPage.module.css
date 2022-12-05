@@ -65,3 +65,13 @@
 	align-self: flex-end;
 	font-size: 1rem;
 }
+
+button.showLessBtn {
+	background-color: white;
+	color: blue;
+	text-decoration: underline;
+	font-weight: 500;
+	box-shadow: none;
+	align-self: flex-end;
+	font-size: 1.2rem;
+}
