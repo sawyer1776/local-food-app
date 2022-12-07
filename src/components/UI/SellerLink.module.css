@@ -1,9 +1,39 @@
 .sellerLinkContainer {
 	display: flex;
-	justify-content: space-between;
-	padding: 0.5rem 2rem;
+	gap: 1.2rem;
+	width: 100%;
+	align-items: center;
+	box-shadow: 0rem 0.15rem 1.9rem rgb(187, 187, 187);
 }
 
 .sellerImg {
-	width: 20vw;
+	width: 25vw;
+	max-width: 10rem;
+	height: 25vw;
+	max-height: 10rem;
+	object-fit: cover;
+}
+
+.sellerText {
+	display: flex;
+	flex-direction: column;
+	gap: 0rem;
+}
+
+.sellerTitle {
+	font-size: 1.2rem;
+}
+
+.sellerSubtitle {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.reviewStarsContainer {
+	display: flex;
+	list-style: none;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+	padding-top: 0.5rem;
 }

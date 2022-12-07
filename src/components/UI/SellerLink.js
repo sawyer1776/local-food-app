@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import classes from './SellerLink.module.css';
+import ReviewStars from './ReviewStars';
 
 const SellerLink = (props) => {
 	return (
@@ -11,9 +12,19 @@ const SellerLink = (props) => {
 				className={classes.sellerImg}
 				src={`http://127.0.0.1:8090/api/files/${props.seller['@collectionId']}/${props.seller.id}/${props.seller.imgs[0]}`}
 			></img>
-			<div>
-				<h2>{props.name}</h2>
-				<h3>{props.seller.location}</h3>
+			<div className={classes.sellerText}>
+				<h2 className={classes.sellerTitle}>
+					{props.seller.producer_name}
+				</h2>
+				<h3 className={classes.sellerSubtitle}>
+					{props.seller.location}
+				</h3>
+				<ul className={classes.reviewStarsContainer}>
+					<ReviewStars
+						className={classes.reviewStars}
+						stars={props.seller.reviews}
+					/>
+				</ul>
 			</div>
 		</NavLink>
 	);

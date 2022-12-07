@@ -10,6 +10,7 @@ import PickupSection from '../sections/PickupSection';
 import { toggleState } from '../storage/helper-functions';
 import ReviewStars from '../UI/ReviewStars';
 import MapSection from '../sections/MapSection';
+import ImgDragSlider from '../UI/ImgDragSlider';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -123,10 +124,12 @@ const SellerPage = (props) => {
 						</ul>
 					</div>
 					<h3 className={classes.subtitle}>
-						Backyard farm in the greater Opilika Al, area
+						{thisSellerData.tagline}
 					</h3>
 				</div>
-				<ImgSlider imgs={thisSellerData} />
+
+				<ImgDragSlider seller={thisSellerData} />
+
 				<button
 					className="wide"
 					onClick={() => {
@@ -156,7 +159,7 @@ const SellerPage = (props) => {
 						toggleState(setShowPickup, showPickup);
 					}}
 				>
-					Pickup / Meetup Options
+					Pickup / Meetup Times
 				</button>
 				{showPickup ? (
 					<PickupSection pickupMeetups={pickupList} />

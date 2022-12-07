@@ -11,6 +11,11 @@
 	align-items: center;
 }
 
+.imgSlider {
+	width: 100vw;
+	height: 5rem;
+}
+
 .title {
 	align-self: flex-start;
 	width: 100%;

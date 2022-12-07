@@ -1,22 +1,68 @@
 import {
 	BsFillBasketFill,
 	BsFillPersonFill,
+	BsX,
 } from 'react-icons/bs';
-import { HiHome } from 'react-icons/hi';
-
-import { GiHamburgerMenu } from 'react-icons/gi';
-
+import { HiHome, HiSearch, HiX } from 'react-icons/hi';
 import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = (props) => {
+	const [showSearch, setShowSearch] = useState(false);
+	const [search, setSearch] = useState(null);
+	const conductSearch = function () {
+		console.log(search);
+		setSearch(null);
+		setShowSearch(false);
+	};
+
+	if (showSearch) {
+		return (
+			<div
+				className={`${classes.header} ${classes.headerSearch}`}
+			>
+				<HiSearch
+					className={classes.icon}
+					onClick={conductSearch}
+				/>
+				{/* Make it run the search or on enter */}
+				<input
+					className={classes.searchBox}
+					type="text"
+					placeholder="Search"
+					onChange={(event) => {
+						setSearch(event.target.value);
+					}}
+					onKeyDown={(e) => {
+						console.log(e.code);
+						if (e.code === 'Enter') {
+							conductSearch();
+						}
+					}}
+				></input>
+				<HiX
+					className={classes.icon}
+					onClick={() => {
+						setShowSearch(false);
+					}}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classes.header}>
-			<GiHamburgerMenu className={classes.icon} />
 			<NavLink to="/all-sellers">
 				<HiHome className={classes.icon} />
 			</NavLink>
-			<input type="text" placeholder="Search"></input>
+			<HiSearch
+				className={classes.icon}
+				onClick={() => {
+					setShowSearch(true);
+				}}
+			/>
+
 			<NavLink to="/profile">
 				<BsFillPersonFill className={classes.icon} />
 			</NavLink>

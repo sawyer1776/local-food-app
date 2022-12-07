@@ -9,7 +9,7 @@ import AllSellersPage from './components/pages/AllSellersPage';
 import SellerAdminPage from './components/pages/SellerAdminPage';
 import ProductPage from './components/pages/ProductPage';
 import LoginSection from './components/sections/LoginSection';
-import ProfilePage from './ProfilePage';
+import ProfilePage from './components/pages/ProfilePage';
 import BasketPage from './components/pages/BasketPage';
 
 function App() {

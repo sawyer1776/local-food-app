@@ -2,6 +2,7 @@ import PocketBase from 'pocketbase';
 import { useEffect, useState } from 'react';
 import SellerLink from '../UI/SellerLink';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import classes from './AllSellersPage.module.css';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -32,13 +33,12 @@ const AllSellers = (props) => {
 	}
 	if (isLoaded) {
 		return (
-			<section>
+			<section className={classes.allSellersContainer}>
 				<h1>All Sellers</h1>
-				<div>
+				<div className={classes.sellerLinks}>
 					{allSellersData.map((seller) => (
 						<SellerLink
 							seller={seller}
-							name={seller.producer_name}
 							id={seller.id}
 							key={seller.id}
 						/>

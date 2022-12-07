@@ -1,0 +1,10 @@
+.allSellersContainer {
+	padding: 1rem;
+}
+
+.sellerLinks {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}

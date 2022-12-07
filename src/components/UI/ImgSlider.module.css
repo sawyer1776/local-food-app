@@ -1,3 +1,8 @@
+.sliderContainer {
+	display: flex;
+	overflow: hidden;
+}
+
 .sliderImg {
 	padding: 0;
 	margin: 0;
