@@ -2,14 +2,16 @@ import classes from './ProductDetails.module.css';
 
 const ProductDetails = (props) => {
 	return (
-		<ul>
-			<h3>Details</h3>
-			<li>
+		<div className={classes.container}>
+			<h3>Product Details</h3>
+			<ul className={classes.list}>
 				{props.details.items.map((detail, index) => (
-					<p key={index}>{detail}</p>
+					<li key={index} className={classes.listItem}>
+						<p>{detail}</p>
+					</li>
 				))}
-			</li>
-		</ul>
+			</ul>
+		</div>
 	);
 };
 

@@ -18,3 +18,11 @@
 	border: 2px solid rgb(207, 207, 207);
 	box-shadow: 0rem 0.1rem 0.5rem rgb(204, 203, 203);
 }
+
+.btns {
+	margin-top: 2rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

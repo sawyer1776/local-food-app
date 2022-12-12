@@ -41,11 +41,7 @@ function App() {
 					<LoginSection />
 				</Route>
 
-				<Route
-					path={`/seller-admin/${
-						authCtx.isLoggedIn ? authCtx.user.id : ''
-					}`}
-				>
+				<Route path={`/seller-admin/`}>
 					<SellerAdminPage />
 				</Route>
 
@@ -53,7 +49,7 @@ function App() {
 					<NewSeller />
 				</Route>
 
-				<Route path="/profile">
+				<Route path={`/profile`}>
 					<ProfilePage />
 				</Route>
 

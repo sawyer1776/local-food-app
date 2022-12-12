@@ -1,4 +1,18 @@
+.productContainer {
+	margin: 1rem;
+	width: calc(100vw - 2rem);
+	max-width: 1024px;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	justify-content: center;
+	align-items: center;
+}
+
 .titleReviews {
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -14,6 +28,54 @@
 }
 
 .priceAndStock {
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
+}
+
+.inStock {
+	font-weight: 600;
+}
+
+.qtyAndAdd {
+	width: 100%;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+}
+
+.qtyCounter {
+	/* padding: 0.6rem 1rem; */
+	font-size: 1.4rem;
+
+	width: fit-content;
+
+	border: none;
+	border-radius: 5px;
+	font-weight: 600;
+	box-shadow: 0rem 0.5rem 0.7rem rgba(0, 0, 0, 0.282);
+	display: flex;
+	background-color: white;
+	padding: 0;
+	margin-bottom: 1rem;
+	flex-grow: 0;
+	height: fit-content;
+	align-self: center;
+	overflow: hidden;
+}
+
+.qtyButton {
+	border-radius: 0;
+	margin: 0;
+	padding: 0;
+	width: 1.5rem;
+	height: 2rem;
+	box-shadow: none;
+}
+
+.qtyNumber {
+	justify-self: center;
+	align-self: center;
+	padding: 0 0.5rem;
+	width: 2rem;
 }

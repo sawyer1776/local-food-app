@@ -131,7 +131,7 @@ const SellerPage = (props) => {
 				<ImgDragSlider seller={thisSellerData} />
 
 				<button
-					className="wide"
+					className={`wide ${classes.firstBtn}`}
 					onClick={() => {
 						toggleState(setShowAbout, showAbout);
 					}}

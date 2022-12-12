@@ -6,6 +6,9 @@ import ProductAdminItem from '../UI/ProductAdminItem';
 import InputsSection from '../sections/InputsSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { toggleState } from '../storage/helper-functions';
+import classes from './SellerAdminPage.module.css';
+import { BsPencil } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let adminData = null;
@@ -16,6 +19,7 @@ const SellerAdminPage = () => {
 	const [addingAProduct, setAddingAProduct] =
 		useState(false);
 	const authCtx = useContext(AuthContext);
+	console.log('ctx', authCtx);
 	const fetchListedProducersProducts = async function () {
 		//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
 		const responseProducts = await client.records.getList(
@@ -68,23 +72,30 @@ const SellerAdminPage = () => {
 
 	//This doesn't work, if not logged in it loads null data and error
 	if (!authCtx.isLoggedIn) return <LoginSection />;
-
+	console.log('admin data', adminData);
 	return (
-		<section>
+		<section className={classes.container}>
 			<h1>Seller Admin Page</h1>
-			<h3>
-				What you call yourself{' '}
-				{isLoaded ? (
-					adminData.producer_name
-				) : (
-					<LoadingSpinner />
-				)}
-			</h3>
+			<h4 className={classes.titleLine}>
+				Title:{' '}
+				<Link
+					// to={`/seller-page/${adminData}`}
+					className={classes.title}
+				>
+					{isLoaded ? (
+						adminData.producer_name
+					) : (
+						<LoadingSpinner />
+					)}
+				</Link>{' '}
+				<BsPencil />
+			</h4>
 			<ul>
 				<li>
-					<table>
+					<table className={classes.adminTable}>
 						<thead>
 							<tr>
+								<th>Edit</th>
 								<th>Title</th>
 								<th>Price</th>
 								<th>Qty</th>
@@ -114,6 +125,7 @@ const SellerAdminPage = () => {
 						/>
 					) : null}
 					<button
+						className={classes.addBtn}
 						onClick={() => {
 							toggleState(
 								setAddingAProduct,

@@ -12,8 +12,7 @@
 }
 
 .imgSlider {
-	width: 100vw;
-	height: 5rem;
+	margin-bottom: 10rem;
 }
 
 .title {
@@ -79,4 +78,8 @@ button.showLessBtn {
 	box-shadow: none;
 	align-self: flex-end;
 	font-size: 1.2rem;
+}
+
+.firstBtn {
+	margin-top: 1rem;
 }

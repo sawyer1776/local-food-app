@@ -1,0 +1,8 @@
+.list {
+	list-style-type: disc;
+	padding-left: 2rem;
+}
+
+.container {
+	align-self: flex-start;
+}
