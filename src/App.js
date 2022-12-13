@@ -11,6 +11,7 @@ import ProductPage from './components/pages/ProductPage';
 import LoginSection from './components/sections/LoginSection';
 import ProfilePage from './components/pages/ProfilePage';
 import BasketPage from './components/pages/BasketPage';
+import SearchResultsPage from './components/pages/SearchResultsPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -31,6 +32,10 @@ function App() {
 
 				<Route path={`/product/:productId`}>
 					<ProductPage />
+				</Route>
+
+				<Route path="/search-results">
+					<SearchResultsPage />
 				</Route>
 
 				<Route path="/all-sellers">

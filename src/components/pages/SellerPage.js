@@ -60,7 +60,6 @@ const SellerPage = (props) => {
 				}
 			);
 			thisSellerData = responseSeller;
-			console.log(thisSellerData);
 		};
 		const fetchLatLong = async function () {
 			let address = thisSellerData.address;
@@ -84,7 +83,6 @@ const SellerPage = (props) => {
 				latLong = [];
 				latLong.push(Number(lat));
 				latLong.push(Number(long));
-				console.log(latLong);
 				setMapIsLoaded(true);
 			});
 		};
@@ -97,7 +95,7 @@ const SellerPage = (props) => {
 				await fetchLatLong();
 			};
 			await allFetches();
-			console.log(pickupList);
+
 			setLoaded(true);
 		};
 

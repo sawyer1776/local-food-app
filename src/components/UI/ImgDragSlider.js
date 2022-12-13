@@ -18,7 +18,6 @@ const ImgDragSlider = (props) => {
 		}
 	);
 
-	console.log('window width', window.innerWidth);
 	if (window.innerWidth < 1025) {
 		return (
 			<BearCarousel

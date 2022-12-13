@@ -7,15 +7,19 @@ import { addToCart } from '../storage/helper-functions';
 import { useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
 import { useState, useEffect, useContext } from 'react';
+import { toggleState } from '../storage/helper-functions';
 import AuthContext from '../storage/auth-context';
+import PickupSection from '../sections/PickupSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
 let thisProduct = [];
+let pickupList = [];
 
 const ProductPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	let [addQty, setQty] = useState(1);
+	const [showPickup, setShowPickup] = useState(false);
 	const params = useParams();
 	const authCtx = useContext(AuthContext);
 
@@ -36,9 +40,31 @@ const ProductPage = (props) => {
 			setLoaded(true);
 		};
 
+		const fetchProducersPickups = async function () {
+			const responseProducts = await client.records.getList(
+				'pickup_meetups',
+				1,
+				10,
+				{
+					filter: `producer_id = '${thisProduct.producer_id}'`,
+				}
+			);
+			pickupList = responseProducts.items;
+		};
+
+		const initFetch = async function () {
+			const allFetches = async function () {
+				await fetchThisProduct();
+				await fetchProducersPickups();
+			};
+			await allFetches();
+
+			setLoaded(true);
+		};
+
 		if (isLoaded) return;
 		if (!isLoaded) {
-			fetchThisProduct();
+			initFetch();
 		}
 	});
 
@@ -118,7 +144,18 @@ const ProductPage = (props) => {
 						Add to Basket
 					</button>
 				</div>
-				<ButtonElement buttonText="Pick Up / Meetup Options" />
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowPickup, showPickup);
+					}}
+				>
+					Pickup / Meetup Times
+				</button>
+				{showPickup ? (
+					<PickupSection pickupMeetups={pickupList} />
+				) : null}
+
 				<p>{thisProduct.description}</p>
 				<ProductDetails
 					className={classes.details}

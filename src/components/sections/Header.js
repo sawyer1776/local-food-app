@@ -5,14 +5,32 @@ import {
 } from 'react-icons/bs';
 import { HiHome, HiSearch, HiX } from 'react-icons/hi';
 import classes from './Header.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
+import PocketBase from 'pocketbase';
+
+const client = new PocketBase('http://127.0.0.1:8090');
 
 const Header = (props) => {
 	const [showSearch, setShowSearch] = useState(false);
 	const [search, setSearch] = useState(null);
+	const history = useHistory();
+	let searchData = [];
 	const conductSearch = function () {
-		console.log(search);
+		console.log('search', search);
+		const fetchSearchResults = async function () {
+			const responseSearchResults =
+				await client.records.getList('products', 1, 50, {
+					filter: `title~"${search}" || description~"${search}" `,
+				});
+			searchData = responseSearchResults.items;
+			console.log(searchData);
+			history.push({
+				pathname: '/search-results',
+				state: { data: searchData, searchTerm: search },
+			});
+		};
+		fetchSearchResults();
 		setSearch(null);
 		setShowSearch(false);
 	};
@@ -26,7 +44,7 @@ const Header = (props) => {
 					className={classes.icon}
 					onClick={conductSearch}
 				/>
-				{/* Make it run the search or on enter */}
+
 				<input
 					className={classes.searchBox}
 					type="text"

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import PocketBase from 'pocketbase';
+import { BsJustifyLeft } from 'react-icons/bs';
 
 const client = new PocketBase('http://127.0.0.1:8090');
+
+let userCart = [
+	{ id: 'x1e7z6qjcjjg4hs', qty: 2 },
+	{ id: 'a9mocdst87l86rv', qty: 3 },
+	{ id: 'c2eloyp1mpbfxem', qty: 1 },
+];
 
 const AuthContext = React.createContext({
 	token: '',
