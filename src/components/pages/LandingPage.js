@@ -10,14 +10,14 @@ const LandingPage = (props) => {
 
 	console.log('authContext', authCtx);
 	return (
-		<div>
+		<main className="container">
 			<NavLink to="/new-seller">
 				<ButtonElement buttonText="Sign up to be a seller" />
 			</NavLink>
 			<NavLink to="/all-sellers">
 				<ButtonElement buttonText="View Farmers" />
 			</NavLink>
-		</div>
+		</main>
 	);
 };
 

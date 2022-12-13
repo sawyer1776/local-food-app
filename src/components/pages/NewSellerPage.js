@@ -23,7 +23,7 @@ const NewSeller = () => {
 
 	if (authCtx.isLoggedIn)
 		return (
-			<section>
+			<main className="container">
 				{authCtx.sellerPageId ? (
 					<Redirect
 						to={`/seller-admin/${authCtx.user.id}`}
@@ -54,7 +54,7 @@ const NewSeller = () => {
 						</button>
 					</NavLink>
 				</div>
-			</section>
+			</main>
 		);
 };
 

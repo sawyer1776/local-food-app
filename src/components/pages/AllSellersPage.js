@@ -33,7 +33,7 @@ const AllSellers = (props) => {
 	}
 	if (isLoaded) {
 		return (
-			<section className={classes.allSellersContainer}>
+			<section className="container">
 				<h1>All Sellers</h1>
 				<div className={classes.sellerLinks}>
 					{allSellersData.map((seller) => (

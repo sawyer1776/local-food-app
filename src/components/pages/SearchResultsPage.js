@@ -13,7 +13,7 @@ const SearchResultsPage = (props) => {
 	const searchTerm = location.state.searchTerm;
 	console.log('at Search', location.state.data);
 	return (
-		<main className={classes.container}>
+		<main className="container">
 			<div className={classes.headingContainer}>
 				<h3 className={classes.heading}>
 					Search Results for: "{searchTerm}"

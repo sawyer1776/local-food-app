@@ -110,7 +110,7 @@ const SellerPage = (props) => {
 	}
 	if (isLoaded) {
 		return (
-			<section className={classes.container}>
+			<main className="container">
 				<div className={classes.title}>
 					<div className={classes.titleAndReviews}>
 						<h2>{thisSellerData.producer_name}</h2>
@@ -199,7 +199,7 @@ const SellerPage = (props) => {
 				) : (
 					'LOADING...'
 				)}
-			</section>
+			</main>
 		);
 	}
 };

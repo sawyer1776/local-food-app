@@ -1,9 +1,29 @@
+.basketItemContainer {
+	height: fit-content;
+	width: 100%;
+
+	margin: 0;
+	padding: 0;
+}
+
 .imgAndText {
 	display: flex;
 	gap: 0.5rem;
+	height: 100%;
 }
 
-h3 {
+.productImg {
+	width: 5rem;
+	height: 5rem;
+	/* object-fit: contain;
+	height: 100%; */
+}
+
+.thumbnail {
+	height: 100%;
+}
+
+.subtitle {
 	text-align: left;
 }
 
@@ -24,4 +44,40 @@ h3 {
 
 .qtyBtns {
 	display: flex;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+
+	border: none;
+	border-radius: 5px;
+
+	box-shadow: 0rem 0.5rem 0.7rem rgba(0, 0, 0, 0.282);
+
+	flex-grow: 0;
+	height: fit-content;
+	align-self: center;
+	overflow: hidden;
+}
+
+.qtyBtn {
+	width: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+
+	height: 2rem;
+}
+
+.qtyNumber {
+	width: 1.8rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.trashItem {
+	background-color: white;
+	padding-left: 0;
+	color: black;
+	box-shadow: none;
 }

@@ -43,7 +43,7 @@ const ProfilePage = (props) => {
 	// }
 	if (1 < 2) {
 		return (
-			<main className={classes.profileContainer}>
+			<main className="container">
 				<h2>Your Profile </h2>
 				<p>Welcome {authCtx.user.profile.name}</p>
 				<div className={classes.btns}>

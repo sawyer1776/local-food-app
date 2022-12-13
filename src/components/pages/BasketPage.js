@@ -1,8 +1,8 @@
 import PocketBase from 'pocketbase';
 import { useContext, useEffect, useState } from 'react';
 import BasketItem from '../UI/BasketItem';
-import ThumbnailImg from '../UI/ThumbnailImg';
 import AuthContext from '../storage/auth-context';
+import classes from './BasketPage.module.css';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -82,9 +82,9 @@ const BasketPage = (props) => {
 
 	if (isLoaded) {
 		return (
-			<section>
-				<h1>Your Basket</h1>
-				<ul>
+			<main className="container">
+				<h2>Your Basket</h2>
+				<ul className={classes.list}>
 					{basketContents.length > 0 ? (
 						basketContents.map((product) => (
 							<BasketItem
@@ -102,7 +102,7 @@ const BasketPage = (props) => {
 				</ul>
 				<h2>Your Total is ${theTotal}</h2>
 				<button onClick={fetchBasketData}>Calc </button>
-			</section>
+			</main>
 		);
 	}
 };

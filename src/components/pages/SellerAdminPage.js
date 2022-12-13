@@ -74,7 +74,7 @@ const SellerAdminPage = () => {
 	if (!authCtx.isLoggedIn) return <LoginSection />;
 	console.log('admin data', adminData);
 	return (
-		<section className={classes.container}>
+		<main className="container">
 			<h1>Seller Admin Page</h1>
 			<h4 className={classes.titleLine}>
 				Title:{' '}
@@ -139,7 +139,7 @@ const SellerAdminPage = () => {
 					</button>
 				</li>
 			</ul>
-		</section>
+		</main>
 	);
 };
 export default SellerAdminPage;

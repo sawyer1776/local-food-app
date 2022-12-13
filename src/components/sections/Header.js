@@ -48,7 +48,7 @@ const Header = (props) => {
 				<input
 					className={classes.searchBox}
 					type="text"
-					placeholder="Search"
+					placeholder="Search Products"
 					onChange={(event) => {
 						setSearch(event.target.value);
 					}}
