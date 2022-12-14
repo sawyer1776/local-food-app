@@ -37,7 +37,7 @@ const BasketItem = (props) => {
 					<button
 						className={classes.trashItem}
 						onClick={() => {
-							props.deleteFunc(props.id);
+							props.deleteFunc(props.product.id);
 						}}
 					>
 						<BsTrash />
@@ -48,7 +48,7 @@ const BasketItem = (props) => {
 					<button
 						className={classes.qtyBtn}
 						onClick={() => {
-							props.editCountFunc('-');
+							props.editCountFunc('-', props.product.id);
 						}}
 					>
 						-
@@ -57,7 +57,7 @@ const BasketItem = (props) => {
 					<button
 						className={classes.qtyBtn}
 						onClick={() => {
-							props.editCountFunc('+');
+							props.editCountFunc('+', props.product.id);
 						}}
 					>
 						+
