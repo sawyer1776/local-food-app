@@ -3,24 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import BasketItem from '../UI/BasketItem';
 import AuthContext from '../storage/auth-context';
 import classes from './BasketPage.module.css';
-
-//testDATA
-// {
-//   "items": [
-//     {
-//       "id": "mf55gm1hyah1i27",
-//       "qty": 1
-//     },
-//     {
-//       "id": "a9mocdst87l86rv",
-//       "qty": 3
-//     },
-//     {
-//       "id": "x1e7z6qjcjjg4hs",
-//       "qty": 2
-//     }
-//   ]
-// }
+import LoadingSpinner from '../UI/LoadingSpinner';
+import { NavLink } from 'react-router-dom';
+import LoginSection from '../sections/LoginSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -34,7 +19,8 @@ const BasketPage = (props) => {
 
 	const authCtx = useContext(AuthContext);
 
-	let cartIds = authCtx.user.profile.cart.items;
+	// let cartIds = authCtx.user.profile.cart.items;
+	let cartIds = null;
 
 	const calcTotal = function () {
 		console.log('calcTotal');
@@ -130,33 +116,31 @@ const BasketPage = (props) => {
 	};
 
 	useEffect(() => {
+		if (!authCtx.isLoggedIn) return;
 		if (isLoaded) return;
 		if (!isLoaded) {
 			basketContents = [];
+			cartIds = authCtx.user.profile.cart.items;
+
 			cartIds.forEach((item, i) => {
 				fetchBasketContents(item.id, item.qty, i);
 			});
 		}
 	});
 
+	if (!authCtx.isLoggedIn) return <LoginSection />;
+
 	if (!isLoaded) {
-		return <h1>...Loading</h1>;
+		return <LoadingSpinner />;
 	}
 
 	if (isLoaded) {
 		return (
 			<main className="container">
-				{/* <button
-					onClick={() => {
-						setTest(test + 1);
-					}}
-				>
-					TEST
-				</button> */}
-				<h2 className={classes.subtotal}>
+				{/* <h2 className={classes.subtotal}>
 					Subtotal: ${theTotal.toFixed(2)}
 				</h2>
-				<button>Proceed to Checkout</button>
+				<button>Proceed to Checkout</button> */}
 
 				<ul className={classes.list}>
 					{basketContents.length > 0 ? (
@@ -173,6 +157,12 @@ const BasketPage = (props) => {
 						<p>Your Cart is Empty</p>
 					)}
 				</ul>
+				<h2 className={classes.subtotal}>
+					Subtotal: ${theTotal.toFixed(2)}
+				</h2>
+				<NavLink to="/checkout">
+					<button>Proceed to Checkout</button>
+				</NavLink>
 			</main>
 		);
 	}

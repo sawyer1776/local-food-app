@@ -1,5 +1,5 @@
 import ReviewContainer from '../UI/ReviewContainer';
-import ButtonElement from '../UI/ButtonElement';
+
 import ImgDragSlider from '../UI/ImgDragSlider';
 import ProductDetails from '../UI/ProductDetails';
 import classes from './ProductPage.module.css';
@@ -10,6 +10,7 @@ import { useState, useEffect, useContext } from 'react';
 import { toggleState } from '../storage/helper-functions';
 import AuthContext from '../storage/auth-context';
 import PickupSection from '../sections/PickupSection';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 let thisSellerData = {};
@@ -68,7 +69,7 @@ const ProductPage = (props) => {
 		}
 	});
 
-	if (!isLoaded) return <h1>Loading...</h1>;
+	if (!isLoaded) return <LoadingSpinner />;
 
 	if (isLoaded)
 		return (

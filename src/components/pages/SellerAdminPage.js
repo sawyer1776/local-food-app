@@ -18,6 +18,13 @@ const SellerAdminPage = () => {
 	const [isLoaded, setLoaded] = useState(false);
 	const [addingAProduct, setAddingAProduct] =
 		useState(false);
+
+	const [description, setDescription] = useState(
+		'Enter what you want people to know about you and how you grow food'
+	);
+	const [tagline, setTagline] = useState(
+		'Enter your tagline here'
+	);
 	const authCtx = useContext(AuthContext);
 	console.log('ctx', authCtx);
 	const fetchListedProducersProducts = async function () {
@@ -90,8 +97,30 @@ const SellerAdminPage = () => {
 				</Link>{' '}
 				<BsPencil />
 			</h4>
-			<ul>
-				<li>
+			<ul className={classes.adminSections}>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>About:</h2>
+
+					<textarea
+						className={classes.textAreaAbout}
+						id="id"
+						wrap="soft|hard"
+						value={description}
+					></textarea>
+				</li>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>Tagline:</h2>
+
+					<textarea
+						className={classes.textAreaTagline}
+						id="id"
+						wrap="soft|hard"
+						value={tagline}
+					></textarea>
+				</li>
+
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>Products:</h2>
 					<table className={classes.adminTable}>
 						<thead>
 							<tr>
@@ -117,27 +146,28 @@ const SellerAdminPage = () => {
 							)}
 						</tbody>
 					</table>
+					<div>
+						{addingAProduct ? (
+							<InputsSection
+								addingProductFunc={addingProductFunc}
+							/>
+						) : null}
+						<button
+							className={classes.addBtn}
+							onClick={() => {
+								toggleState(
+									setAddingAProduct,
+									addingAProduct
+								);
+							}}
+						>
+							{addingAProduct
+								? 'Nevermind '
+								: 'Add A Product'}
+						</button>
+					</div>
 				</li>
-				<li>
-					{addingAProduct ? (
-						<InputsSection
-							addingProductFunc={addingProductFunc}
-						/>
-					) : null}
-					<button
-						className={classes.addBtn}
-						onClick={() => {
-							toggleState(
-								setAddingAProduct,
-								addingAProduct
-							);
-						}}
-					>
-						{addingAProduct
-							? 'Nevermind '
-							: 'Add A Product'}
-					</button>
-				</li>
+				<li></li>
 			</ul>
 		</main>
 	);

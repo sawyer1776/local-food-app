@@ -4,7 +4,9 @@
 	width: 100%;
 	padding-right: 5px;
 	align-items: center;
-	box-shadow: 0rem 0.15rem 1.9rem rgb(187, 187, 187);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.185);
 }
 
 .sellerImg {

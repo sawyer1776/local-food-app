@@ -2,6 +2,10 @@
 	margin-bottom: 10rem;
 }
 
+.ImgDragSlider {
+	border: 3px solid lightgray;
+}
+
 .title {
 	align-self: flex-start;
 	width: 100%;
@@ -34,12 +38,14 @@
 .productsContainer {
 	list-style: none;
 	display: grid;
-	max-width: 100%;
+	width: 100%;
 	grid-template-columns: repeat(2, 48.5%);
-	gap: 0rem;
+	column-gap: 0.25rem;
+	row-gap: 2rem;
 	justify-content: space-between;
 	padding: 0;
 	box-sizing: border-box;
+	margin-bottom: 0.5rem;
 }
 .product {
 	background-color: red;
@@ -57,9 +63,10 @@
 	font-size: 1rem;
 }
 
-button.showLessBtn {
-	background-color: white;
+.showLessBtn {
+	background-color: transparent;
 	color: blue;
+	border: none;
 	text-decoration: underline;
 	font-weight: 500;
 	box-shadow: none;

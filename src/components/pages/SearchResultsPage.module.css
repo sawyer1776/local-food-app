@@ -4,6 +4,7 @@
 	max-width: 100%;
 	grid-template-columns: repeat(2, 48.5%);
 	gap: 0rem;
+	row-gap: 2rem;
 	justify-content: space-between;
 	padding: 0;
 	box-sizing: border-box;
@@ -32,6 +33,11 @@
 .icon {
 	font-size: 2.5rem;
 	color: var(--main-color);
+}
+.arrowsContainer {
+	display: flex;
+	gap: 2rem;
+	margin-bottom: 2rem;
 }
 
 .iconButton {

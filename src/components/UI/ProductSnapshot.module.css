@@ -2,6 +2,10 @@
 	width: 100%;
 }
 
+.thumbnail {
+	border: 3px solid red;
+}
+
 .title {
 	text-align: left;
 	margin-bottom: 0rem;

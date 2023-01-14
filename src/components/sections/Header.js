@@ -1,9 +1,14 @@
 import {
 	BsFillBasketFill,
 	BsFillPersonFill,
-	BsX,
+	BsArrowLeft,
 } from 'react-icons/bs';
-import { HiHome, HiSearch, HiX } from 'react-icons/hi';
+import {
+	HiHome,
+	HiSearch,
+	HiX,
+	HiArrowLeft,
+} from 'react-icons/hi';
 import classes from './Header.module.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -35,14 +40,48 @@ const Header = (props) => {
 		setShowSearch(false);
 	};
 
-	if (showSearch) {
-		return (
-			<div
-				className={`${classes.header} ${classes.headerSearch}`}
-			>
-				<HiSearch
+	// if (showSearch) {
+	// 	return (
+	// 		<div
+	// 			className={`${classes.header} ${classes.headerSearch}`}
+	// 		>
+	// 			<HiSearch
+	// 				className={classes.icon}
+	// 				onClick={conductSearch}
+	// 			/>
+
+	// 			<input
+	// 				className={classes.searchBox}
+	// 				type="text"
+	// 				placeholder="Search Products"
+	// 				onChange={(event) => {
+	// 					setSearch(event.target.value);
+	// 				}}
+	// 				onKeyDown={(e) => {
+	// 					console.log(e.code);
+	// 					if (e.code === 'Enter') {
+	// 						conductSearch();
+	// 					}
+	// 				}}
+	// 			></input>
+	// 			<HiX
+	// 				className={classes.icon}
+	// 				onClick={() => {
+	// 					setShowSearch(false);
+	// 				}}
+	// 			/>
+	// 		</div>
+	// 	);
+	// }
+
+	return (
+		<nav className={classes.header}>
+			<div className={`${classes.headerSearch}`}>
+				<HiArrowLeft
 					className={classes.icon}
-					onClick={conductSearch}
+					onClick={() => {
+						history.goBack();
+					}}
 				/>
 
 				<input
@@ -51,6 +90,7 @@ const Header = (props) => {
 					placeholder="Search Products"
 					onChange={(event) => {
 						setSearch(event.target.value);
+						console.log(search);
 					}}
 					onKeyDown={(e) => {
 						console.log(e.code);
@@ -59,35 +99,20 @@ const Header = (props) => {
 						}
 					}}
 				></input>
-				<HiX
-					className={classes.icon}
-					onClick={() => {
-						setShowSearch(false);
-					}}
-				/>
 			</div>
-		);
-	}
 
-	return (
-		<div className={classes.header}>
-			<NavLink to="/all-sellers">
-				<HiHome className={classes.icon} />
-			</NavLink>
-			<HiSearch
-				className={classes.icon}
-				onClick={() => {
-					setShowSearch(true);
-				}}
-			/>
-
-			<NavLink to="/profile">
-				<BsFillPersonFill className={classes.icon} />
-			</NavLink>
-			<NavLink to="/basket">
-				<BsFillBasketFill className={classes.icon} />
-			</NavLink>
-		</div>
+			<div className={classes.headerNavBar}>
+				<NavLink to="/all-sellers">
+					<HiHome className={classes.icon} />
+				</NavLink>
+				<NavLink to="/profile">
+					<BsFillPersonFill className={classes.icon} />
+				</NavLink>
+				<NavLink to="/basket">
+					<BsFillBasketFill className={classes.icon} />
+				</NavLink>
+			</div>
+		</nav>
 	);
 };
 

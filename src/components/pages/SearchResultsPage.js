@@ -6,12 +6,15 @@ import {
 	HiArrowLeft,
 	HiSortDescending,
 } from 'react-icons/hi';
+import { useState } from 'react';
 
 const SearchResultsPage = (props) => {
 	const location = useLocation();
-	const data = location.state.data;
 	const searchTerm = location.state.searchTerm;
-	console.log('at Search', location.state.data);
+	const data = location.state.data;
+	// let [data, setData] = useState(location.state.data);
+	console.log('data', data);
+
 	return (
 		<main className="container">
 			<div className={classes.headingContainer}>
@@ -45,14 +48,18 @@ const SearchResultsPage = (props) => {
 					</Link>
 				))}
 			</ul>
-			<nav className={classes.arrowsContainer}>
-				<button className={classes.iconButton}>
-					<HiArrowLeft className={classes.icon} />
-				</button>
-				<button className={classes.iconButton}>
-					<HiArrowRight className={classes.icon} />
-				</button>
-			</nav>
+			{data.length > 50 ? (
+				<nav className={classes.arrowsContainer}>
+					<button className={classes.iconButton}>
+						<HiArrowLeft className={classes.icon} />
+					</button>
+					<button className={classes.iconButton}>
+						<HiArrowRight className={classes.icon} />
+					</button>
+				</nav>
+			) : (
+				''
+			)}
 		</main>
 	);
 };

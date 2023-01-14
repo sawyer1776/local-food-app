@@ -3,6 +3,7 @@ import BearCarousel, {
 	BearSlideItem,
 } from 'bear-react-carousel';
 import 'bear-react-carousel/dist/index.css';
+import classes from './ImgDragSlider.module.css';
 
 const ImgDragSlider = (props) => {
 	const bearSlideItemData = props.seller.imgs.map(
@@ -21,6 +22,7 @@ const ImgDragSlider = (props) => {
 	if (window.innerWidth < 1025) {
 		return (
 			<BearCarousel
+				className={classes.border}
 				data={bearSlideItemData}
 				// isEnableLoop
 				// isEnableNavButton

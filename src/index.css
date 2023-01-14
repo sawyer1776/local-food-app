@@ -1,5 +1,6 @@
 :root {
-	--main-color: #1f7a22;
+	--main-color: #468333;
+	--secondary-color: #396d28;
 	--text-color: rgb(0, 0, 0);
 }
 
@@ -35,10 +36,11 @@ button {
 	width: fit-content;
 	color: white;
 	background-color: var(--main-color);
-	border: none;
+	border: 2px solid var(--secondary-color);
+	/* border: none; */
 	border-radius: 5px;
 	font-weight: 600;
-	box-shadow: 0rem 0.5rem 0.7rem rgba(0, 0, 0, 0.282);
+	box-shadow: 0rem 0rem 0.3rem rgba(28, 28, 28, 0.645);
 }
 button:hover {
 	cursor: pointer;
@@ -69,7 +71,26 @@ ul {
 }
 
 main {
-	margin-top: 5rem;
+	margin-top: 9rem;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .container {
@@ -83,4 +104,16 @@ main {
 
 	justify-content: center;
 	align-items: center;
+}
+
+.card {
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.185);
+}
+
+textarea {
+	width: 100%;
+	border: 3px solid var(--main-color);
+	font-size: 1.2rem;
 }

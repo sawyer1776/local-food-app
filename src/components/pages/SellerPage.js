@@ -11,6 +11,7 @@ import { toggleState } from '../storage/helper-functions';
 import ReviewStars from '../UI/ReviewStars';
 import MapSection from '../sections/MapSection';
 import ImgDragSlider from '../UI/ImgDragSlider';
+import ContactInfoSection from '../sections/ContactInfoSection';
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
@@ -23,6 +24,7 @@ const SellerPage = (props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [showAbout, setShowAbout] = useState(false);
 	const [showPickup, setShowPickup] = useState(false);
+	const [showContact, setShowContact] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
 	const [mapIsLoaded, setMapIsLoaded] = useState(false);
 	const params = useParams();
@@ -60,6 +62,7 @@ const SellerPage = (props) => {
 				}
 			);
 			thisSellerData = responseSeller;
+			console.log(thisSellerData);
 		};
 		const fetchLatLong = async function () {
 			let address = thisSellerData.address;
@@ -161,6 +164,20 @@ const SellerPage = (props) => {
 				</button>
 				{showPickup ? (
 					<PickupSection pickupMeetups={pickupList} />
+				) : null}
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowContact, showContact);
+					}}
+				>
+					Get In Touch
+				</button>
+				{showContact ? (
+					<ContactInfoSection
+						email={thisSellerData.public_email}
+						phone={thisSellerData.public_phone}
+					/>
 				) : null}
 
 				<ul

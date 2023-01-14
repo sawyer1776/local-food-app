@@ -1,0 +1,25 @@
+.title {
+	font-size: 2rem;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.heading {
+	font-size: 2rem;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.subHeading {
+	text-align: center;
+	font-weight: 500;
+	margin-bottom: 1rem;
+	font-size: 1.1rem;
+}
+
+.carrot {
+	width: 7rem;
+	height: 7rem;
+	color: var(--main-color);
+	margin-bottom: 1rem;
+}

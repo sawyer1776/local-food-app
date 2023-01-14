@@ -12,6 +12,7 @@ import LoginSection from './components/sections/LoginSection';
 import ProfilePage from './components/pages/ProfilePage';
 import BasketPage from './components/pages/BasketPage';
 import SearchResultsPage from './components/pages/SearchResultsPage';
+import CheckoutPage from './components/pages/CheckoutPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -36,6 +37,10 @@ function App() {
 
 				<Route path="/search-results">
 					<SearchResultsPage />
+				</Route>
+
+				<Route path="/checkout">
+					<CheckoutPage />
 				</Route>
 
 				<Route path="/all-sellers">

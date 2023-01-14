@@ -17,3 +17,21 @@
 .addBtn {
 	font-size: 1rem;
 }
+
+.adminSections {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.title {
+	margin-bottom: 1rem;
+}
+
+.adminSection {
+}
+
+.textAreaAbout {
+	height: 20rem;
+}

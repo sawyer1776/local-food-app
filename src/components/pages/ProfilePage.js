@@ -39,7 +39,7 @@ const ProfilePage = (props) => {
 	if (!authCtx.isLoggedIn) return <LoginSection />;
 
 	// if (!isLoaded) {
-	// 	return <h1>loading...</h1>;
+	// 	return <LoadingSpinner/>;
 	// }
 	if (1 < 2) {
 		return (
