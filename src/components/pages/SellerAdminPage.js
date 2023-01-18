@@ -20,11 +20,13 @@ const SellerAdminPage = () => {
 		useState(false);
 
 	const [description, setDescription] = useState(
-		'Enter what you want people to know about you and how you grow food'
+		'Enter what you want people to know about you and how you grow food.'
 	);
 	const [tagline, setTagline] = useState(
-		'Enter your tagline here'
+		'Enter your tagline here.'
 	);
+
+	const [hideAddress, setHideAddress] = useState(false);
 	const authCtx = useContext(AuthContext);
 	console.log('ctx', authCtx);
 	const fetchListedProducersProducts = async function () {
@@ -99,16 +101,6 @@ const SellerAdminPage = () => {
 			</h4>
 			<ul className={classes.adminSections}>
 				<li className={classes.adminSection}>
-					<h2 className={classes.title}>About:</h2>
-
-					<textarea
-						className={classes.textAreaAbout}
-						id="id"
-						wrap="soft|hard"
-						value={description}
-					></textarea>
-				</li>
-				<li className={classes.adminSection}>
 					<h2 className={classes.title}>Tagline:</h2>
 
 					<textarea
@@ -117,6 +109,24 @@ const SellerAdminPage = () => {
 						wrap="soft|hard"
 						value={tagline}
 					></textarea>
+					<div className={classes.buttons}>
+						<button>Cancel</button>
+						<button>Save</button>
+					</div>
+				</li>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>About:</h2>
+
+					<textarea
+						className={classes.textAreaAbout}
+						id="id"
+						wrap="soft|hard"
+						value={description}
+					></textarea>
+					<div className={classes.buttons}>
+						<button>Cancel</button>
+						<button>Save</button>
+					</div>
 				</li>
 
 				<li className={classes.adminSection}>
@@ -167,7 +177,72 @@ const SellerAdminPage = () => {
 						</button>
 					</div>
 				</li>
-				<li></li>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>
+						Meetups and Pickups:
+					</h2>
+
+					<textarea
+						className={classes.textAreaTagline}
+						id="id"
+						wrap="soft|hard"
+						value={tagline}
+					></textarea>
+					<div className={classes.buttons}>
+						<button>Cancel</button>
+						<button>Save</button>
+					</div>
+				</li>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>Contact info:</h2>
+
+					<textarea
+						className={classes.textAreaTagline}
+						id="id"
+						wrap="soft|hard"
+						value={tagline}
+					></textarea>
+					<div className={classes.buttons}>
+						<button>Cancel</button>
+						<button>Save</button>
+					</div>
+				</li>
+				<li className={classes.adminSection}>
+					<h2 className={classes.title}>
+						Address:{' '}
+						<span>
+							{hideAddress ? 'HIDDEN' : 'VISIBLE'}
+						</span>{' '}
+					</h2>
+					<div className={classes.addressBtn}>
+						<h3>Hide address?</h3>
+						<label className={classes.switch}>
+							<input
+								onClick={() => {
+									toggleState(setHideAddress, hideAddress);
+								}}
+								type="checkbox"
+							/>
+							<span
+								className={`${classes.slider} ${classes.round}`}
+							></span>
+						</label>
+					</div>
+					<p>
+						If hidden users will have to request your
+						address from you to pickup from you.
+					</p>
+					<textarea
+						className={classes.textAreaTagline}
+						id="id"
+						wrap="soft|hard"
+						value={tagline}
+					></textarea>
+					<div className={classes.buttons}>
+						<button>Cancel</button>
+						<button>Save</button>
+					</div>
+				</li>
 			</ul>
 		</main>
 	);
