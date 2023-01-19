@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PocketBase from 'pocketbase';
-import { BsJustifyLeft } from 'react-icons/bs';
 import GLOBALIP from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
