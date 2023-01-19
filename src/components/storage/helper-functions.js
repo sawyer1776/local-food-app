@@ -4,7 +4,7 @@ import GLOBALIP from '../globalVars';
 const client = new PocketBase(`${GLOBALIP}`);
 
 const toggleState = function (setFunction, variable) {
-	if (variable == false) {
+	if (variable === false) {
 		setFunction(true);
 	} else {
 		setFunction(false);
