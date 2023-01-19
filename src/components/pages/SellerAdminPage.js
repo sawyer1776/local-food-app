@@ -1,250 +1,225 @@
-import AuthContext from '../storage/auth-context';
-import { useContext, useEffect, useState } from 'react';
+import classes from './SellerPage.module.css';
+import ImgSlider from '../UI/ImgSlider';
+import ProductSnapshot from '../UI/ProductSnapshot';
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import PocketBase from 'pocketbase';
-import LoginSection from '../sections/LoginSection';
-import ProductAdminItem from '../UI/ProductAdminItem';
-import InputsSection from '../sections/InputsSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import AboutSection from '../sections/AboutSection';
+import PickupSection from '../sections/PickupSection';
 import { toggleState } from '../storage/helper-functions';
-import classes from './SellerAdminPage.module.css';
-import { BsPencil } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import ReviewStars from '../UI/ReviewStars';
+import MapSection from '../sections/MapSection';
+import ImgDragSlider from '../UI/ImgDragSlider';
+import ContactInfoSection from '../sections/ContactInfoSection';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
-let adminData = null;
+const client = new PocketBase(`${GLOBALIP}`);
+
+let thisSellerData = {};
 let productList = [];
+let pickupList = [];
+let latLong = [];
 
-const SellerAdminPage = () => {
+const SellerAdminPage = (props) => {
+	const [showMore, setShowMore] = useState(false);
+	const [showAbout, setShowAbout] = useState(false);
+	const [showPickup, setShowPickup] = useState(false);
+	const [showContact, setShowContact] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
-	const [addingAProduct, setAddingAProduct] =
-		useState(false);
-
-	const [description, setDescription] = useState(
-		'Enter what you want people to know about you and how you grow food.'
-	);
-	const [tagline, setTagline] = useState(
-		'Enter your tagline here.'
-	);
-
-	const [hideAddress, setHideAddress] = useState(false);
-	const authCtx = useContext(AuthContext);
-	console.log('ctx', authCtx);
-	const fetchListedProducersProducts = async function () {
-		//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
-		const responseProducts = await client.records.getList(
-			'products',
-			1,
-			100,
-			{
-				filter: `producer_id = '${authCtx.sellerPageId}'`,
-			}
-		);
-		productList = responseProducts.items;
-	};
-
-	const fetchAdminData = async function () {
-		const responseAdminData = await client.records.getList(
-			'producers',
-			1,
-			1,
-			{
-				filter: `id = '${authCtx.sellerPageId}'`,
-			}
-		);
-		adminData = responseAdminData.items[0];
-		console.log(adminData);
-	};
-	const fetchData = async function () {
-		await fetchListedProducersProducts();
-		await fetchAdminData();
-		setLoaded(true);
-	};
-
-	const deleteProduct = async function (recordId) {
-		await client.records.delete('products', recordId);
-		setLoaded(false);
-		fetchData();
-	};
-
-	const addingProductFunc = () => {
-		toggleState(setAddingAProduct, addingAProduct);
-		setLoaded(false);
-		fetchData();
-	};
-
+	const [mapIsLoaded, setMapIsLoaded] = useState(false);
+	const params = useParams();
 	useEffect(() => {
-		if (authCtx.isLoggedIn) {
-			fetchData();
-			console.log('Fetching Data');
+		const fetchListedProducersProducts = async function () {
+			//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
+			const responseProducts = await client.records.getList(
+				'products',
+				1,
+				100,
+				{
+					filter: `producer_id = '${params.sellerId}'`,
+				}
+			);
+			productList = responseProducts.items;
+		};
+		const fetchProducersPickups = async function () {
+			const responseProducts = await client.records.getList(
+				'pickup_meetups',
+				1,
+				10,
+				{
+					filter: `producer_id = '${params.sellerId}'`,
+				}
+			);
+			pickupList = responseProducts.items;
+		};
+
+		const fetchSeller = async function () {
+			const responseSeller = await client.records.getOne(
+				'producers',
+				params.sellerId,
+				{
+					sort: '-created',
+				}
+			);
+			thisSellerData = responseSeller;
+			console.log(thisSellerData);
+		};
+		const fetchLatLong = async function () {
+			let address = thisSellerData.address;
+			const request = new XMLHttpRequest();
+			request.open(
+				'GET',
+				`https://api.opencagedata.com/geocode/v1/json?q=${address}&countrycode=us&limit=1&key=c44325b9d11346f595aaca4bedc21234`
+			);
+			request.send();
+			request.addEventListener('load', function () {
+				const data = JSON.parse(this.responseText);
+				let lat = String(data.results[0].geometry.lat);
+				let indexOf = lat.indexOf('.');
+				lat = lat.slice(0, indexOf + 3);
+				lat = lat.concat('5');
+				let long = String(data.results[0].geometry.lng);
+				indexOf = long.indexOf('.');
+				long = long.slice(0, indexOf + 3);
+				long = long.concat('5');
+
+				latLong = [];
+				latLong.push(Number(lat));
+				latLong.push(Number(long));
+				setMapIsLoaded(true);
+			});
+		};
+
+		const initFetch = async function () {
+			const allFetches = async function () {
+				await fetchListedProducersProducts();
+				await fetchProducersPickups();
+				await fetchSeller();
+				await fetchLatLong();
+			};
+			await allFetches();
+
+			setLoaded(true);
+		};
+
+		if (isLoaded) return;
+		if (!isLoaded) {
+			initFetch();
 		}
 	});
 
-	//This doesn't work, if not logged in it loads null data and error
-	if (!authCtx.isLoggedIn) return <LoginSection />;
-	console.log('admin data', adminData);
-	return (
-		<main className="container">
-			<h1>Seller Admin Page</h1>
-			<h4 className={classes.titleLine}>
-				Title:{' '}
-				<Link
-					// to={`/seller-page/${adminData}`}
-					className={classes.title}
-				>
-					{isLoaded ? (
-						adminData.producer_name
-					) : (
-						<LoadingSpinner />
-					)}
-				</Link>{' '}
-				<BsPencil />
-			</h4>
-			<ul className={classes.adminSections}>
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>Tagline:</h2>
-
-					<textarea
-						className={classes.textAreaTagline}
-						id="id"
-						wrap="soft|hard"
-						value={tagline}
-					></textarea>
-					<div className={classes.buttons}>
-						<button>Cancel</button>
-						<button>Save</button>
-					</div>
-				</li>
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>About:</h2>
-
-					<textarea
-						className={classes.textAreaAbout}
-						id="id"
-						wrap="soft|hard"
-						value={description}
-					></textarea>
-					<div className={classes.buttons}>
-						<button>Cancel</button>
-						<button>Save</button>
-					</div>
-				</li>
-
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>Products:</h2>
-					<table className={classes.adminTable}>
-						<thead>
-							<tr>
-								<th>Edit</th>
-								<th>Title</th>
-								<th>Price</th>
-								<th>Qty</th>
-								<th>Delete</th>
-							</tr>
-						</thead>
-						<tbody>
-							{isLoaded ? (
-								productList.map((product, index) => (
-									<ProductAdminItem
-										index={index}
-										product={product}
-										key={product.id}
-										deleteFunc={deleteProduct}
-									/>
-								))
-							) : (
-								<LoadingSpinner />
-							)}
-						</tbody>
-					</table>
-					<div>
-						{addingAProduct ? (
-							<InputsSection
-								addingProductFunc={addingProductFunc}
+	if (!isLoaded) {
+		return <LoadingSpinner />;
+	}
+	if (isLoaded) {
+		return (
+			<main className="container">
+				<div className={classes.title}>
+					<div className={classes.titleAndReviews}>
+						<h2>{thisSellerData.producer_name}</h2>
+						<ul className={classes.reviewStarsContainer}>
+							<ReviewStars
+								className={classes.reviewStars}
+								stars={thisSellerData.reviews}
 							/>
-						) : null}
+						</ul>
+					</div>
+					<h3 className={classes.subtitle}>
+						{thisSellerData.tagline}
+					</h3>
+				</div>
+
+				<ImgDragSlider seller={thisSellerData} />
+
+				<button
+					className={`wide ${classes.firstBtn}`}
+					onClick={() => {
+						toggleState(setShowAbout, showAbout);
+					}}
+				>
+					About
+				</button>
+				{showAbout ? (
+					<>
+						<AboutSection
+							aboutText={thisSellerData.about_description}
+						/>
 						<button
-							className={classes.addBtn}
+							className={classes.showLessBtn}
 							onClick={() => {
-								toggleState(
-									setAddingAProduct,
-									addingAProduct
-								);
+								toggleState(setShowAbout, showAbout);
 							}}
 						>
-							{addingAProduct
-								? 'Nevermind '
-								: 'Add A Product'}
+							Show Less
 						</button>
-					</div>
-				</li>
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>
-						Meetups and Pickups:
-					</h2>
+					</>
+				) : null}
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowPickup, showPickup);
+					}}
+				>
+					Pickup / Meetup Times
+				</button>
+				{showPickup ? (
+					<PickupSection pickupMeetups={pickupList} />
+				) : null}
+				<button
+					className="wide"
+					onClick={() => {
+						toggleState(setShowContact, showContact);
+					}}
+				>
+					Get In Touch
+				</button>
+				{showContact ? (
+					<ContactInfoSection
+						email={thisSellerData.public_email}
+						phone={thisSellerData.public_phone}
+					/>
+				) : null}
 
-					<textarea
-						className={classes.textAreaTagline}
-						id="id"
-						wrap="soft|hard"
-						value={tagline}
-					></textarea>
-					<div className={classes.buttons}>
-						<button>Cancel</button>
-						<button>Save</button>
-					</div>
-				</li>
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>Contact info:</h2>
-
-					<textarea
-						className={classes.textAreaTagline}
-						id="id"
-						wrap="soft|hard"
-						value={tagline}
-					></textarea>
-					<div className={classes.buttons}>
-						<button>Cancel</button>
-						<button>Save</button>
-					</div>
-				</li>
-				<li className={classes.adminSection}>
-					<h2 className={classes.title}>
-						Address:{' '}
-						<span>
-							{hideAddress ? 'HIDDEN' : 'VISIBLE'}
-						</span>{' '}
-					</h2>
-					<div className={classes.addressBtn}>
-						<h3>Hide address?</h3>
-						<label className={classes.switch}>
-							<input
-								onClick={() => {
-									toggleState(setHideAddress, hideAddress);
-								}}
-								type="checkbox"
+				<ul
+					id="products-container"
+					className={classes.productsContainer}
+				>
+					{productList.slice(0, 2).map((product) => (
+						<Link to={`/product/${product.id}`}>
+							<ProductSnapshot
+								product={product}
+								key={product.id}
 							/>
-							<span
-								className={`${classes.slider} ${classes.round}`}
-							></span>
-						</label>
-					</div>
-					<p>
-						If hidden users will have to request your
-						address from you to pickup from you.
-					</p>
-					<textarea
-						className={classes.textAreaTagline}
-						id="id"
-						wrap="soft|hard"
-						value={tagline}
-					></textarea>
-					<div className={classes.buttons}>
-						<button>Cancel</button>
-						<button>Save</button>
-					</div>
-				</li>
-			</ul>
-		</main>
-	);
+						</Link>
+					))}
+
+					{showMore &&
+						productList.slice(2).map((product) => (
+							<Link to={`/product/${product.id}`}>
+								<ProductSnapshot
+									product={product}
+									key={product.id}
+								/>
+							</Link>
+						))}
+				</ul>
+				<button
+					onClick={() => {
+						toggleState(setShowMore, showMore);
+					}}
+					className={classes.moreBtn}
+				>
+					{showMore ? 'Show Less' : 'Show More'}
+				</button>
+				{mapIsLoaded ? (
+					<MapSection latLong={latLong}></MapSection>
+				) : (
+					'LOADING...'
+				)}
+			</main>
+		);
+	}
 };
+
 export default SellerAdminPage;

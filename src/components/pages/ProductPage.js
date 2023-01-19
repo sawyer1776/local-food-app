@@ -11,8 +11,9 @@ import { toggleState } from '../storage/helper-functions';
 import AuthContext from '../storage/auth-context';
 import PickupSection from '../sections/PickupSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 let thisSellerData = {};
 let thisProduct = [];
 let pickupList = [];

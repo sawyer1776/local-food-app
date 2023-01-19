@@ -9,8 +9,9 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import { toggleState } from '../storage/helper-functions';
 import OrderSection from '../sections/OrdersSection';
 import { Link } from 'react-router-dom';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 let userData = {};
 
@@ -19,6 +20,7 @@ const ProfilePage = (props) => {
 	const [ShowOrders, setShowOrders] = useState(false);
 	const authCtx = useContext(AuthContext);
 	console.log('ctx', authCtx);
+	console.log('pge id', authCtx.sellerPageId);
 	// useEffect(() => {
 	// 	const fetchUser = async function () {
 	// 		const responseUser = await client.records.getList(

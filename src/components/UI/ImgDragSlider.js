@@ -3,6 +3,7 @@ import BearCarousel, {
 	BearSlideItem,
 } from 'bear-react-carousel';
 import 'bear-react-carousel/dist/index.css';
+import GLOBALIP from '../globalVars';
 import classes from './ImgDragSlider.module.css';
 
 const ImgDragSlider = (props) => {
@@ -12,7 +13,7 @@ const ImgDragSlider = (props) => {
 				key: index,
 				children: (
 					<BearSlideItem
-						imageUrl={`http://127.0.0.1:8090/api/files/${props.seller['@collectionId']}/${props.seller.id}/${props.seller.imgs[index]}`}
+						imageUrl={`${GLOBALIP}/api/files/${props.seller.collectionId}/${props.seller.id}/${props.seller.imgs[index]}`}
 					/>
 				),
 			};

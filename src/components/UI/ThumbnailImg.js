@@ -1,10 +1,13 @@
 import classes from './ThumbnailImg.module.css';
+import GLOBALIP from '../globalVars';
 
 const ThumbnailImg = (props) => {
+	console.log('product Id', props.product.id);
+	console.log('imgs', props.product.imgs);
 	return (
 		<img
 			className={classes.productImg}
-			src={`http://127.0.0.1:8090/api/files/ktbhywrwv3kbqar/${props.product.id}/${props.product.imgs[0]}`}
+			src={`${GLOBALIP}/api/files/fju2ageazj7ce35/${props.product.id}/${props.product.imgs[0]}`}
 		></img>
 	);
 };

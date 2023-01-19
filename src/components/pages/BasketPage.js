@@ -6,8 +6,9 @@ import classes from './BasketPage.module.css';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { NavLink } from 'react-router-dom';
 import LoginSection from '../sections/LoginSection';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 let currentTotal = 0;
 let basketContents = [];

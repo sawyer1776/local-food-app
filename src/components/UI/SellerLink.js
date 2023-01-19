@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import classes from './SellerLink.module.css';
 import ReviewStars from './ReviewStars';
+import GLOBALIP from '../globalVars';
 
 const SellerLink = (props) => {
+	console.log('props', props);
 	return (
 		<NavLink
 			className={classes.sellerLinkContainer}
@@ -10,7 +12,7 @@ const SellerLink = (props) => {
 		>
 			<img
 				className={classes.sellerImg}
-				src={`http://127.0.0.1:8090/api/files/${props.seller['@collectionId']}/${props.seller.id}/${props.seller.imgs[0]}`}
+				src={`${GLOBALIP}/api/files/${props.seller.collectionId}/${props.seller.id}/${props.seller.imgs[0]}`}
 			></img>
 			<div className={classes.sellerText}>
 				<h2 className={classes.sellerTitle}>

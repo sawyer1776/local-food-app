@@ -9,8 +9,9 @@ import ButtonElement from '../UI/ButtonElement';
 import classes from './LoginSection.module.css';
 import PocketBase from 'pocketbase';
 import AuthContext from '../storage/auth-context';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 const LoginPage = (props) => {
 	const emailInputRef = useRef();

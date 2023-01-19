@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './BasketItem.module.css';
 import ThumbnailImg from './ThumbnailImg';
 import { BsTrash } from 'react-icons/bs';
+import GLOBALIP from '../globalVars';
 
 const BasketItem = (props) => {
 	return (
@@ -11,7 +12,7 @@ const BasketItem = (props) => {
 				<NavLink to={`/product/${props.product.id}`}>
 					<img
 						className={classes.productImg}
-						src={`http://127.0.0.1:8090/api/files/ktbhywrwv3kbqar/${props.product.id}/${props.product.imgs[0]}`}
+						src={`${GLOBALIP}/api/files/ktbhywrwv3kbqar/${props.product.id}/${props.product.imgs[0]}`}
 					></img>
 				</NavLink>
 

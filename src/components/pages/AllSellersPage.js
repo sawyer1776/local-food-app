@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import SellerLink from '../UI/SellerLink';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './AllSellersPage.module.css';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 let allSellersData = [];
 

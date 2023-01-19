@@ -13,8 +13,9 @@ import classes from './Header.module.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import PocketBase from 'pocketbase';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 const Header = (props) => {
 	const [showSearch, setShowSearch] = useState(false);

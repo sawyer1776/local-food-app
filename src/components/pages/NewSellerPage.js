@@ -3,8 +3,9 @@ import AuthContext from '../storage/auth-context';
 import { useContext, useState } from 'react';
 import PocketBase from 'pocketbase';
 import { NavLink, Redirect } from 'react-router-dom';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 const NewSeller = () => {
 	const authCtx = useContext(AuthContext);

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PocketBase from 'pocketbase';
 import { BsJustifyLeft } from 'react-icons/bs';
+import GLOBALIP from '../globalVars';
 
-const client = new PocketBase('http://127.0.0.1:8090');
+const client = new PocketBase(`${GLOBALIP}`);
 
 let userCart = [
 	{ id: 'x1e7z6qjcjjg4hs', qty: 2 },
