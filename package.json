@@ -9,7 +9,7 @@
 		"axios": "^0.27.2",
 		"bear-react-carousel": "^2.0.1",
 		"leaflet": "^1.9.3",
-		"pocketbase": "^0.7.1",
+		"pocketbase": "^0.10.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-leaflet": "^4.2.0",

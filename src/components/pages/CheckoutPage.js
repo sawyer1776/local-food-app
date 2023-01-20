@@ -1,4 +1,4 @@
-// import { HiHome } from 'react-icons/hi';
+import { HiHome } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
 
 const CheckoutPage = (props) => {
@@ -22,7 +22,9 @@ const CheckoutPage = (props) => {
 			</p>
 
 			<NavLink to="./all-sellers">
-				<button>{/* <HiHome /> */}</button>
+				<button>
+					<HiHome />
+				</button>
 			</NavLink>
 		</div>
 	);

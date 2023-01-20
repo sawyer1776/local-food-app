@@ -4,6 +4,7 @@ import GLOBALIP from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
+//check but i don't think i need this anymore
 let userCart = [
 	{ id: 'x1e7z6qjcjjg4hs', qty: 2 },
 	{ id: 'a9mocdst87l86rv', qty: 3 },
@@ -28,7 +29,7 @@ export const AuthContextProvider = (props) => {
 
 	const loginHandler = (authData, producerId) => {
 		setToken(authData.token);
-		setUser(authData.user);
+		setUser(authData.record);
 		if (producerId.items.length > 0) {
 			setSellerPageId(producerId.items[0].id);
 		}

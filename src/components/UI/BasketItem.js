@@ -12,7 +12,7 @@ const BasketItem = (props) => {
 				<NavLink to={`/product/${props.product.id}`}>
 					<img
 						className={classes.productImg}
-						src={`${GLOBALIP}/api/files/ktbhywrwv3kbqar/${props.product.id}/${props.product.imgs[0]}`}
+						src={`${GLOBALIP}/api/files/fju2ageazj7ce35/${props.product.id}/${props.product.imgs[0]}`}
 					></img>
 				</NavLink>
 

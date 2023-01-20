@@ -8,7 +8,8 @@
 	text-align: center;
 }
 .titleLine {
-	margin-bottom: 1rem;
+	align-self: flex-start;
+	width: 100%;
 }
 .title {
 	font-size: 1.3rem;
@@ -29,10 +30,19 @@
 	margin: 0;
 }
 
+.sectionTitle {
+	justify-self: flex-start;
+	text-align: left;
+	margin: 1rem 0;
+	font-weight: 400;
+	text-decoration: underline;
+}
+
 .adminSection {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 0rem;
 }
 
 .textAreaAbout {
@@ -49,6 +59,16 @@
 	display: flex;
 	gap: 2rem;
 	justify-content: end;
+}
+
+.smallBtn {
+	font-size: 1rem;
+	margin: 0.5rem;
+	padding: 0.5rem;
+}
+
+.warn {
+	color: red;
 }
 
 /* Bool button */

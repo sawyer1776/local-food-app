@@ -27,30 +27,25 @@ const ProductPage = (props) => {
 
 	useEffect(() => {
 		const fetchThisProduct = async function () {
-			const responseProduct = await client.records.getOne(
-				'products',
-				params.productId
-			);
+			const responseProduct = await client
+				.collection('products')
+				.getOne(params.productId);
 			thisProduct = responseProduct;
 
-			const responseSeller = await client.records.getOne(
-				'producers',
-				thisProduct.producer_id
-			);
+			const responseSeller = await client
+				.collection('producers')
+				.getOne(thisProduct.producer_id);
 			thisSellerData = responseSeller;
 
 			setLoaded(true);
 		};
 
 		const fetchProducersPickups = async function () {
-			const responseProducts = await client.records.getList(
-				'pickup_meetups',
-				1,
-				10,
-				{
+			const responseProducts = await client
+				.collection('pickup_meetups')
+				.getList(1, 10, {
 					filter: `producer_id = '${thisProduct.producer_id}'`,
-				}
-			);
+				});
 			pickupList = responseProducts.items;
 		};
 

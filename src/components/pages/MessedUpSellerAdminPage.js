@@ -21,7 +21,7 @@ let productList = [];
 let pickupList = [];
 let latLong = [];
 
-const SellerPage = (props) => {
+const SellerAdminPage = (props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [showAbout, setShowAbout] = useState(false);
 	const [showPickup, setShowPickup] = useState(false);
@@ -32,6 +32,9 @@ const SellerPage = (props) => {
 	useEffect(() => {
 		const fetchListedProducersProducts = async function () {
 			//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
+
+			console.log('seller Id', params.sellerId);
+
 			const responseProducts = await client
 				.collection('products')
 				.getList(1, 100, {
@@ -39,7 +42,6 @@ const SellerPage = (props) => {
 				});
 			productList = responseProducts.items;
 		};
-		console.log('params sellerId', params.sellerId);
 		const fetchProducersPickups = async function () {
 			const responseProducts = await client
 				.collection('pickup_meetups')
@@ -52,9 +54,11 @@ const SellerPage = (props) => {
 		const fetchSeller = async function () {
 			const responseSeller = await client
 				.collection('producers')
-				.getOne(params.sellerId, {});
+				.getOne(params.sellerId, {
+					sort: '-created',
+				});
 			thisSellerData = responseSeller;
-			console.log('this seller', thisSellerData);
+			console.log(thisSellerData);
 		};
 		const fetchLatLong = async function () {
 			let address = thisSellerData.address;
@@ -213,4 +217,4 @@ const SellerPage = (props) => {
 	}
 };
 
-export default SellerPage;
+export default SellerAdminPage;

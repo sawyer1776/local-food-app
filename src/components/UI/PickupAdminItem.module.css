@@ -1,5 +1,4 @@
 .listItemContainer {
-	width: 100%;
 	margin: 2rem;
 	border-bottom: 2px solid var(--main-color);
 	padding-bottom: 1rem;
@@ -19,4 +18,10 @@
 	border: none;
 
 	border-radius: 0;
+}
+
+.imgTitle {
+	font-size: 0.8rem;
+	max-width: 70%;
+	overflow: scroll;
 }

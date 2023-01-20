@@ -14,13 +14,9 @@ const AllSellers = (props) => {
 	useEffect(() => {
 		const fetchProducers = async function () {
 			//PAGINATE with PARAMS
-			const responseProducersData =
-				await client.records.getList(
-					'producers',
-					1,
-					25,
-					{}
-				);
+			const responseProducersData = await client
+				.collection('producers')
+				.getList(1, 25, {});
 			allSellersData = responseProducersData.items;
 
 			setLoaded(true);

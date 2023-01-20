@@ -23,8 +23,7 @@ const ProfilePage = (props) => {
 	console.log('pge id', authCtx.sellerPageId);
 	// useEffect(() => {
 	// 	const fetchUser = async function () {
-	// 		const responseUser = await client.records.getList(
-	// 			'producers',
+	// 		const responseUser = await client.collections('producers').getList(
 	// 			1,
 	// 			100,
 	// 			{}
@@ -43,11 +42,14 @@ const ProfilePage = (props) => {
 	// if (!isLoaded) {
 	// 	return <LoadingSpinner/>;
 	// }
+
 	if (1 < 2) {
+		console.log('ctx user', authCtx.user);
+		console.log('ctx user name', authCtx.user.name);
 		return (
 			<main className="container">
 				<h2>Your Profile </h2>
-				<p>Welcome {authCtx.user.profile.name}</p>
+				<p>Welcome {authCtx.user.name}</p>
 				<div className={classes.btns}>
 					<button
 						className={classes.button}
@@ -58,9 +60,7 @@ const ProfilePage = (props) => {
 						Orders
 					</button>
 					{ShowOrders ? (
-						<OrderSection
-							orders={authCtx.user.profile.orders}
-						/>
+						<OrderSection orders={authCtx.user.orders} />
 					) : (
 						''
 					)}

@@ -33,9 +33,7 @@ const NewSeller = () => {
 					''
 				)}
 				<h1>
-					Welcome{' '}
-					{authCtx.user.profile.name &&
-						authCtx.user.profile.name}
+					Welcome {authCtx.user.name && authCtx.user.name}
 				</h1>
 
 				<div>

@@ -20,7 +20,7 @@ const BasketPage = (props) => {
 
 	const authCtx = useContext(AuthContext);
 
-	// let cartIds = authCtx.user.profile.cart.items;
+	// let cartIds = authCtx.user.cart.items;
 	let cartIds = null;
 
 	const calcTotal = function () {
@@ -73,12 +73,9 @@ const BasketPage = (props) => {
 		qty,
 		i
 	) {
-		const responseBasketContents =
-			await client.records.getOne(
-				'products',
-				`${productId}`,
-				{}
-			);
+		const responseBasketContents = await client
+			.collection('products')
+			.getOne(`${productId}`, {});
 		basketContents.push({
 			item: responseBasketContents,
 			qty: qty,
@@ -121,7 +118,8 @@ const BasketPage = (props) => {
 		if (isLoaded) return;
 		if (!isLoaded) {
 			basketContents = [];
-			cartIds = authCtx.user.profile.cart.items;
+			console.log('look here', authCtx.user.cart.items);
+			cartIds = authCtx.user.cart.items;
 
 			cartIds.forEach((item, i) => {
 				fetchBasketContents(item.id, item.qty, i);

@@ -7,8 +7,8 @@ import {
 } from 'react';
 import ButtonElement from '../UI/ButtonElement';
 import classes from './LoginSection.module.css';
-import PocketBase from 'pocketbase';
 import AuthContext from '../storage/auth-context';
+import PocketBase from 'pocketbase';
 import GLOBALIP from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
@@ -50,18 +50,22 @@ const LoginPage = (props) => {
 			// 	`${enteredEmail}`,
 			// 	`${enteredPassword}`
 			// );
-			const authData = await client.users.authViaEmail(
-				`blackcreekproductions@gmail.com`,
-				`12345678`
-			);
-			const producerId = await client.records.getList(
-				'producers',
-				1,
-				1,
-				{
-					filter: `owner_id = '${authData.user.id}'`,
-				}
-			);
+			console.log('trying to login');
+
+			const authData = await client
+				.collection('users')
+				.authWithPassword('willowrun@me.com', '1234567890');
+
+			console.log('should have logged in');
+
+			const producerId = await client
+				.collection('producers')
+				.getList(1, 1, {
+					filter: `owner_id = '${authData.record.id}'`,
+				});
+
+			console.log('id', producerId);
+			console.log('authdata', authData);
 
 			authCtx.login(authData, producerId);
 		} else {
