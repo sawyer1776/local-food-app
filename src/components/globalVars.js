@@ -1,3 +1,3 @@
-const GLOBALIP = 'http://142.93.66.154:443/_/';
+const GLOBALIP = 'http://167.71.182.79/:443/_/';
 
 export default GLOBALIP;
