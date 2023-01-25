@@ -9,7 +9,6 @@ import { FaCarrot } from 'react-icons/fa';
 const LandingPage = (props) => {
 	const authCtx = useContext(AuthContext);
 
-	console.log('authContext', authCtx);
 	return (
 		<main className="container">
 			<section>

@@ -39,7 +39,7 @@ const SellerPage = (props) => {
 				});
 			productList = responseProducts.items;
 		};
-		console.log('params sellerId', params.sellerId);
+
 		const fetchProducersPickups = async function () {
 			const responseProducts = await client
 				.collection('pickup_meetups')
@@ -54,7 +54,6 @@ const SellerPage = (props) => {
 				.collection('producers')
 				.getOne(params.sellerId, {});
 			thisSellerData = responseSeller;
-			console.log('this seller', thisSellerData);
 		};
 		const fetchLatLong = async function () {
 			let address = thisSellerData.address;

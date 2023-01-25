@@ -90,7 +90,6 @@ const BasketPage = (props) => {
 	};
 
 	const deleteItem = function (itemId) {
-		console.log('pre', basketContents);
 		let indexContent = null;
 		let indexIds = null;
 		basketContents.forEach((_, i) => {
@@ -118,7 +117,6 @@ const BasketPage = (props) => {
 		if (isLoaded) return;
 		if (!isLoaded) {
 			basketContents = [];
-			console.log('look here', authCtx.user.cart.items);
 			cartIds = authCtx.user.cart.items;
 
 			cartIds.forEach((item, i) => {

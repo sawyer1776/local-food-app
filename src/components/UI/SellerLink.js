@@ -4,7 +4,6 @@ import ReviewStars from './ReviewStars';
 import GLOBALIP from '../globalVars';
 
 const SellerLink = (props) => {
-	console.log('props', props);
 	return (
 		<NavLink
 			className={classes.sellerLinkContainer}

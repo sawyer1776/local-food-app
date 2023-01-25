@@ -13,6 +13,7 @@ import ProfilePage from './components/pages/ProfilePage';
 import BasketPage from './components/pages/BasketPage';
 import SearchResultsPage from './components/pages/SearchResultsPage';
 import CheckoutPage from './components/pages/CheckoutPage';
+import ProductsAdmin from './components/pages/ProductsAdmin';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -51,7 +52,11 @@ function App() {
 					<LoginSection />
 				</Route>
 
-				<Route path={`/seller-admin/`}>
+				<Route path={`/seller-admin/products`}>
+					<ProductsAdmin />
+				</Route>
+
+				<Route path={`/seller-admin`}>
 					<SellerAdminPage />
 				</Route>
 

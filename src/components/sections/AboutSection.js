@@ -1,7 +1,6 @@
 import classes from './AboutSection.module.css';
 
 const AboutSection = function (props) {
-	console.log(props.aboutText.paragraphs);
 	return (
 		<section>
 			<h1 className={classes.title}>About</h1>

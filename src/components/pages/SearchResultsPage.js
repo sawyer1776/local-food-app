@@ -12,7 +12,6 @@ const SearchResultsPage = (props) => {
 	const searchTerm = location.state.searchTerm;
 	const data = location.state.data;
 	// let [data, setData] = useState(location.state.data);
-	console.log('data', data);
 
 	return (
 		<main className="container">

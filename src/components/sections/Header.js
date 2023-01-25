@@ -23,14 +23,13 @@ const Header = (props) => {
 	const history = useHistory();
 	let searchData = [];
 	const conductSearch = function () {
-		console.log('search', search);
 		const fetchSearchResults = async function () {
 			const responseSearchResults =
 				await client.records.getList('products', 1, 50, {
 					filter: `title~"${search}" || description~"${search}" `,
 				});
 			searchData = responseSearchResults.items;
-			console.log(searchData);
+
 			history.push({
 				pathname: '/search-results',
 				state: { data: searchData, searchTerm: search },
@@ -59,7 +58,7 @@ const Header = (props) => {
 	// 					setSearch(event.target.value);
 	// 				}}
 	// 				onKeyDown={(e) => {
-	// 					console.log(e.code);
+	//
 	// 					if (e.code === 'Enter') {
 	// 						conductSearch();
 	// 					}
@@ -91,10 +90,8 @@ const Header = (props) => {
 					placeholder="Search Products"
 					onChange={(event) => {
 						setSearch(event.target.value);
-						console.log(search);
 					}}
 					onKeyDown={(e) => {
-						console.log(e.code);
 						if (e.code === 'Enter') {
 							conductSearch();
 						}

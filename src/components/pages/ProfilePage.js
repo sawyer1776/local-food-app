@@ -19,8 +19,7 @@ const ProfilePage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const [ShowOrders, setShowOrders] = useState(false);
 	const authCtx = useContext(AuthContext);
-	console.log('ctx', authCtx);
-	console.log('pge id', authCtx.sellerPageId);
+
 	// useEffect(() => {
 	// 	const fetchUser = async function () {
 	// 		const responseUser = await client.collections('producers').getList(
@@ -29,9 +28,6 @@ const ProfilePage = (props) => {
 	// 			{}
 	// 		);
 	// 		userData = responseUser.items;
-
-	// 		console.log(userData); //need name and account id
-
 	// 		setLoaded(true);
 	// 	};
 	// 	if (isLoaded) return;
@@ -44,8 +40,6 @@ const ProfilePage = (props) => {
 	// }
 
 	if (1 < 2) {
-		console.log('ctx user', authCtx.user);
-		console.log('ctx user name', authCtx.user.name);
 		return (
 			<main className="container">
 				<h2>Your Profile </h2>

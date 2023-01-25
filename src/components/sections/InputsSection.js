@@ -29,15 +29,11 @@ const InputsPage = (props) => {
 	};
 
 	const record = async function () {
-		console.log('Submitting');
-		console.log(data);
 		await client.records.create('products', data);
 	};
 
 	const submitHandler = function () {
-		console.log('Submit Handler');
 		if (title.trim().length <= 0) {
-			console.log(title.trim());
 			setTitleIsValid(false);
 			return;
 		} else {

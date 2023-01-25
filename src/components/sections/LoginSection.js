@@ -34,7 +34,6 @@ const LoginPage = (props) => {
 	const submitHandler = async (event) => {
 		//REMOVE AFTER TESTING DUMMY LOGIN
 		// event.preventDefault();
-		console.log('Ouch');
 
 		//Validate inputs
 		//return error if inputs invalid
@@ -50,22 +49,16 @@ const LoginPage = (props) => {
 			// 	`${enteredEmail}`,
 			// 	`${enteredPassword}`
 			// );
-			console.log('trying to login');
 
 			const authData = await client
 				.collection('users')
 				.authWithPassword('willowrun@me.com', '1234567890');
-
-			console.log('should have logged in');
 
 			const producerId = await client
 				.collection('producers')
 				.getList(1, 1, {
 					filter: `owner_id = '${authData.record.id}'`,
 				});
-
-			console.log('id', producerId);
-			console.log('authdata', authData);
 
 			authCtx.login(authData, producerId);
 		} else {
@@ -74,7 +67,6 @@ const LoginPage = (props) => {
 				password: `${enteredPassword}`,
 				// passwordConfirm: `${enteredConfirmPassword}`,
 			});
-			console.log(createProfile);
 		}
 	};
 

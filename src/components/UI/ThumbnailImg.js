@@ -2,8 +2,6 @@ import classes from './ThumbnailImg.module.css';
 import GLOBALIP from '../globalVars';
 
 const ThumbnailImg = (props) => {
-	console.log('product Id', props.product.id);
-	console.log('imgs', props.product.imgs);
 	return (
 		<img
 			className={classes.productImg}

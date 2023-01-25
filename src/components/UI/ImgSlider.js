@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import GLOBALIP from '../globalVars';
 
 const ImgSlider = (props) => {
-	console.log('imgs are', props.imgs.imgs);
 	return (
 		<div className={classes.sliderContainer}>
 			{props.imgs.imgs.map((img, index) => (

@@ -27,7 +27,6 @@ const addToCart = async function (
 		'baskets',
 		data
 	);
-	console.log(record);
 };
 
 export { toggleState, addToCart };

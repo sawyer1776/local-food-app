@@ -33,8 +33,6 @@ const SellerAdminPage = (props) => {
 		const fetchListedProducersProducts = async function () {
 			//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
 
-			console.log('seller Id', params.sellerId);
-
 			const responseProducts = await client
 				.collection('products')
 				.getList(1, 100, {
@@ -58,7 +56,6 @@ const SellerAdminPage = (props) => {
 					sort: '-created',
 				});
 			thisSellerData = responseSeller;
-			console.log(thisSellerData);
 		};
 		const fetchLatLong = async function () {
 			let address = thisSellerData.address;
