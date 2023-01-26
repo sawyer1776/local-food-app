@@ -1,0 +1,12 @@
+.back {
+	display: flex;
+	align-items: center;
+	gap: 3rem;
+	margin-bottom: 1rem;
+	font-weight: 400;
+	color: var(--text-color);
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}

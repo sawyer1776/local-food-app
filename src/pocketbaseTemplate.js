@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 import { useEffect, useState } from 'react';
+import classes from './COMPONANTNAME.module.css';
 import GLOBALIP from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);

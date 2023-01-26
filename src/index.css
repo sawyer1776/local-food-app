@@ -59,16 +59,25 @@ button.wide {
 	max-width: 500px;
 }
 
+.buttonOutline {
+	background-color: transparent;
+	color: var(--secondary-color);
+}
+
+section {
+	width: 100%;
+}
+
 a,
 a:visited {
 	text-decoration: none;
 	color: var(--text-color);
 }
 
-code {
+/* code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas,
 		'Courier New', monospace;
-}
+} */
 
 ul {
 	list-style: none;
@@ -111,10 +120,4 @@ section {
 	border-radius: 0.5rem;
 	overflow: hidden;
 	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.185);
-}
-
-textarea {
-	width: 100%;
-	border: 3px solid var(--main-color);
-	font-size: 1.2rem;
 }
