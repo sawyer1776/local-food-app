@@ -112,18 +112,20 @@ const EditingProductSection = (props) => {
 	if (isLoaded) {
 		return (
 			<section>
-				<h2 className={classes.id}>ID: {props.id}</h2>
-				<button
-					className="buttonOutline"
-					onClick={() => {
-						deleteHandler();
-						product = {};
-						formData = new FormData();
-						props.cancelFunction(null);
-					}}
-				>
-					Delete
-				</button>
+				<div className={classes.idAndDelete}>
+					<h2 className={classes.id}>ID: {props.id}</h2>
+					<button
+						className={`${classes.deleteBtn} buttonOutline`}
+						onClick={() => {
+							deleteHandler();
+							product = {};
+							formData = new FormData();
+							props.cancelFunction(null);
+						}}
+					>
+						Delete
+					</button>
+				</div>
 				<form onSubmit={submitHandler}>
 					<ul className={classes.list}>
 						<li className={classes.listItem}>

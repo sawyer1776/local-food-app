@@ -14,6 +14,9 @@ import BasketPage from './components/pages/BasketPage';
 import SearchResultsPage from './components/pages/SearchResultsPage';
 import CheckoutPage from './components/pages/CheckoutPage';
 import ProductsAdmin from './components/pages/ProductsAdmin';
+import { Admin } from 'pocketbase';
+import AdminContactPage from './components/pages/AdminContactPage';
+import AdminLocationPage from './components/pages/AdminLocationPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -54,6 +57,12 @@ function App() {
 
 				<Route path={`/seller-admin/products`}>
 					<ProductsAdmin />
+				</Route>
+				<Route path={`/seller-admin/contact`}>
+					<AdminContactPage />
+				</Route>
+				<Route path={`/seller-admin/location`}>
+					<AdminLocationPage />
 				</Route>
 
 				<Route path={`/seller-admin`}>

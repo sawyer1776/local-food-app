@@ -5,6 +5,17 @@
 	align-self: flex-start;
 }
 
+.idAndDelete {
+	width: 100%;
+	display: flex;
+	/* gap: 1rem; */
+	justify-content: space-between;
+}
+
+.deleteBtn {
+	font-size: 1rem;
+}
+
 .buttons {
 	margin-top: 1rem;
 	width: 100%;

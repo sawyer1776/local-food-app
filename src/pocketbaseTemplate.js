@@ -11,12 +11,9 @@ const COMPONANTNAME = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	useEffect(() => {
 		const FETCHFUNC = async function () {
-			const RESPONSEDATA = await client.records.getList(
-				'producers',
-				1,
-				100,
-				{}
-			);
+			const RESPONSEDATA = await client
+				.collection('producers')
+				.getList(1, 100, {});
 			DATAVAR = RESPONSEDATA.items;
 			setLoaded(true);
 		};
