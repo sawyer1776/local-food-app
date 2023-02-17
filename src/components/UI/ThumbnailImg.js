@@ -1,5 +1,5 @@
 import classes from './ThumbnailImg.module.css';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const ThumbnailImg = (props) => {
 	return (

@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import { useEffect, useState, useContext } from 'react';
 import { HiOutlineMail, HiPhone } from 'react-icons/hi';
 import classes from './AdminContactPage.module.css';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 import BackToAdmin from '../UI/BackToAdmin';
 import AuthContext from '../storage/auth-context';
 import { NavLink, useHistory } from 'react-router-dom';

@@ -1,18 +1,25 @@
+import { BsPencil } from 'react-icons/bs';
 import classes from './PickupMeetupItem.module.css';
 
 const PickupMeetupItem = (props) => {
 	let startTime = props.info.start_time;
 	let endTime = props.info.end_time;
-	if (startTime > 1259) {
-		startTime = startTime - 1200;
+	// if (startTime.slice > 1259) {
+	// 	startTime = startTime - 1200;
+	// }
+	// if (endTime > 1259) {
+	// 	endTime = endTime - 1200;
+	// }
+	let startFirst = String(startTime).slice(0, 2);
+	if (Number(startFirst >= 13)) {
+		startFirst = startFirst - 12;
 	}
-	if (endTime > 1259) {
-		endTime = endTime - 1200;
+	let startLast = String(startTime).slice(3, 5);
+	let endFirst = String(endTime).slice(0, 2);
+	if (Number(endFirst >= 13)) {
+		endFirst = endFirst - 12;
 	}
-	let startFirst = String(startTime).slice(0, -2);
-	let startLast = String(startTime).slice(-2);
-	let endFirst = String(endTime).slice(0, -2);
-	let endLast = String(endTime).slice(-2);
+	let endLast = String(endTime).slice(3, 5);
 
 	return (
 		<div className={classes.container}>
@@ -21,6 +28,7 @@ const PickupMeetupItem = (props) => {
 					? 'Pickup at the farm'
 					: 'Meetup locally'}
 			</h3>
+
 			<p>{props.info.location_name}</p>
 			<p>
 				{props.info.show_address_public ? (
@@ -41,10 +49,25 @@ const PickupMeetupItem = (props) => {
 
 			<p className={classes.time}>
 				{startFirst + ':' + startLast}
-				{props.info.start_time > 1159 ? 'pm' : 'am'} -{' '}
-				{endFirst + ':' + endLast}
-				{props.info.end_time > 1159 ? 'pm' : 'am'}
+				{Number(startTime.slice(0, 2)) > 11 &&
+				Number(startTime.slice(0, 2)) < 24
+					? 'pm'
+					: 'am'}{' '}
+				- {endFirst + ':' + endLast}
+				{Number(endTime.slice(0, 2)) > 11 &&
+				Number(endTime.slice(0, 2)) < 24
+					? 'pm'
+					: 'am'}
 			</p>
+
+			<button
+				className={classes.editButton}
+				onClick={() => {
+					props.editFunction(props.info.id);
+				}}
+			>
+				<BsPencil />
+			</button>
 		</div>
 	);
 };

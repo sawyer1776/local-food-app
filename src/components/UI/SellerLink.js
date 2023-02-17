@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import classes from './SellerLink.module.css';
 import ReviewStars from './ReviewStars';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const SellerLink = (props) => {
 	return (

@@ -12,7 +12,7 @@ import ReviewStars from '../UI/ReviewStars';
 import MapSection from '../sections/MapSection';
 import ImgDragSlider from '../UI/ImgDragSlider';
 import ContactInfoSection from '../sections/ContactInfoSection';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

@@ -6,7 +6,7 @@ import classes from './BasketPage.module.css';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { NavLink } from 'react-router-dom';
 import LoginSection from '../sections/LoginSection';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

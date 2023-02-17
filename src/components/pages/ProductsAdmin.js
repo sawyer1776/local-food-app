@@ -5,7 +5,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import AdminCurrentProductsSection from '../sections/AdminCurrentProductsSection';
 import { HiArrowLeft } from 'react-icons/hi';
 import classes from './ProductsAdminPage.module.css';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 import BackToAdmin from '../UI/BackToAdmin';
 import EditingProductSection from '../sections/EditingProductSection';
 

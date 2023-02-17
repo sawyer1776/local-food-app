@@ -13,7 +13,7 @@ import classes from './Header.module.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import PocketBase from 'pocketbase';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

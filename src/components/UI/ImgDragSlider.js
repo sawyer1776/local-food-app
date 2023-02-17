@@ -3,7 +3,7 @@ import BearCarousel, {
 	BearSlideItem,
 } from 'bear-react-carousel';
 import 'bear-react-carousel/dist/index.css';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 import classes from './ImgDragSlider.module.css';
 
 const ImgDragSlider = (props) => {

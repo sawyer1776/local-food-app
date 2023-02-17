@@ -8,6 +8,7 @@ const PickupSection = (props) => {
 				<PickupMeetupItem
 					className={classes.container}
 					info={pickupMeetup}
+					editFunction={props.editFunction}
 				></PickupMeetupItem>
 			))}
 

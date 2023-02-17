@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import { useEffect, useState, useContext } from 'react';
 import classes from './EditingProductSection.module.css';
 import AuthContext from '../storage/auth-context';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
@@ -21,7 +21,6 @@ const EditingProductSection = (props) => {
 	};
 
 	const uploadHandler = function (e) {
-		console.log('file Input', e.target.files[0]);
 		formData.append('imgs', e.target.files[0]);
 
 		console.log('Form Data', Array.from(formData));
@@ -44,14 +43,6 @@ const EditingProductSection = (props) => {
 
 	const submitHandler = function (e) {
 		e.preventDefault();
-		// 		data = {
-		// 	title: `${e.currentTarget.elements.title.value}`,
-		// 	price: e.currentTarget.elements.price.value,
-		// 	unit: `${e.currentTarget.elements.unit.value}`,
-		// 	qty: e.currentTarget.elements.qty.value,
-		// 	description: `${e.currentTarget.elements.description.value}`,
-		// 	// producer_id: 'k9rfk6p2epvhe6c',
-		// };
 
 		formData.append(
 			'title',

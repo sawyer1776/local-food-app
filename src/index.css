@@ -61,7 +61,7 @@ button.wide {
 	max-width: 500px;
 }
 
-.buttonOutline {
+button.buttonOutline {
 	background-color: transparent;
 	color: var(--secondary-color);
 }

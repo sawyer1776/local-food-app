@@ -3,7 +3,7 @@ import AuthContext from '../storage/auth-context';
 import { useContext, useState } from 'react';
 import PocketBase from 'pocketbase';
 import { NavLink, Redirect } from 'react-router-dom';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

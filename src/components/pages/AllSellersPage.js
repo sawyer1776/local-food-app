@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import SellerLink from '../UI/SellerLink';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './AllSellersPage.module.css';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

@@ -17,6 +17,10 @@ import ProductsAdmin from './components/pages/ProductsAdmin';
 import { Admin } from 'pocketbase';
 import AdminContactPage from './components/pages/AdminContactPage';
 import AdminLocationPage from './components/pages/AdminLocationPage';
+import AdminPickupsPage from './components/pages/AdminPickupsPage';
+import AdminAboutPage from './components/pages/AdminAboutPage';
+import AdminSellerImgsPage from './components/pages/AdminSellerImgsPage';
+import AdminTitlePage from './components/pages/AdminTitlePage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -63,6 +67,18 @@ function App() {
 				</Route>
 				<Route path={`/seller-admin/location`}>
 					<AdminLocationPage />
+				</Route>
+				<Route path={`/seller-admin/pickups`}>
+					<AdminPickupsPage />
+				</Route>
+				<Route path={`/seller-admin/about`}>
+					<AdminAboutPage />
+				</Route>
+				<Route path={`/seller-admin/seller-imgs`}>
+					<AdminSellerImgsPage />
+				</Route>
+				<Route path={`/seller-admin/title`}>
+					<AdminTitlePage />
 				</Route>
 
 				<Route path={`/seller-admin`}>

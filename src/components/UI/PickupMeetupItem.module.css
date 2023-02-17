@@ -8,3 +8,12 @@
 	padding-bottom: 0.5rem;
 	border-bottom: 0.125rem solid var(--main-color);
 }
+
+.editButton {
+	margin-top: 0.5rem;
+	background-color: transparent;
+	color: var(--main-color);
+	padding: 0;
+	box-shadow: none;
+	border: none;
+}

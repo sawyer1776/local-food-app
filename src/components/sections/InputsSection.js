@@ -4,7 +4,7 @@ import PocketBase from 'pocketbase';
 import AuthContext from '../storage/auth-context';
 //HAS TO BE HERE, function passed in calls it
 import { toggleState } from '../storage/helper-functions';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

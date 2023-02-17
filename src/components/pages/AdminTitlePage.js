@@ -1,26 +1,22 @@
 import PocketBase from 'pocketbase';
 import { useEffect, useState, useContext } from 'react';
-import {
-	HiOutlineLocationMarker,
-	HiOutlineMail,
-	HiPhone,
-} from 'react-icons/hi';
+import { HiOutlineMail, HiPhone } from 'react-icons/hi';
 import classes from './AdminContactPage.module.css';
-import { GLOBALIP, pbLoad } from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 import BackToAdmin from '../UI/BackToAdmin';
 import AuthContext from '../storage/auth-context';
 import { NavLink, useHistory } from 'react-router-dom';
 
 const client = new PocketBase(`${GLOBALIP}`);
-let sellerAddress = {};
+let TitleData = {};
 
-const AdminContactPage = (props) => {
+const AdminTitlePage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const authCtx = useContext(AuthContext);
 	const history = useHistory();
 	console.log('ctx', authCtx);
 
-	const updateAddress = async function (
+	const updateContact = async function (
 		sellerPageId,
 		data
 	) {
@@ -32,7 +28,9 @@ const AdminContactPage = (props) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		console.log('submitted');
-		const address = e.currentTarget.elements.address.value;
+		const title = e.currentTarget.elements.title.value;
+		const subtitle =
+			e.currentTarget.elements.subtitle.value;
 
 		// format phone vs 2
 		// let phoneFormatted = `(${phone.slice(
@@ -41,10 +39,11 @@ const AdminContactPage = (props) => {
 		// )}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;
 
 		const data = {
-			address: address,
+			producer_name: title,
+			tagline: subtitle,
 		};
 
-		updateAddress(authCtx.sellerPageId, data);
+		updateContact(authCtx.sellerPageId, data);
 		history.push({
 			pathname: '/seller-admin',
 		});
@@ -55,29 +54,24 @@ const AdminContactPage = (props) => {
 	useEffect(() => {
 		const loadContact = async function () {
 			console.log(authCtx.sellerPageId);
-			const responseContact = await client
+			const responseSeller = await client
 				.collection('producers')
 				.getList(1, 50, {
 					filter: `id = "${authCtx.sellerPageId}"`,
 				});
-			sellerAddress = responseContact.items[0];
-			console.log(sellerAddress);
-			console.log(sellerAddress.public_phone);
-			console.log(sellerAddress.public_email);
+			TitleData = responseSeller.items[0];
+			console.log(TitleData);
+
 			setLoaded(true);
 		};
-
 		if (isLoaded) return;
-		if (!isLoaded) {
-			loadContact();
-		}
+		if (!isLoaded) loadContact();
 	});
 
 	if (!isLoaded) {
 		return <h1>loading...</h1>;
 	}
 	if (isLoaded) {
-		console.log(sellerAddress);
 		return (
 			<main className="container">
 				<form
@@ -86,7 +80,7 @@ const AdminContactPage = (props) => {
 				>
 					<ul className={classes.list}>
 						<li>
-							<h1>Your Contact Info</h1>
+							<h1>Your Store's Title</h1>
 						</li>
 						<li>
 							<BackToAdmin />
@@ -95,30 +89,43 @@ const AdminContactPage = (props) => {
 						<li
 							className={`${classes.listItem} ${classes.descriptionListItem}`}
 						>
-							<label className={classes.label} for="email">
-								<HiOutlineLocationMarker
-									className={classes.icon}
-								/>
+							<label className={classes.label} for="title">
+								Title
 							</label>
 							<input
 								className={`${classes.input}`}
-								id="address"
+								id="title"
 								type="text"
-								placeholder="101 Main Street, Anytown, GA 31000"
+								placeholder="e.g. Sonny Hill Farms"
 								defaultValue={
-									sellerAddress.address
-										? sellerAddress.address
+									TitleData.producer_name
+										? TitleData.producer_name
 										: null
 								}
 							></input>
-							{/* <label className={classes.switch}>
-							<input type="checkbox" />
-							<span
-								className={`${classes.slider} ${classes.round}`}
-							></span>
-						</label> */}
 						</li>
 
+						<li
+							className={`${classes.listItem} ${classes.descriptionListItem}`}
+						>
+							<label
+								className={classes.label}
+								for="subtitle"
+							>
+								Subtitle
+							</label>
+							<input
+								className={classes.input}
+								type="text"
+								id="subtitle"
+								placeholder="e.g. A family farm"
+								defaultValue={
+									TitleData.tagline
+										? TitleData.tagline
+										: null
+								}
+							></input>
+						</li>
 						<li className={classes.buttons}>
 							<button className="buttonOutline">
 								<NavLink to={'/seller-admin'}>
@@ -134,4 +141,4 @@ const AdminContactPage = (props) => {
 	}
 };
 
-export default AdminContactPage;
+export default AdminTitlePage;

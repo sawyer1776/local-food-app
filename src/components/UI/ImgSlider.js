@@ -1,6 +1,6 @@
 import classes from './ImgSlider.module.css';
 import React, { useState } from 'react';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const ImgSlider = (props) => {
 	return (

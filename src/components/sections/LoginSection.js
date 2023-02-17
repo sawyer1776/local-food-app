@@ -9,7 +9,7 @@ import ButtonElement from '../UI/ButtonElement';
 import classes from './LoginSection.module.css';
 import AuthContext from '../storage/auth-context';
 import PocketBase from 'pocketbase';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

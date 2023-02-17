@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './BasketItem.module.css';
 import ThumbnailImg from './ThumbnailImg';
 import { BsTrash } from 'react-icons/bs';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const BasketItem = (props) => {
 	return (

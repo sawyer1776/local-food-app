@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import GLOBALIP from '../globalVars';
+import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
