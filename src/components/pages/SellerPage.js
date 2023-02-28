@@ -134,6 +134,7 @@ const SellerPage = (props) => {
 					<>
 						<AboutSection
 							aboutText={thisSellerData.about_description}
+							edit={false}
 						/>
 						<button
 							className={classes.showLessBtn}

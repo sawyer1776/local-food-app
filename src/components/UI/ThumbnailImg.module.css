@@ -1,6 +1,13 @@
 .productImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	max-width: 10rem;
 	height: 100%;
+	object-fit: cover;
 	max-height: 10rem;
-	border-radius: 0;
-	border: 3px solid lightgray;
+	border-radius: 5px;
 }

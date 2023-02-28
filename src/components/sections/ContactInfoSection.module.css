@@ -1,12 +1,15 @@
+.contactContainer {
+	width: 100%;
+}
 .contactLine {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
-	font-size: 1.5rem;
+	font-size: 1.1rem;
 	margin-bottom: 0.75rem;
 }
 
 .icon {
-	height: 2.5rem;
-	width: 2.5rem;
+	height: 2rem;
+	width: 2rem;
 }

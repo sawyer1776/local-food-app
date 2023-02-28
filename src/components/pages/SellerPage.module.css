@@ -39,7 +39,8 @@
 	list-style: none;
 	display: grid;
 	width: 100%;
-	grid-template-columns: repeat(2, 48.5%);
+
+	grid-template-columns: repeat(2, 48%);
 	column-gap: 0.25rem;
 	row-gap: 2rem;
 	justify-content: space-between;

@@ -19,6 +19,33 @@ const BasketPage = (props) => {
 	const [test, setTest] = useState(1);
 
 	const authCtx = useContext(AuthContext);
+	const sendToDB = async (data) => {
+		await client.collection('orders').create(data);
+	};
+
+	const sendOrder = () => {
+		let order = [];
+		console.log('basket', basketContents);
+		basketContents.forEach((item) => {
+			order.push({
+				id: item.item.id,
+				title: item.item.title,
+				unit: item.item.unit,
+				qty: item.qty,
+				price: item.item.price,
+			});
+		});
+		console.log('Order', order);
+		console.log('stringed', JSON.stringify(order));
+		console.log('ctx', authCtx);
+		const data = {
+			products: JSON.stringify(order),
+			producer_id: 'k9rfk6p2epvhe6c',
+			buyer_id: authCtx.user.id,
+			buyer_name: authCtx.user.name,
+		};
+		sendToDB(data);
+	};
 
 	// let cartIds = authCtx.user.cart.items;
 	let cartIds = null;
@@ -63,6 +90,7 @@ const BasketPage = (props) => {
 					cartIds[i].qty--;
 				}
 			});
+
 			calcTotal();
 			setTest(test + 1);
 		}
@@ -157,7 +185,7 @@ const BasketPage = (props) => {
 				<h2 className={classes.subtotal}>
 					Subtotal: ${theTotal.toFixed(2)}
 				</h2>
-				<NavLink to="/checkout">
+				<NavLink to="/checkout" onClick={sendOrder}>
 					<button>Proceed to Checkout</button>
 				</NavLink>
 			</main>

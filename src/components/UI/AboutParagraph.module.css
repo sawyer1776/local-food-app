@@ -1,0 +1,28 @@
+.isEditing {
+	padding-top: 2rem;
+	border: 2px solid var(--main-color);
+}
+
+.paragraphAndHead {
+	padding: 0.3rem;
+	margin-bottom: 3rem;
+}
+
+.heading {
+	display: flex;
+	gap: 2rem;
+}
+.btns {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+	padding: 0.3rem;
+}
+
+.btnsDiv {
+	display: flex;
+	gap: 2rem;
+	margin: 0.3rem;
+	width: 100%;
+	justify-content: center;
+}

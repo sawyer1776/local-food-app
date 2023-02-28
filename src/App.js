@@ -21,6 +21,7 @@ import AdminPickupsPage from './components/pages/AdminPickupsPage';
 import AdminAboutPage from './components/pages/AdminAboutPage';
 import AdminSellerImgsPage from './components/pages/AdminSellerImgsPage';
 import AdminTitlePage from './components/pages/AdminTitlePage';
+import OrdersAdminPage from './components/pages/OrdersAdminPage';
 
 function App() {
 	const authCtx = useContext(AuthContext);
@@ -61,6 +62,9 @@ function App() {
 
 				<Route path={`/seller-admin/products`}>
 					<ProductsAdmin />
+				</Route>
+				<Route path={`/seller-admin/orders`}>
+					<OrdersAdminPage />
 				</Route>
 				<Route path={`/seller-admin/contact`}>
 					<AdminContactPage />

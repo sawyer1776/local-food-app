@@ -51,7 +51,7 @@ const ProfilePage = (props) => {
 							toggleState(setShowOrders, ShowOrders);
 						}}
 					>
-						Orders
+						Orders You Bought
 					</button>
 					{ShowOrders ? (
 						<OrderSection orders={authCtx.user.orders} />
@@ -59,11 +59,18 @@ const ProfilePage = (props) => {
 						''
 					)}
 					{authCtx.sellerPageId ? (
-						<Link to={`/seller-admin`}>
-							<button className={classes.button}>
-								Seller Admin
-							</button>
-						</Link>
+						<>
+							<Link to={`/seller-admin/orders`}>
+								<button className={classes.button}>
+									Orders You Sold
+								</button>
+							</Link>
+							<Link to={`/seller-admin`}>
+								<button className={classes.button}>
+									Seller Admin
+								</button>
+							</Link>
+						</>
 					) : (
 						<button className={classes.button}>
 							Become a Seller

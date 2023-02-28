@@ -1,0 +1,69 @@
+.orderContainer {
+	width: 100%;
+	border-bottom: 3px solid var(--grey-color);
+	margin-bottom: 0.35rem;
+	padding-bottom: 0.35rem;
+}
+
+.heading {
+	width: 100%;
+	margin-bottom: 1rem;
+	display: flex;
+	gap: 0.2rem;
+	justify-content: space-between;
+}
+.x {
+	width: 2rem;
+	height: 2rem;
+}
+.heading h3 {
+	text-align: left;
+}
+
+.light {
+	color: rgb(119, 119, 119);
+}
+
+.orderContainer:last-child {
+	border-bottom: none;
+}
+
+.orderMini {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+}
+
+.totalRow {
+	background-color: var(--grey-color);
+}
+
+.name {
+	font-weight: 500;
+}
+
+.table {
+	width: 100%;
+	border: 2px solid var(--main-color);
+	border-collapse: collapse;
+	margin-bottom: 1rem;
+}
+
+.table td {
+	padding: 0.5rem 0.15rem;
+	border: none;
+	border-bottom: 2px solid var(--main-color);
+}
+
+.tableBody {
+}
+
+.total {
+	font-weight: 500;
+	text-align: right;
+}
+
+.totalNum {
+	font-weight: 500;
+}

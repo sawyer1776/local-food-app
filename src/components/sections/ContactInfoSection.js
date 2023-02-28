@@ -11,7 +11,7 @@ const ContactInfoSection = (props) => {
 	)}`;
 
 	return (
-		<div className="container">
+		<div className={classes.contactContainer}>
 			<a
 				href={`mailto: ${props.email}`}
 				className={classes.contactLine}
