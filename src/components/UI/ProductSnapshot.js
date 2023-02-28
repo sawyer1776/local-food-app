@@ -5,10 +5,15 @@ import { BsStarFill } from 'react-icons/bs';
 import ReviewStars from './ReviewStars';
 
 const ProductSnapshot = (props) => {
+	console.log('snapshot', props.product);
 	return (
 		<div className={classes.productContainer}>
 			<div className={classes.imgContainer}>
-				<ThumbnailImg product={props.product} />
+				<ThumbnailImg
+					img={props.product.imgs[0]}
+					productId={props.product.id}
+					collectionId={'fju2ageazj7ce35'}
+				/>
 			</div>
 
 			<div className={classes.productText}>

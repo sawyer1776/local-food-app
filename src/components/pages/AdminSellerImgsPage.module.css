@@ -1,3 +1,37 @@
-.test {
-	font-size: 2rem;
+.delete {
+	align-self: flex-end;
+	margin-bottom: 1rem;
+}
+
+.list {
+	margin-bottom: 1rem;
+	width: 100%;
+}
+
+.list li {
+	width: 100%;
+}
+.list li input {
+	width: 100%;
+	margin: 1rem 0;
+}
+
+.buttons {
+	display: flex;
+	padding: 2rem;
+	justify-content: space-between;
+}
+
+.imgsContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.35rem;
+	margin-bottom: 1rem;
+}
+
+.imgContainer {
+	width: 48.5%;
+	padding-bottom: 48.5%;
+	position: relative;
 }
