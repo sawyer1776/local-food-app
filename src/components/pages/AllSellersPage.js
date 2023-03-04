@@ -1,6 +1,7 @@
 import PocketBase from 'pocketbase';
 import { useEffect, useState } from 'react';
 import SellerLink from '../UI/SellerLink';
+import SellersMapSection from '../sections/SellersMapSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './AllSellersPage.module.css';
 import { GLOBALIP } from '../globalVars';
@@ -19,6 +20,8 @@ const AllSellers = (props) => {
 				.getList(1, 25, {});
 			allSellersData = responseProducersData.items;
 
+			console.log('data', allSellersData);
+
 			setLoaded(true);
 		};
 		if (isLoaded) return;
@@ -31,6 +34,8 @@ const AllSellers = (props) => {
 	if (isLoaded) {
 		return (
 			<section className="container">
+				<h1>Find A Seller Near You</h1>
+				<SellersMapSection sellers={allSellersData} />
 				<h1>All Sellers</h1>
 				<div className={classes.sellerLinks}>
 					{allSellersData.map((seller) => (

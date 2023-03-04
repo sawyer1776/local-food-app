@@ -86,7 +86,7 @@ const SellerPage = (props) => {
 				await fetchListedProducersProducts();
 				await fetchProducersPickups();
 				await fetchSeller();
-				await fetchLatLong();
+				// await fetchLatLong();
 			};
 			await allFetches();
 
@@ -203,11 +203,10 @@ const SellerPage = (props) => {
 				>
 					{showMore ? 'Show Less' : 'Show More'}
 				</button>
-				{mapIsLoaded ? (
-					<MapSection latLong={latLong}></MapSection>
-				) : (
-					'LOADING...'
-				)}
+
+				<MapSection
+					latLong={thisSellerData.lat_long}
+				></MapSection>
 			</main>
 		);
 	}

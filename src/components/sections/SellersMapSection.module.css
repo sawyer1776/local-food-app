@@ -1,0 +1,22 @@
+.map {
+	height: 65vh;
+	width: 100%;
+	box-shadow: 0rem 0.7rem 1.5rem rgb(154, 154, 154);
+}
+
+.popup {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	text-decoration: underline;
+}
+
+.popup h4 {
+	margin: 0;
+
+	padding: 0;
+}
+.popup p {
+	margin: 0;
+	padding: 0;
+}

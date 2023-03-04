@@ -24,10 +24,12 @@ const Header = (props) => {
 	let searchData = [];
 	const conductSearch = function () {
 		const fetchSearchResults = async function () {
-			const responseSearchResults =
-				await client.records.getList('products', 1, 50, {
+			const responseSearchResults = await client
+				.collection('products')
+				.getList(1, 50, {
 					filter: `title~"${search}" || description~"${search}" `,
 				});
+
 			searchData = responseSearchResults.items;
 
 			history.push({

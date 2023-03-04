@@ -9,6 +9,7 @@ import {
 } from 'react-leaflet';
 
 const MapSection = (props) => {
+	console.log(props.latLong);
 	return (
 		<MapContainer
 			className={classes.map}

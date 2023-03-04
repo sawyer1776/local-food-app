@@ -18,7 +18,7 @@ const AdminContactPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const authCtx = useContext(AuthContext);
 	const history = useHistory();
-	console.log('ctx', authCtx);
+	let latLong = [];
 
 	const updateAddress = async function (
 		sellerPageId,
@@ -29,32 +29,49 @@ const AdminContactPage = (props) => {
 			.update(`${sellerPageId}`, data);
 	};
 
-	const submitHandler = (e) => {
+	const fetchLatLong = async function (address) {
+		const request = new XMLHttpRequest();
+		request.open(
+			'GET',
+			`https://api.opencagedata.com/geocode/v1/json?q=${address}&countrycode=us&limit=1&key=c44325b9d11346f595aaca4bedc21234`
+		);
+		request.send();
+		console.log('sent');
+		request.addEventListener('load', function () {
+			console.log('loaded');
+			const data = JSON.parse(this.responseText);
+			let lat = String(data.results[0].geometry.lat);
+			console.log('lat', lat);
+			let indexOf = lat.indexOf('.');
+			lat = lat.slice(0, indexOf + 3);
+			lat = lat.concat('5');
+			let long = String(data.results[0].geometry.lng);
+			indexOf = long.indexOf('.');
+			long = long.slice(0, indexOf + 3);
+			long = long.concat('5');
+
+			latLong = [lat, long];
+			console.log('latLong inside', latLong);
+			const sendData = {
+				address: address,
+				lat_long: latLong,
+			};
+			updateAddress(authCtx.sellerPageId, sendData);
+		});
+	};
+
+	const submitHandler = async (e) => {
 		e.preventDefault();
 		console.log('submitted');
 		const address = e.currentTarget.elements.address.value;
-
-		// format phone vs 2
-		// let phoneFormatted = `(${phone.slice(
-		// 	0,
-		// 	3
-		// )}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;
-
-		const data = {
-			address: address,
-		};
-
-		updateAddress(authCtx.sellerPageId, data);
+		await fetchLatLong(address);
 		history.push({
 			pathname: '/seller-admin',
 		});
-
-		//send data
 	};
 
 	useEffect(() => {
 		const loadContact = async function () {
-			console.log(authCtx.sellerPageId);
 			const responseContact = await client
 				.collection('producers')
 				.getList(1, 50, {
