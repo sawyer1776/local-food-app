@@ -2,6 +2,7 @@ import PocketBase from 'pocketbase';
 import { useEffect, useState, useContext } from 'react';
 import classes from './EditingProductSection.module.css';
 import AuthContext from '../storage/auth-context';
+import ThumbnailImg from '../UI/ThumbnailImg';
 import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
@@ -80,15 +81,7 @@ const EditingProductSection = (props) => {
 					filter: `id = "${props.id}"`,
 				});
 			product = responseProduct.items[0];
-
-			// data = {
-			// 	title: `${product.title}`,
-			// 	price: product.price,
-			// 	unit: `${product.unit}`,
-			// 	qty: product.qty,
-			// 	description: `${product.description}`,
-			// 	// producer_id: 'k9rfk6p2epvhe6c',
-			// };
+			console.log('product', product);
 
 			setLoaded(true);
 		};
@@ -161,6 +154,18 @@ const EditingProductSection = (props) => {
 						<li
 							className={`${classes.listItem} ${classes.descriptionListItem}`}
 						>
+							<div className={classes.imgsContainer}>
+								{product.imgs.map((img, index) => (
+									<div className={classes.imgContainer}>
+										<ThumbnailImg
+											img={img}
+											collectionId={product.collectionId}
+											productId={product.id}
+											key={index}
+										/>
+									</div>
+								))}
+							</div>
 							<label
 								className={classes.label}
 								for="fileInput"
