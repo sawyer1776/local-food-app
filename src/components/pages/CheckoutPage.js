@@ -1,7 +1,11 @@
 import { HiHome } from 'react-icons/hi';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const CheckoutPage = (props) => {
+	const linkToVenmo = () => {
+		let link = `https://venmo.com/?txn=charge&audience=private&recipients=GibsonsGardens&amount=1&note=test`;
+	};
+
 	return (
 		<div className="container">
 			<h1>This is an example page</h1>
@@ -14,11 +18,10 @@ const CheckoutPage = (props) => {
 				</a>
 			</p>
 			<p>
-				Although the checkout does not currently function I
-				am working to make this a functional application.
-				One day you will be able to find the local producers
-				of quality meats and vegitables in your area, so
-				check back in the future.
+				Since this application is currently not live with
+				real buyers and sellers I have disabled the actual
+				checkout. It will intigrate with Venmo for easy
+				secure payments.
 			</p>
 
 			<NavLink to="./all-sellers">
@@ -26,6 +29,21 @@ const CheckoutPage = (props) => {
 					<HiHome />
 				</button>
 			</NavLink>
+
+			{/* <p>
+				If you want to see how this intigrates with Venmo.
+				<strong>DO NOT ACTUALLY PAY</strong>
+			</p>
+
+			//If you want to support this project feel free to buy me some chicken feed by sending a payment to the below user on Venmo
+
+			<NavLink
+				to={`https://venmo.com/?txn=charge&audience=private&recipients=GibsonsGardens&amount=${props.total}&note=${props.orderId}`}
+			>
+				<button onClick={linkToVenmo}>
+					Pay With Venmo
+				</button>
+			</NavLink> */}
 		</div>
 	);
 };
