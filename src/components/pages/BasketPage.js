@@ -108,6 +108,7 @@ const BasketPage = (props) => {
 			item: responseBasketContents,
 			qty: qty,
 		});
+		console.log('basket contents', basketContents);
 
 		if (i === cartIds.length - 1) {
 			setTimeout(() => {
