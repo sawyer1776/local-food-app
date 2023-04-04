@@ -36,7 +36,9 @@ const Order = (props) => {
 					<p className={classes.date}>
 						{props.order.created.slice(0, 10)}
 					</p>
-					<p className={classes.total}>${total}</p>
+					<p className={classes.total}>
+						${total.toFixed(2)}
+					</p>
 				</div>
 			) : (
 				<div className={classes.expanded}>

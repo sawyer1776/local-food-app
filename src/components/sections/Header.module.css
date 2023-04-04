@@ -11,7 +11,7 @@
 	height: 8.5rem;
 	padding: 2rem 0.25rem 0;
 	background-color: var(--main-color);
-	z-index: 999;
+	z-index: 9999;
 	border-bottom: 2px solid var(--secondary-color);
 }
 

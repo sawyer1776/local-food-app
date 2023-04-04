@@ -84,3 +84,36 @@
 	padding-bottom: 48.5%;
 	position: relative;
 }
+
+.trashContainer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.365);
+	display: none;
+}
+
+.hidden .trashContainer {
+	display: none;
+}
+
+.show .trashContainer {
+	display: flex;
+}
+
+.trash {
+	background-color: var(--main-color);
+	width: 4rem;
+	height: 4rem;
+	padding: 0.85rem;
+	border-radius: 100%;
+	color: white;
+	z-index: 999;
+}
+
+.topBackBtn {
+	align-self: flex-start;
+}

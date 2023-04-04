@@ -4,6 +4,7 @@ import classes from './EditingProductSection.module.css';
 import AuthContext from '../storage/auth-context';
 import ThumbnailImg from '../UI/ThumbnailImg';
 import { GLOBALIP } from '../globalVars';
+import { BsTrash, BsArrowLeft } from 'react-icons/bs';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
@@ -13,12 +14,27 @@ let formData = new FormData();
 
 const EditingProductSection = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
+	const [isDeleting, setDeleting] = useState(false);
 	const authCtx = useContext(AuthContext);
 
 	const deleteHandler = async function () {
 		await client
 			.collection('products')
 			.delete(`${props.id}`);
+	};
+	const deleteImgHandler = async function (index) {
+		console.log(
+			'deleting',
+			product.imgs[index],
+			'from',
+			product.id
+		);
+		await client
+			.collection('products')
+			.update(`${product.id}`, {
+				'imgs-': [`${product.imgs[index]}`],
+			});
+		setLoaded(false);
 	};
 
 	const uploadHandler = function (e) {
@@ -39,7 +55,7 @@ const EditingProductSection = (props) => {
 
 		product = {};
 		formData = new FormData();
-		props.cancelFunction(null);
+		setLoaded(false);
 	};
 
 	const submitHandler = function (e) {
@@ -110,6 +126,16 @@ const EditingProductSection = (props) => {
 						Delete
 					</button>
 				</div>
+				<button
+					className={classes.topBackBtn}
+					onClick={() => {
+						props.cancelFunction(null);
+						product = {};
+						formData = new FormData();
+					}}
+				>
+					<BsArrowLeft /> Back
+				</button>
 				<form onSubmit={submitHandler}>
 					<ul className={classes.list}>
 						<li className={classes.listItem}>
@@ -156,16 +182,47 @@ const EditingProductSection = (props) => {
 						>
 							<div className={classes.imgsContainer}>
 								{product.imgs.map((img, index) => (
-									<div className={classes.imgContainer}>
+									<div
+										className={`${classes.imgContainer} ${
+											isDeleting
+												? classes.show
+												: classes.hidden
+										}`}
+										onClick={() => {
+											setDeleting(true);
+										}}
+									>
 										<ThumbnailImg
 											img={img}
 											collectionId={product.collectionId}
 											productId={product.id}
 											key={index}
 										/>
+										<div
+											onClick={() => {
+												console.log('delete', index);
+												deleteImgHandler(index);
+											}}
+											className={`${classes.trashContainer}`}
+										>
+											<BsTrash className={classes.trash} />
+										</div>
 									</div>
 								))}
 							</div>
+							{isDeleting ? (
+								<div>
+									<button
+										onClick={() => {
+											setDeleting(false);
+										}}
+									>
+										Done
+									</button>
+								</div>
+							) : (
+								''
+							)}
 							<label
 								className={classes.label}
 								for="fileInput"
@@ -180,6 +237,7 @@ const EditingProductSection = (props) => {
 									uploadHandler(e);
 								}}
 							></input>
+							<button type="submit">Upload</button>
 						</li>
 
 						<li className={classes.listItem}>
@@ -227,7 +285,7 @@ const EditingProductSection = (props) => {
 								formData = new FormData();
 							}}
 						>
-							Cancel
+							<BsArrowLeft /> Back
 						</button>
 						<button type="submit">Save</button>
 					</div>
