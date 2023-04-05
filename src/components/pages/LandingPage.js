@@ -21,7 +21,7 @@ const LandingPage = (props) => {
 		>
 			<section className={classes.heroSection}>
 				<h2 className={classes.headingText}>
-					Find your next meal from a local farm or backyard
+					Find your next mealz from a local farm or backyard
 					gardner
 				</h2>
 
