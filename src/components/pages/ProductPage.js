@@ -130,12 +130,19 @@ const ProductPage = (props) => {
 
 					<button
 						onClick={() => {
-							addToCart(
-								thisProduct.title,
-								thisProduct.id,
-								authCtx.user.id,
-								1
-							);
+							if (thisProduct.qty >= 1) {
+								console.log('ctx', authCtx);
+
+								addToCart(
+									thisProduct.title,
+									thisProduct.id,
+									addQty,
+									authCtx.user.cart.items,
+									authCtx.user.id
+								);
+							} else {
+								console.log('Not available add this to UI');
+							}
 						}}
 					>
 						Add to Basket
@@ -154,10 +161,10 @@ const ProductPage = (props) => {
 				) : null}
 
 				<p>{thisProduct.description}</p>
-				<ProductDetails
+				{/* <ProductDetails
 					className={classes.details}
 					details={thisProduct.details}
-				/>
+				/> */}
 			</main>
 		);
 };

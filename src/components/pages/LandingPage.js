@@ -74,6 +74,10 @@ const LandingPage = (props) => {
 			<NavLink to="/all-sellers">
 				<ButtonElement buttonText="View On Map" />
 			</NavLink>
+			<p className={classes.disclaimer}>
+				Favicon by https://icons8.com/ used under Creative
+				Commons Attribution-NoDerivs 3.0
+			</p>
 		</main>
 	);
 };

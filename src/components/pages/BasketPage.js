@@ -19,6 +19,7 @@ const BasketPage = (props) => {
 	const [test, setTest] = useState(1);
 
 	const authCtx = useContext(AuthContext);
+	console.log('Auth', authCtx);
 	const sendToDB = async (data) => {
 		await client.collection('orders').create(data);
 	};

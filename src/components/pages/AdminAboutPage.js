@@ -63,18 +63,13 @@ const AdminAboutPage = (props) => {
 				paragraph: paragraph,
 			};
 
-			console.log('new Data', newData);
-
 			//Add in the changed paragraph
 			aboutData.splice(index, 1, newData);
-			console.log('added to about data');
 		}
 
 		if (title === 'deleteThis') {
 			console.log('before Splice', aboutData);
 			aboutData.splice(index, 1);
-
-			console.log('removed from about data', aboutData);
 		}
 
 		//Stringify the Array
@@ -119,7 +114,6 @@ const AdminAboutPage = (props) => {
 		console.log('aboutData', aboutData);
 	};
 	const newSection = () => {
-		console.log('added section');
 		const data = {
 			title: 'Enter your title',
 			paragraph:

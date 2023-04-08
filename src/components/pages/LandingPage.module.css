@@ -74,3 +74,11 @@
 	gap: 0.5rem;
 	padding-bottom: 1rem;
 }
+
+.disclaimer {
+	width: 100%;
+	padding: 0.5rem;
+	font-size: 0.75rem;
+	color: var(--grey-color);
+	margin-top: 6rem;
+}
