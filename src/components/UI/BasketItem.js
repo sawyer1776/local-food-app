@@ -6,6 +6,8 @@ import { BsTrash } from 'react-icons/bs';
 import { GLOBALIP } from '../globalVars';
 
 const BasketItem = (props) => {
+	const [isCount, setCount] = useState(props.qty);
+
 	return (
 		<li className={classes.basketItemContainer}>
 			<div className={classes.imgAndText}>
@@ -36,7 +38,7 @@ const BasketItem = (props) => {
 					<button
 						className={classes.trashItem}
 						onClick={() => {
-							props.deleteFunc(props.product.id);
+							props.deleteFunc(props.index);
 						}}
 					>
 						<BsTrash />
@@ -47,16 +49,21 @@ const BasketItem = (props) => {
 					<button
 						className={classes.qtyBtn}
 						onClick={() => {
-							props.editCountFunc('-', props.product.id);
+							if (isCount > 1) {
+								setCount(isCount - 1);
+								props.editCountFunc('-', props.index);
+							}
 						}}
 					>
 						-
 					</button>
-					<p className={classes.qtyNumber}>{props.qty}</p>
+					<p className={classes.qtyNumber}>{isCount}</p>
 					<button
 						className={classes.qtyBtn}
 						onClick={() => {
-							props.editCountFunc('+', props.product.id);
+							//ADD control for available qty
+							setCount(isCount + 1);
+							props.editCountFunc('+', props.index);
 						}}
 					>
 						+
