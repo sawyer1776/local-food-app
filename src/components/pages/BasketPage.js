@@ -142,13 +142,14 @@ const BasketPage = (props) => {
 	};
 
 	useEffect(() => {
+		console.log('useEffect is called');
 		if (!authCtx.isLoggedIn) return;
 		if (isLoaded) return;
 		if (!isLoaded) {
 			//why is this called twice?
 			//a: because of the useEffect in the LoginSection
 			//the login use effect is temporary and can be removed later.
-			console.log('useEffect is called');
+			console.log('is not loaded');
 			loadContent();
 		}
 	});
