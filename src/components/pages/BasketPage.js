@@ -80,6 +80,7 @@ const BasketPage = (props) => {
 	};
 
 	const updateDB = function () {
+		console.log('updateDB is called');
 		setBasketContents(tempBasketContent);
 
 		let tempItems = [];
@@ -117,7 +118,7 @@ const BasketPage = (props) => {
 			'LoadContent is called should only happen once'
 		);
 		let tempVar = [];
-		if (authCtx.user.cart.items.length === 0) {
+		if (!authCtx.user.cart.items.length > 0) {
 			setLoaded(true);
 			return;
 			// setBasketContents([]);

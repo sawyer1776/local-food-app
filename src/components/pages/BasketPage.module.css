@@ -9,3 +9,7 @@
 .subtotal {
 	width: 100%;
 }
+
+main .container {
+	background-color: red;
+}
