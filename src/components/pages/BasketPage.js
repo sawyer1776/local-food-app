@@ -22,129 +22,6 @@ const BasketPage = (props) => {
 	const authCtx = useContext(AuthContext);
 	console.log('Auth', authCtx);
 
-	// const sendToDB = async (data) => {
-	// 	await client.collection('orders').create(data);
-	// };
-
-	// const sendOrder = () => {
-	// 	let order = [];
-	// 	console.log('basket', basketContents);
-	// 	basketContents.forEach((item) => {
-	// 		order.push({
-	// 			id: item.item.id,
-	// 			title: item.item.title,
-	// 			unit: item.item.unit,
-	// 			qty: item.qty,
-	// 			price: item.item.price,
-	// 		});
-	// 	});
-	// 	console.log('Order', order);
-	// 	console.log('stringed', JSON.stringify(order));
-	// 	console.log('ctx', authCtx);
-	// 	const data = {
-	// 		products: JSON.stringify(order),
-	// 		producer_id: 'k9rfk6p2epvhe6c',
-	// 		buyer_id: authCtx.user.id,
-	// 		buyer_name: authCtx.user.name,
-	// 	};
-	// 	sendToDB(data);
-	// };
-
-	// // let cartIds = authCtx.user.cart.items;
-	// let cartIds = null;
-
-	// const calcTotal = function () {
-	// 	console.log('calcTotal');
-	// 	let subtotal = 0;
-	// 	basketContents.forEach((product, i) => {
-	// 		const extendedPrice =
-	// 			product.item.price * product.qty;
-
-	// 		subtotal = subtotal + extendedPrice;
-	// 	});
-	// 	setTotal(subtotal);
-	// };
-
-	// const editCount = function (symbol, itemId) {
-	// 	console.log('symbol', symbol, 'id', itemId);
-	// 	console.log('contents', basketContents);
-	// 	if (symbol === '+') {
-	// 		basketContents.forEach((_, i) => {
-	// 			if (basketContents[i].item.id === itemId) {
-	// 				basketContents[i].qty++;
-	// 			}
-	// 		});
-	// 		cartIds.forEach((_, i) => {
-	// 			if (cartIds[i].id === itemId) {
-	// 				cartIds[i].qty++;
-	// 			}
-	// 		});
-	// 		calcTotal();
-	// 		setTest(test + 1);
-	// 	}
-	// 	if (symbol === '-') {
-	// 		basketContents.forEach((_, i) => {
-	// 			if (basketContents[i].item.id === itemId) {
-	// 				if (basketContents[i].qty > 1) {
-	// 					basketContents[i].qty--;
-	// 				}
-	// 			}
-	// 		});
-	// 		cartIds.forEach((_, i) => {
-	// 			if (cartIds[i].id === itemId) {
-	// 				cartIds[i].qty--;
-	// 			}
-	// 		});
-
-	// 		calcTotal();
-	// 		setTest(test + 1);
-	// 	}
-	// };
-
-	// const fetchBasketContents = async function (
-	// 	productId,
-	// 	qty,
-	// 	i
-	// ) {
-	// 	const responseBasketContents = await client
-	// 		.collection('products')
-	// 		.getOne(`${productId}`, {});
-	// 	basketContents.push({
-	// 		item: responseBasketContents,
-	// 		qty: qty,
-	// 	});
-	// 	console.log('basket contents', basketContents);
-
-	// 	if (i === cartIds.length - 1) {
-	// 		setTimeout(() => {
-	// 			calcTotal();
-	// 			setLoaded(true);
-	// 		}, 120);
-	// 	}
-	// };
-
-	// const deleteItem = function (itemId) {
-	// 	let indexContent = null;
-	// 	let indexIds = null;
-	// 	basketContents.forEach((_, i) => {
-	// 		if (basketContents[i].item.id === itemId) {
-	// 			indexContent = i;
-	// 		}
-	// 	});
-	// 	cartIds.forEach((_, i) => {
-	// 		if (cartIds[i].id === itemId) {
-	// 			indexIds = i;
-	// 		}
-	// 	});
-
-	// 	if (indexContent != null) {
-	// 		basketContents.splice(indexContent, 1);
-	// 		cartIds.splice(indexContent, 1);
-
-	// 		calcTotal();
-	// 		setTest(test + 1);
-	// 	}
-	// };
 	const editCountFunc = function (symbol, itemIndex) {
 		console.log(symbol, itemIndex);
 		console.log(tempBasketContent);
@@ -168,33 +45,52 @@ const BasketPage = (props) => {
 
 	const sendOrder = function () {
 		console.log('SENDING ORDER');
+		console.log(tempBasketContent);
 		//Format JSON
 		//Send Order to DB
-		// const send = async () => {
-		// 	const data = {
-		// 		products: 'JSON',
-		// 		producer_id: 'test',
-		// 		buyer_id: 'test',
-		// 		buyer_name: 'test',
-		// 	};
+		// Later make multiple orders for multiple sellers
+		const send = async () => {
+			const tempProductsVar = [];
+			tempBasketContent.forEach((item) => {
+				tempProductsVar.push({
+					title: item.product.title,
+					unit: item.product.unit,
+					qty: item.qty,
+					price: item.product.price,
+				});
+			});
+			console.log('tempProductsVar', tempProductsVar);
+			const data = {
+				products: JSON.stringify(tempProductsVar),
+				producer_id: `${tempBasketContent[0].product.producer_id}`,
+				buyer_id: `${authCtx.user.id}`,
+				buyer_name: `${authCtx.user.name}`,
+			};
 
-		// 	await client
-		// 		.collection('users')
-		// 		.update(`${authCtx.user.id}`, JSON.stringify(data));
-		// };
-		// send();
+			await client.collection('orders').create(data);
+			//Clear Basket
+			await client
+				.collection('users')
+				.update(`${authCtx.user.id}`, {
+					cart: { items: [] },
+				});
+			console.log('Order Sent');
+		};
+		send();
 	};
 
 	const updateDB = function () {
 		setBasketContents(tempBasketContent);
-		//This isn't triggering a re render for some reason
+
 		let tempItems = [];
 		tempBasketContent.forEach((item) => {
 			tempItems.push({
 				id: item.product.id,
 				qty: item.qty,
+				title: item.product.title,
 			});
 		});
+		console.log('temp Items', tempItems);
 		const send = async () => {
 			const data = {
 				cart: {
@@ -210,7 +106,9 @@ const BasketPage = (props) => {
 	};
 
 	const deleteItem = function (index) {
+		console.log('deleteItem is called', index);
 		tempBasketContent.splice(index, 1);
+		calcTotal();
 		updateDB();
 	};
 
@@ -219,6 +117,12 @@ const BasketPage = (props) => {
 			'LoadContent is called should only happen once'
 		);
 		let tempVar = [];
+		if (authCtx.user.cart.items.length === 0) {
+			setLoaded(true);
+			return;
+			// setBasketContents([]);
+			// setTotal(0);
+		}
 
 		authCtx.user.cart.items.forEach(async (item, index) => {
 			const responseProduct = await client
@@ -241,22 +145,13 @@ const BasketPage = (props) => {
 		if (!authCtx.isLoggedIn) return;
 		if (isLoaded) return;
 		if (!isLoaded) {
+			//why is this called twice?
+			//a: because of the useEffect in the LoginSection
+			//the login use effect is temporary and can be removed later.
+			console.log('useEffect is called');
 			loadContent();
 		}
 	});
-
-	// useEffect(() => {
-	// 	if (!authCtx.isLoggedIn) return;
-	// 	if (isLoaded) return;
-	// 	if (!isLoaded) {
-	// 		basketContents = [];
-	// 		cartIds = authCtx.user.cart.items;
-
-	// 		cartIds.forEach((item, i) => {
-	// 			fetchBasketContents(item.id, item.qty, i);
-	// 		});
-	// 	}
-	// });
 
 	if (!authCtx.isLoggedIn) return <LoginSection />;
 
@@ -269,6 +164,17 @@ const BasketPage = (props) => {
 			<main className="container">
 				<ul className={classes.list}>
 					{isBasketContents.length > 0 ? (
+						//q: what will cause this to rerender?
+						//a: the editCountFunc
+						//q: what else will cause this to rerender?
+						//a: the deleteItem function
+						//q: what are all the things that will cause this to rerender?
+						//a: the editCountFunc, the deleteItem function, the loadContent function
+						//q: will changing the state of the basket contents cause this to rerender?
+						//q: will changing isBasketContents cause this to rerender?
+						//q: when I change isbasketcontents this does not rerender, why?
+						//a: because the state is not changed, the state is changed in the tempBasketContent
+
 						isBasketContents.map((item, index) => (
 							<BasketItem
 								product={item.product}

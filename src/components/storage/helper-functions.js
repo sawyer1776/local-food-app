@@ -24,6 +24,14 @@ const addToCart = function (
 	cartData,
 	userId
 ) {
+	console.log(
+		'addToCart',
+		title,
+		productID,
+		qty,
+		cartData,
+		userId
+	);
 	let data = {
 		title: title,
 		id: productID,
@@ -38,14 +46,17 @@ const addToCart = function (
 			if (item.id === data.id) {
 				boolVar = true;
 				newCart[index].qty += data.qty;
+				console.log('newCart match', newCart[index]);
 			}
 		});
 
 		if (boolVar === false) {
 			newCart.push(data);
+			console.log('newCart no match', newCart);
 		}
 	} else {
 		newCart.push(data);
+		console.log('newCart empty', newCart);
 	}
 
 	const jsonNewCart = {
