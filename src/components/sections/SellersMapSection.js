@@ -30,7 +30,7 @@ const SellersMapSection = (props) => {
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-			{props.sellers.map((seller) => (
+			{/* {props.sellers.map((seller) => (
 				<Marker position={seller.lat_long}>
 					<Popup>
 						<NavLink
@@ -42,7 +42,24 @@ const SellersMapSection = (props) => {
 						</NavLink>
 					</Popup>
 				</Marker>
-			))}
+			))} */}
+			{props.sellers.map((seller) => {
+				return seller.lat_long ? (
+					<Marker position={seller.lat_long}>
+						<Popup>
+							<NavLink
+								to={`/seller-page/${seller.id}`}
+								className={classes.popup}
+							>
+								<h4>{seller.producer_name}</h4>
+								<p>{seller.location}</p>
+							</NavLink>
+						</Popup>
+					</Marker>
+				) : (
+					''
+				);
+			})}
 
 			{/* <Circle
 				center={props.latLong}

@@ -20,3 +20,26 @@
 	padding-left: 0.5rem;
 	font-weight: 500;
 }
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tbody {
+	width: 100%;
+}
+
+.tbody tr:nth-child(odd) {
+	background-color: rgb(163, 163, 163);
+}
+
+.tbody tr td {
+	font-size: 1.25rem;
+	padding: 0.5rem 0.95rem;
+	width: fit-content;
+}
+
+.tbody tr td:nth-child(2) {
+	text-align: right;
+	font-weight: 500;
+}

@@ -2,13 +2,17 @@ import { HiOutlineMail, HiPhone } from 'react-icons/hi';
 import classes from './ContactInfoSection.module.css';
 
 const ContactInfoSection = (props) => {
-	let phoneFormatted = `(${props.phone.slice(
-		0,
-		3
-	)}) ${props.phone.slice(3, 6)}-${props.phone.slice(
-		6,
-		10
-	)}`;
+	let phoneFormatted =
+		'This seller has not listed a phone number';
+	if (props.phone) {
+		phoneFormatted = `(${props.phone.slice(
+			0,
+			3
+		)}) ${props.phone.slice(3, 6)}-${props.phone.slice(
+			6,
+			10
+		)}`;
+	}
 
 	return (
 		<div className={classes.contactContainer}>
@@ -17,7 +21,9 @@ const ContactInfoSection = (props) => {
 				className={classes.contactLine}
 			>
 				<HiOutlineMail className={classes.icon} />{' '}
-				{props.email}
+				{props.email
+					? props.email
+					: 'This seller has not listed an email'}
 			</a>
 
 			<a

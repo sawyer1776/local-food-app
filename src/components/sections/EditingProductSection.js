@@ -181,34 +181,42 @@ const EditingProductSection = (props) => {
 							className={`${classes.listItem} ${classes.descriptionListItem}`}
 						>
 							<div className={classes.imgsContainer}>
-								{product.imgs.map((img, index) => (
-									<div
-										className={`${classes.imgContainer} ${
-											isDeleting
-												? classes.show
-												: classes.hidden
-										}`}
-										onClick={() => {
-											setDeleting(true);
-										}}
-									>
-										<ThumbnailImg
-											img={img}
-											collectionId={product.collectionId}
-											productId={product.id}
-											key={index}
-										/>
-										<div
-											onClick={() => {
-												console.log('delete', index);
-												deleteImgHandler(index);
-											}}
-											className={`${classes.trashContainer}`}
-										>
-											<BsTrash className={classes.trash} />
-										</div>
-									</div>
-								))}
+								{product.imgs
+									? product.imgs.map((img, index) => (
+											<div
+												className={`${
+													classes.imgContainer
+												} ${
+													isDeleting
+														? classes.show
+														: classes.hidden
+												}`}
+												onClick={() => {
+													setDeleting(true);
+												}}
+											>
+												<ThumbnailImg
+													img={img}
+													collectionId={
+														product.collectionId
+													}
+													productId={product.id}
+													key={index}
+												/>
+												<div
+													onClick={() => {
+														console.log('delete', index);
+														deleteImgHandler(index);
+													}}
+													className={`${classes.trashContainer}`}
+												>
+													<BsTrash
+														className={classes.trash}
+													/>
+												</div>
+											</div>
+									  ))
+									: ''}
 							</div>
 							{isDeleting ? (
 								<div>

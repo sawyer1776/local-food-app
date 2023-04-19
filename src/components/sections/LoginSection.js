@@ -40,19 +40,24 @@ const LoginPage = (props) => {
 
 		const enteredEmail = emailInputRef.current.value;
 		const enteredPassword = passwordInputRef.current.value;
+		// const enteredConfirmPassword =
+
+		console.log(enteredEmail, enteredPassword);
 
 		//Add Validation
 
 		if (loginOrCreateAcct === 'Login') {
-			//RETURN AFTER DUMMY LOGIN
-			// const authData = await client.users.authViaEmail(
-			// 	`${enteredEmail}`,
-			// 	`${enteredPassword}`
-			// );
-
+			console.log('login');
 			const authData = await client
 				.collection('users')
-				.authWithPassword('willowrun@me.com', '1234567890');
+				.authWithPassword(
+					`${enteredEmail}`,
+					`${enteredPassword}`
+				);
+
+			// const authData = await client
+			// 	.collection('users')
+			// 	.authWithPassword('willowrun@me.com', '1234567890');
 
 			const producerId = await client
 				.collection('producers')
@@ -62,11 +67,18 @@ const LoginPage = (props) => {
 
 			authCtx.login(authData, producerId);
 		} else {
-			const createProfile = await client.users.create({
-				email: `${enteredEmail}`,
-				password: `${enteredPassword}`,
-				// passwordConfirm: `${enteredConfirmPassword}`,
-			});
+			console.log('create account');
+			const createProfile = await client
+				.collection('users')
+				.create({
+					email: `${enteredEmail}`,
+					password: `${enteredPassword}`,
+					passwordConfirm: `${confirmPasswordInputRef.current.value}`,
+					cart: JSON.stringify({
+						items: [],
+					}),
+				});
+			console.log('createProfile', createProfile);
 		}
 	};
 

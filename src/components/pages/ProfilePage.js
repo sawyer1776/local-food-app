@@ -13,26 +13,30 @@ import { GLOBALIP } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
-let userData = {};
+let orderData = {};
 
 const ProfilePage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const [ShowOrders, setShowOrders] = useState(false);
 	const authCtx = useContext(AuthContext);
 
-	// useEffect(() => {
-	// 	const fetchUser = async function () {
-	// 		const responseUser = await client.collections('producers').getList(
-	// 			1,
-	// 			100,
-	// 			{}
-	// 		);
-	// 		userData = responseUser.items;
-	// 		setLoaded(true);
-	// 	};
-	// 	if (isLoaded) return;
-	// 	if (!isLoaded) fetchUser();
-	// });
+	useEffect(() => {
+		console.log('fetching orders');
+		const fetchOrders = async function () {
+			console.log('authCtx.user.id', authCtx.user.id);
+			const responseOrders = await client
+				.collection('orders')
+				.getList(1, 50, {
+					filter: `buyer_id = "${authCtx.user.id}"`,
+					sort: `-created `,
+				});
+
+			orderData = responseOrders.items;
+			setLoaded(true);
+		};
+		if (isLoaded) return;
+		if (!isLoaded) fetchOrders();
+	});
 	if (!authCtx.isLoggedIn) return <LoginSection />;
 
 	// if (!isLoaded) {
@@ -54,7 +58,11 @@ const ProfilePage = (props) => {
 						Orders You Bought
 					</button>
 					{ShowOrders ? (
-						<OrderSection orders={authCtx.user.orders} />
+						isLoaded ? (
+							<OrderSection orders={orderData} />
+						) : (
+							<LoadingSpinner />
+						)
 					) : (
 						''
 					)}

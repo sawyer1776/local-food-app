@@ -55,38 +55,12 @@ const SellerPage = (props) => {
 				.getOne(params.sellerId, {});
 			thisSellerData = responseSeller;
 		};
-		const fetchLatLong = async function () {
-			let address = thisSellerData.address;
-			const request = new XMLHttpRequest();
-			request.open(
-				'GET',
-				`https://api.opencagedata.com/geocode/v1/json?q=${address}&countrycode=us&limit=1&key=c44325b9d11346f595aaca4bedc21234`
-			);
-			request.send();
-			request.addEventListener('load', function () {
-				const data = JSON.parse(this.responseText);
-				let lat = String(data.results[0].geometry.lat);
-				let indexOf = lat.indexOf('.');
-				lat = lat.slice(0, indexOf + 3);
-				lat = lat.concat('5');
-				let long = String(data.results[0].geometry.lng);
-				indexOf = long.indexOf('.');
-				long = long.slice(0, indexOf + 3);
-				long = long.concat('5');
-
-				latLong = [];
-				latLong.push(Number(lat));
-				latLong.push(Number(long));
-				setMapIsLoaded(true);
-			});
-		};
 
 		const initFetch = async function () {
 			const allFetches = async function () {
 				await fetchListedProducersProducts();
 				await fetchProducersPickups();
 				await fetchSeller();
-				// await fetchLatLong();
 			};
 			await allFetches();
 
@@ -131,20 +105,24 @@ const SellerPage = (props) => {
 					About
 				</button>
 				{showAbout ? (
-					<>
-						<AboutSection
-							aboutText={thisSellerData.about_description}
-							edit={false}
-						/>
-						<button
-							className={classes.showLessBtn}
-							onClick={() => {
-								toggleState(setShowAbout, showAbout);
-							}}
-						>
-							Show Less
-						</button>
-					</>
+					thisSellerData.avout_description ? (
+						<>
+							<AboutSection
+								aboutText={thisSellerData.about_description}
+								edit={false}
+							/>
+							<button
+								className={classes.showLessBtn}
+								onClick={() => {
+									toggleState(setShowAbout, showAbout);
+								}}
+							>
+								Show Less
+							</button>
+						</>
+					) : (
+						<p>This Seller Hasn't filled this out yet</p>
+					)
 				) : null}
 				<button
 					className="wide"
@@ -176,14 +154,20 @@ const SellerPage = (props) => {
 					id="products-container"
 					className={classes.productsContainer}
 				>
-					{productList.slice(0, 2).map((product) => (
-						<Link to={`/product/${product.id}`}>
-							<ProductSnapshot
-								product={product}
-								key={product.id}
-							/>
-						</Link>
-					))}
+					{productList.length > 0 ? (
+						productList.slice(0, 2).map((product) => (
+							<Link to={`/product/${product.id}`}>
+								<ProductSnapshot
+									product={product}
+									key={product.id}
+								/>
+							</Link>
+						))
+					) : (
+						<p className={classes.productWarning}>
+							No Products yet.
+						</p>
+					)}
 
 					{showMore &&
 						productList.slice(2).map((product) => (
