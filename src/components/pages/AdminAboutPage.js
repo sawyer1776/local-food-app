@@ -114,6 +114,7 @@ const AdminAboutPage = (props) => {
 		console.log('aboutData', aboutData);
 	};
 	const newSection = () => {
+		console.log(aboutData);
 		const data = {
 			title: 'Enter your title',
 			paragraph:
@@ -121,6 +122,7 @@ const AdminAboutPage = (props) => {
 			isEditing: true,
 		};
 		aboutData.push(data);
+		console.log(aboutData);
 		setAboutData(aboutData);
 	};
 
@@ -131,8 +133,14 @@ const AdminAboutPage = (props) => {
 				.getList(1, 50, {
 					filter: `id = "${authCtx.sellerPageId}"`,
 				});
-			aboutData = responseAbout.items[0].about_description;
-			console.log('returned', aboutData);
+
+			if (responseAbout.items[0].about_description) {
+				aboutData =
+					responseAbout.items[0].about_description;
+				console.log('returned', aboutData);
+			} else {
+				console.log('about data', aboutData);
+			}
 
 			setLoaded(true);
 		};

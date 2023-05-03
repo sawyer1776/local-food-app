@@ -1,5 +1,12 @@
 .map {
 	height: 15rem;
 	width: 100%;
-	box-shadow: 0rem 0.7rem 1.5rem rgb(154, 154, 154);
+	box-shadow: 0rem 0.7rem 1.5rem rgb(211, 211, 211);
+	border-radius: 0.35rem;
+}
+
+@media (min-width: 1025px) {
+	.map {
+		height: 25rem;
+	}
 }

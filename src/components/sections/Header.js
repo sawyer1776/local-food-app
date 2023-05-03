@@ -42,75 +42,43 @@ const Header = (props) => {
 		setShowSearch(false);
 	};
 
-	// if (showSearch) {
-	// 	return (
-	// 		<div
-	// 			className={`${classes.header} ${classes.headerSearch}`}
-	// 		>
-	// 			<HiSearch
-	// 				className={classes.icon}
-	// 				onClick={conductSearch}
-	// 			/>
-
-	// 			<input
-	// 				className={classes.searchBox}
-	// 				type="text"
-	// 				placeholder="Search Products"
-	// 				onChange={(event) => {
-	// 					setSearch(event.target.value);
-	// 				}}
-	// 				onKeyDown={(e) => {
-	//
-	// 					if (e.code === 'Enter') {
-	// 						conductSearch();
-	// 					}
-	// 				}}
-	// 			></input>
-	// 			<HiX
-	// 				className={classes.icon}
-	// 				onClick={() => {
-	// 					setShowSearch(false);
-	// 				}}
-	// 			/>
-	// 		</div>
-	// 	);
-	// }
-
 	return (
 		<nav className={classes.header}>
-			<div className={`${classes.headerSearch}`}>
-				<HiArrowLeft
-					className={classes.icon}
-					onClick={() => {
-						history.goBack();
-					}}
-				/>
+			<div className={classes.headerContainer}>
+				<div className={`${classes.headerSearch}`}>
+					<HiArrowLeft
+						className={classes.icon}
+						onClick={() => {
+							history.goBack();
+						}}
+					/>
 
-				<input
-					className={classes.searchBox}
-					type="text"
-					placeholder="Search Products"
-					onChange={(event) => {
-						setSearch(event.target.value);
-					}}
-					onKeyDown={(e) => {
-						if (e.code === 'Enter') {
-							conductSearch();
-						}
-					}}
-				></input>
-			</div>
+					<input
+						className={classes.searchBox}
+						type="text"
+						placeholder="Search Products"
+						onChange={(event) => {
+							setSearch(event.target.value);
+						}}
+						onKeyDown={(e) => {
+							if (e.code === 'Enter') {
+								conductSearch();
+							}
+						}}
+					></input>
+				</div>
 
-			<div className={classes.headerNavBar}>
-				<NavLink to="/all-sellers">
-					<HiHome className={classes.icon} />
-				</NavLink>
-				<NavLink to="/profile">
-					<BsFillPersonFill className={classes.icon} />
-				</NavLink>
-				<NavLink to="/basket">
-					<BsFillBasketFill className={classes.icon} />
-				</NavLink>
+				<div className={classes.headerNavBar}>
+					<NavLink to="/all-sellers">
+						<HiHome className={classes.icon} />
+					</NavLink>
+					<NavLink to="/profile">
+						<BsFillPersonFill className={classes.icon} />
+					</NavLink>
+					<NavLink to="/basket">
+						<BsFillBasketFill className={classes.icon} />
+					</NavLink>
+				</div>
 			</div>
 		</nav>
 	);

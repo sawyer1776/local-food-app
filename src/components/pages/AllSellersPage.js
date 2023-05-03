@@ -34,9 +34,11 @@ const AllSellers = (props) => {
 	if (isLoaded) {
 		return (
 			<section className="container">
-				<h1>Find A Seller Near You</h1>
+				<h1 className={classes.title}>
+					Find A Seller Near You
+				</h1>
 				<SellersMapSection sellers={allSellersData} />
-				<h1>All Sellers</h1>
+				<h1 className={classes.title}>All Sellers</h1>
 				<div className={classes.sellerLinks}>
 					{allSellersData.map((seller) => (
 						<SellerLink

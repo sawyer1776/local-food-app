@@ -6,7 +6,7 @@
 	align-items: center;
 	border-radius: 0.5rem;
 	overflow: hidden;
-	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.185);
+	box-shadow: 0rem 0rem 0.75rem 0.2rem rgb(219, 219, 219);
 }
 
 .sellerImg {
@@ -40,4 +40,10 @@
 	margin: 0;
 	padding: 0;
 	padding-top: 0.5rem;
+}
+
+@media (min-width: 1025px) {
+	.sellerLinkContainer {
+		max-width: 50rem;
+	}
 }

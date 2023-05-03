@@ -5,9 +5,9 @@
 	right: 0;
 	bottom: 0;
 	width: 100%;
-	max-width: 10rem;
+	/* max-width: 11rem; */
 	height: 100%;
 	object-fit: cover;
-	max-height: 10rem;
+	/* max-height: 11rem; */
 	border-radius: 5px;
 }

@@ -76,12 +76,17 @@ const SellerPage = (props) => {
 	if (!isLoaded) {
 		return <LoadingSpinner />;
 	}
+
 	if (isLoaded) {
 		return (
-			<main className="container">
+			<main
+				className={`container ${classes.sellerContainer}`}
+			>
 				<div className={classes.title}>
 					<div className={classes.titleAndReviews}>
-						<h2>{thisSellerData.producer_name}</h2>
+						<h2 className={classes.name}>
+							{thisSellerData.producer_name}
+						</h2>
 						<ul className={classes.reviewStarsContainer}>
 							<ReviewStars
 								className={classes.reviewStars}

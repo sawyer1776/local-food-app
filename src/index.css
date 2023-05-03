@@ -1,16 +1,17 @@
+@import url(https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400&display=swap);
+
 :root {
-	--light-color: #e6e5e0;
+	--light-color: #f6f4ef;
 	--main-color: #4f843f;
 	--secondary-color: #3e6e2e;
 	--text-color: rgb(0, 0, 0);
-	--grey-color: rgb(165, 165, 165);
+	--grey-color: rgb(174, 174, 171);
 }
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	/* overflow-x: hidden; */
 }
 
 body {
@@ -18,11 +19,7 @@ body {
 	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-		'Droid Sans', 'Helvetica Neue', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	font-family: 'Cantarell', sans-serif;
 }
 
 h1,
@@ -90,11 +87,6 @@ a:visited {
 	color: var(--text-color);
 }
 
-/* code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas,
-		'Courier New', monospace;
-} */
-
 ul {
 	list-style: none;
 }
@@ -128,14 +120,19 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-
 	justify-content: center;
 	align-items: center;
-	/* background-color: red; */
 }
 
 .card {
 	border-radius: 0.5rem;
 	overflow: hidden;
 	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.185);
+}
+
+@media (min-width: 1025px) {
+	.container {
+		width: calc(100vw - 12rem);
+		max-width: 1550px;
+	}
 }

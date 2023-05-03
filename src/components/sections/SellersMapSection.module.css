@@ -1,7 +1,8 @@
 .map {
 	height: 65vh;
 	width: 100%;
-	box-shadow: 0rem 0.7rem 1.5rem rgb(154, 154, 154);
+	box-shadow: 0rem 0.7rem 1.5rem rgb(210, 210, 210);
+	border-radius: 0.5rem;
 }
 
 .popup {
@@ -19,4 +20,10 @@
 .popup p {
 	margin: 0;
 	padding: 0;
+}
+
+@media (min-width: 1025px) {
+	.map {
+		height: 80vh;
+	}
 }
