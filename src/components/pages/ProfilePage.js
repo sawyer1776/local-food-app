@@ -18,7 +18,49 @@ let orderData = {};
 const ProfilePage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const [ShowOrders, setShowOrders] = useState(false);
+	const [becomingASeller, setBecomingASeller] =
+		useState(false);
 	const authCtx = useContext(AuthContext);
+	console.log('ctx', authCtx);
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		console.log('submitting');
+		const producerName =
+			e.currentTarget.elements.name.value;
+		console.log(producerName);
+
+		const data = {
+			owner_id: authCtx.user.id,
+			about_description: JSON.stringify([
+				{
+					title: 'Enter your title',
+					paragraph:
+						'Tell everyone about what you do and why you do it. Let them feel connected and help them understand how you grow and raise your food.',
+				},
+			]),
+			producer_name: producerName,
+		};
+
+		const createProducer = async function () {
+			await client.collection('producers').create(data);
+
+			const producerId = await client
+				.collection('producers')
+				.getList(1, 1, {
+					filter: `owner_id = '${authCtx.user.id}'`,
+				});
+			let authData = {
+				token: authCtx.token,
+				record: authCtx.user,
+			};
+
+			authCtx.login(authData, producerId);
+			console.log('authCtx ', authCtx);
+		};
+		createProducer();
+		setBecomingASeller(false);
+	};
 
 	useEffect(() => {
 		console.log('fetching orders');
@@ -39,81 +81,103 @@ const ProfilePage = (props) => {
 	});
 	if (!authCtx.isLoggedIn) return <LoginSection />;
 
-	// if (!isLoaded) {
-	// 	return <LoadingSpinner/>;
-	// }
-
-	if (1 < 2) {
-		return (
-			<main className="container">
-				<h2>Your Profile </h2>
-				<p>Welcome {authCtx.user.name}</p>
-				<div className={classes.btns}>
+	return (
+		<main className="container">
+			<h2>Your Profile </h2>
+			<p>Welcome {authCtx.user.name}</p>
+			<div className={classes.btns}>
+				{ShowOrders ? (
+					isLoaded ? (
+						<OrderSection orders={orderData} />
+					) : (
+						<LoadingSpinner />
+					)
+				) : (
+					''
+				)}
+				{becomingASeller ? (
+					<>
+						<h3>Welcome! We are glad to have you!</h3>
+						<form
+							className={classes.form}
+							onSubmit={submitHandler}
+						>
+							<label className={classes.label} for="name">
+								<p className={classes.paragraph}>
+									What would you like your page to be
+									called?
+								</p>
+							</label>
+							<input
+								className={classes.input}
+								type="text"
+								id="name"
+								maxLength="200"
+								placeholder="eg. Jordan's Garden or Hillside Farm"
+							></input>
+							<button
+								className={classes.submitBtn}
+								type="submit"
+							>
+								Save
+							</button>
+						</form>
+					</>
+				) : (
+					''
+				)}
+				{authCtx.sellerPageId ? (
+					<>
+						<Link to={`/seller-admin`}>
+							<button className={classes.button}>
+								Seller Admin
+							</button>
+						</Link>
+						<Link to={`/seller-admin/orders`}>
+							<button className={classes.button}>
+								Orders You Sold
+							</button>
+						</Link>
+					</>
+				) : (
 					<button
 						className={classes.button}
 						onClick={() => {
-							toggleState(setShowOrders, ShowOrders);
+							toggleState(
+								setBecomingASeller,
+								becomingASeller
+							);
 						}}
 					>
-						Orders You Bought
+						{!becomingASeller
+							? 'Become a Seller'
+							: 'Cancel'}
 					</button>
-					{ShowOrders ? (
-						isLoaded ? (
-							<OrderSection orders={orderData} />
-						) : (
-							<LoadingSpinner />
-						)
-					) : (
-						''
-					)}
-					{authCtx.sellerPageId ? (
-						<>
-							<Link to={`/seller-admin/orders`}>
-								<button className={classes.button}>
-									Orders You Sold
-								</button>
-							</Link>
-							<Link to={`/seller-admin`}>
-								<button className={classes.button}>
-									Seller Admin
-								</button>
-							</Link>
-						</>
-					) : (
-						<button className={classes.button}>
-							Become a Seller
-						</button>
-					)}
+				)}
 
-					<button className={classes.resetPassword}>
-						Reset Password
-					</button>
-				</div>
-			</main>
-		);
-	}
+				<button
+					className={classes.button}
+					onClick={() => {
+						toggleState(setShowOrders, ShowOrders);
+					}}
+				>
+					Orders You Bought
+				</button>
+
+				<button
+					className={classes.resetPassword}
+					onClick={() => {
+						authCtx.logout();
+					}}
+				>
+					Log Out
+				</button>
+				<button className={classes.resetPassword}>
+					Reset Password
+				</button>
+			</div>
+		</main>
+	);
 };
 
 export default ProfilePage;
-
-// const ProfilePage = (props) => {
-// 	//This doesn't work, if not logged in it loads null data and error
-// 	if (!authCtx.isLoggedIn) return <LoginSection />;
-// 	return (
-// 		<main className={classes.profileContainer}>
-// 			<h2>Your Profile </h2>
-// 			<p>Welcome Clay</p>
-// 			<div className={classes.btns}>
-// 				<button className={classes.button}>Orders</button>
-// 				<button className={classes.button}>
-// 					Become a Seller
-// 				</button>
-// 				<button className={classes.resetPassword}>
-// 					Reset Password
-// 				</button>
-// 			</div>
-// 		</main>
-// 	);
-// };
-
-// export default ProfilePage;

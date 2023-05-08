@@ -5,7 +5,6 @@ import {
 	useContext,
 	useEffect,
 } from 'react';
-import ButtonElement from '../UI/ButtonElement';
 import classes from './LoginSection.module.css';
 import AuthContext from '../storage/auth-context';
 import PocketBase from 'pocketbase';
@@ -42,8 +41,6 @@ const LoginPage = (props) => {
 		const enteredPassword = passwordInputRef.current.value;
 		// const enteredConfirmPassword =
 
-		console.log(enteredEmail, enteredPassword);
-
 		//Add Validation
 
 		if (loginOrCreateAcct === 'Login') {
@@ -54,6 +51,7 @@ const LoginPage = (props) => {
 					`${enteredEmail}`,
 					`${enteredPassword}`
 				);
+			console.log('authData', authData);
 
 			// const authData = await client
 			// 	.collection('users')

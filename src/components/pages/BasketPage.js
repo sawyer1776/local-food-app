@@ -68,7 +68,6 @@ const BasketPage = (props) => {
 			};
 
 			await client.collection('orders').create(data);
-			//Clear Basket
 			await client
 				.collection('users')
 				.update(`${authCtx.user.id}`, {

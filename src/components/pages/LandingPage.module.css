@@ -85,3 +85,11 @@
 	color: var(--grey-color);
 	margin-top: 6rem;
 }
+
+@media (min-width: 1025px) {
+	.headingText {
+		font-size: 2.5rem;
+
+		font-weight: 600;
+	}
+}

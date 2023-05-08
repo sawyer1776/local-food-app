@@ -31,12 +31,6 @@ const AdminContactPage = (props) => {
 		const email = e.currentTarget.elements.email.value;
 		const phone = e.currentTarget.elements.phone.value;
 
-		// format phone vs 2
-		// let phoneFormatted = `(${phone.slice(
-		// 	0,
-		// 	3
-		// )}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;
-
 		const data = {
 			public_email: email,
 			public_phone: phone,

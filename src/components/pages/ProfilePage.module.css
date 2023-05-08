@@ -22,3 +22,23 @@
 	flex-direction: column;
 	align-items: center;
 }
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.input {
+	font-size: 1rem;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.paragraph {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.submitBtn {
+	justify-self: center;
+}
