@@ -128,20 +128,23 @@ const ProfilePage = (props) => {
 				)}
 				{authCtx.sellerPageId ? (
 					<>
-						<Link to={`/seller-admin`}>
-							<button className={classes.button}>
+						<Link className="wide" to={`/seller-admin`}>
+							<button className="buttonOutline">
 								Seller Admin
 							</button>
 						</Link>
-						<Link to={`/seller-admin/orders`}>
-							<button className={classes.button}>
+						<Link
+							className="wide"
+							to={`/seller-admin/orders`}
+						>
+							<button className="buttonOutline">
 								Orders You Sold
 							</button>
 						</Link>
 					</>
 				) : (
 					<button
-						className={classes.button}
+						className="buttonOutline"
 						onClick={() => {
 							toggleState(
 								setBecomingASeller,
@@ -156,7 +159,7 @@ const ProfilePage = (props) => {
 				)}
 
 				<button
-					className={classes.button}
+					className="buttonOutline"
 					onClick={() => {
 						toggleState(setShowOrders, ShowOrders);
 					}}

@@ -5,14 +5,7 @@
 	box-shadow: none;
 	font-weight: 500;
 	font-size: 1.2rem;
-	text-decoration: underline;
-}
-
-.button {
-	background-color: white;
-	color: var(--text-color);
-	border: 2px solid rgb(207, 207, 207);
-	box-shadow: 0rem 0.1rem 0.5rem rgb(204, 203, 203);
+	text-decoration: none;
 }
 
 .btns {
