@@ -25,7 +25,7 @@ const LandingPage = (props) => {
 					gardner
 				</h2>
 
-				<NavLink to="/all-sellers">
+				<NavLink className="wide" to="/all-sellers">
 					<button>View Producers</button>
 				</NavLink>
 			</section>
@@ -40,7 +40,7 @@ const LandingPage = (props) => {
 						the gardener down the street to full time
 						farmers.
 					</h4>
-					<NavLink to="/all-sellers">
+					<NavLink className="wide" to="/all-sellers">
 						<button>View Producers</button>
 					</NavLink>
 				</li>
@@ -50,7 +50,11 @@ const LandingPage = (props) => {
 						Browse the food products they offer
 					</h4>
 
-					<NavLink to="/profile">
+					<NavLink
+						className="wide"
+						className="wide"
+						to="/profile"
+					>
 						<ButtonElement buttonText="Sign Up" />
 					</NavLink>
 				</li>
@@ -68,10 +72,10 @@ const LandingPage = (props) => {
 				</li>
 			</ul>
 
-			<NavLink to="/new-seller">
+			<NavLink className="wide" to="/new-seller">
 				<ButtonElement buttonText="Become a seller" />
 			</NavLink>
-			<NavLink to="/all-sellers">
+			<NavLink className="wide" to="/all-sellers">
 				<ButtonElement buttonText="View On Map" />
 			</NavLink>
 			<p className={classes.disclaimer}>

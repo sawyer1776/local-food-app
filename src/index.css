@@ -66,6 +66,9 @@ button.buttonOutline {
 	box-shadow: 0rem 0.1rem 0.5rem rgb(204, 203, 203);
 }
 
+.wide {
+	width: 100%;
+}
 button.buttonRound {
 	border-radius: 100%;
 }
@@ -104,6 +107,7 @@ main {
 	align-items: center;
 	padding-bottom: 5rem;
 }
+
 section {
 	display: flex;
 	flex-direction: column;
@@ -113,7 +117,7 @@ section {
 
 .container {
 	margin: 1rem;
-	width: calc(100vw - 2rem);
+	width: 85vw;
 	max-width: 1024px;
 	padding: 0;
 	display: flex;
@@ -131,6 +135,9 @@ section {
 
 .wide {
 	width: 100%;
+}
+a {
+	color: blue;
 }
 
 @media (min-width: 1025px) {
