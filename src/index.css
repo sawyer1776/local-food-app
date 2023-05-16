@@ -117,7 +117,7 @@ section {
 
 .container {
 	margin: 1rem;
-	width: 85vw;
+	width: calc(100vw - 2rem);
 	max-width: 1024px;
 	padding: 0;
 	display: flex;

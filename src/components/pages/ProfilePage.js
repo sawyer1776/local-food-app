@@ -10,6 +10,7 @@ import { toggleState } from '../storage/helper-functions';
 import OrderSection from '../sections/OrdersSection';
 import { Link } from 'react-router-dom';
 import { GLOBALIP } from '../globalVars';
+import { resetPassword } from '../globalVars';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
@@ -175,7 +176,13 @@ const ProfilePage = (props) => {
 				>
 					Log Out
 				</button>
-				<button className={classes.resetPassword}>
+				<button
+					onClick={() => {
+						resetPassword(authCtx.user.email);
+						authCtx.logout();
+					}}
+					className={classes.resetPassword}
+				>
 					Reset Password
 				</button>
 			</div>

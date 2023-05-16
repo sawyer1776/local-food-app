@@ -12,6 +12,7 @@ import AuthContext from '../storage/auth-context';
 import PickupSection from '../sections/PickupSection';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { GLOBALIP } from '../globalVars';
+import LoginSection from '../sections/LoginSection';
 
 const client = new PocketBase(`${GLOBALIP}`);
 let thisSellerData = {};
@@ -22,6 +23,8 @@ const ProductPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	let [addQty, setQty] = useState(1);
 	const [showPickup, setShowPickup] = useState(false);
+	const [added, setAdded] = useState(false);
+	const [needToLogin, setNeedToLogin] = useState(false);
 	const params = useParams();
 	const authCtx = useContext(AuthContext);
 
@@ -65,9 +68,11 @@ const ProductPage = (props) => {
 		}
 	});
 
+	if (needToLogin) return <LoginSection />;
+
 	if (!isLoaded) return <LoadingSpinner />;
 
-	if (isLoaded)
+	if (isLoaded && !needToLogin)
 		return (
 			<main
 				className={`container ${classes.productContainer}`}
@@ -132,9 +137,11 @@ const ProductPage = (props) => {
 
 					<button
 						onClick={() => {
+							if (authCtx.isLoggedIn === false) {
+								setNeedToLogin(true);
+							}
 							if (thisProduct.qty >= 1) {
 								console.log('ctx', authCtx);
-
 								addToCart(
 									thisProduct.title,
 									thisProduct.id,
@@ -142,6 +149,7 @@ const ProductPage = (props) => {
 									authCtx.user.cart.items,
 									authCtx.user.id
 								);
+								setAdded(true);
 							} else {
 								console.log('Not available add this to UI');
 							}
@@ -150,6 +158,11 @@ const ProductPage = (props) => {
 						Add to Basket
 					</button>
 				</div>
+				{added ? (
+					<p className={classes.added}>
+						{addQty} Added to Basket
+					</p>
+				) : null}
 				<button
 					className="wide"
 					onClick={() => {
