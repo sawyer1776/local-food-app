@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# What the project is:
+
+An app to allow small farmers and backyard gardners to easily sell the food they raise locally.   Trying to decentralize and localize the food system!
+
+This site is currently in development and does not yet have active users, but if you want to see a live version with dummy users you can check it out [here]http://137.184.98.71/ 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
