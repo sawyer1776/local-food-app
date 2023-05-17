@@ -22,86 +22,96 @@ import AdminAboutPage from './components/pages/AdminAboutPage';
 import AdminSellerImgsPage from './components/pages/AdminSellerImgsPage';
 import AdminTitlePage from './components/pages/AdminTitlePage';
 import OrdersAdminPage from './components/pages/OrdersAdminPage';
+import {
+	QueryClient,
+	QueryClientProvider,
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
 	const authCtx = useContext(AuthContext);
 	const params = useParams();
 
+	const queryClient = new QueryClient();
+
 	return (
-		<main>
-			<Header></Header>
+		<QueryClientProvider client={queryClient}>
+			<main>
+				<Header></Header>
 
-			<Switch>
-				<Route path="/" exact>
-					<LandingPage />
-				</Route>
+				<Switch>
+					<Route path="/" exact>
+						<LandingPage />
+					</Route>
 
-				<Route path={`/seller-page/:sellerId`}>
-					<SellerPage />
-				</Route>
+					<Route path={`/seller-page/:sellerId`}>
+						<SellerPage />
+					</Route>
 
-				<Route path={`/product/:productId`}>
-					<ProductPage />
-				</Route>
+					<Route path={`/product/:productId`}>
+						<ProductPage />
+					</Route>
 
-				<Route path="/search-results">
-					<SearchResultsPage />
-				</Route>
+					<Route path="/search-results">
+						<SearchResultsPage />
+					</Route>
 
-				<Route path="/checkout">
-					<CheckoutPage />
-				</Route>
+					<Route path="/checkout">
+						<CheckoutPage />
+					</Route>
 
-				<Route path="/all-sellers">
-					<AllSellersPage />
-				</Route>
+					<Route path="/all-sellers">
+						<AllSellersPage />
+					</Route>
 
-				<Route path="/login">
-					<LoginSection />
-				</Route>
+					<Route path="/login">
+						<LoginSection />
+					</Route>
 
-				<Route path={`/seller-admin/products`}>
-					<ProductsAdmin />
-				</Route>
-				<Route path={`/seller-admin/orders`}>
-					<OrdersAdminPage />
-				</Route>
-				<Route path={`/seller-admin/contact`}>
-					<AdminContactPage />
-				</Route>
-				<Route path={`/seller-admin/location`}>
-					<AdminLocationPage />
-				</Route>
-				<Route path={`/seller-admin/pickups`}>
-					<AdminPickupsPage />
-				</Route>
-				<Route path={`/seller-admin/about`}>
-					<AdminAboutPage />
-				</Route>
-				<Route path={`/seller-admin/seller-imgs`}>
-					<AdminSellerImgsPage />
-				</Route>
-				<Route path={`/seller-admin/title`}>
-					<AdminTitlePage />
-				</Route>
+					<Route path={`/seller-admin/products`}>
+						<ProductsAdmin />
+					</Route>
+					<Route path={`/seller-admin/orders`}>
+						<OrdersAdminPage />
+					</Route>
+					<Route path={`/seller-admin/contact`}>
+						<AdminContactPage />
+					</Route>
+					<Route path={`/seller-admin/location`}>
+						<AdminLocationPage />
+					</Route>
+					<Route path={`/seller-admin/pickups`}>
+						<AdminPickupsPage />
+					</Route>
+					<Route path={`/seller-admin/about`}>
+						<AdminAboutPage />
+					</Route>
+					<Route path={`/seller-admin/seller-imgs`}>
+						<AdminSellerImgsPage />
+					</Route>
+					<Route path={`/seller-admin/title`}>
+						<AdminTitlePage />
+					</Route>
 
-				<Route path={`/seller-admin`}>
-					<SellerAdminPage />
-				</Route>
+					<Route path={`/seller-admin`}>
+						<SellerAdminPage />
+					</Route>
 
-				<Route path="/new-seller">
-					<NewSeller />
-				</Route>
+					<Route path="/new-seller">
+						<NewSeller />
+					</Route>
 
-				<Route path={`/profile`}>
-					<ProfilePage />
-				</Route>
+					<Route path={`/profile`}>
+						<ProfilePage />
+					</Route>
 
-				<Route path="/basket">
-					<BasketPage />
-				</Route>
-			</Switch>
-		</main>
+					<Route path="/basket">
+						<BasketPage />
+					</Route>
+				</Switch>
+			</main>
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
 	);
 }
 

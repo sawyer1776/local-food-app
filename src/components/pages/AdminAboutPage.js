@@ -99,7 +99,6 @@ const AdminAboutPage = (props) => {
 		const data = {
 			about_description: stringy,
 		};
-		//This is a comment to test git
 
 		await client
 			.collection('producers')

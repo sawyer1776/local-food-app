@@ -167,8 +167,6 @@ const LoginPage = (props) => {
 		}
 	};
 
-	//q: listen for enter key?
-	//a: https://stackoverflow.com/questions/5597060/detecting-enter-keypress-on-a-input-type-text-field
 	return (
 		<section
 			className={`container ${classes.loginContainer}`}

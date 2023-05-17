@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 import { GLOBALIP } from '../globalVars';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const client = new PocketBase(`${GLOBALIP}`);
 

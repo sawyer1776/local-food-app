@@ -13,13 +13,20 @@ import MapSection from '../sections/MapSection';
 import ImgDragSlider from '../UI/ImgDragSlider';
 import ContactInfoSection from '../sections/ContactInfoSection';
 import { GLOBALIP } from '../globalVars';
+import {
+	fetchListedProducersProducts,
+	fetchProducersPickups,
+	fetchSeller,
+} from '../storage/db-functions';
+import { useQuery } from '@tanstack/react-query';
+import ErrorMessage from '../UI/ErrorMessage';
 
 const client = new PocketBase(`${GLOBALIP}`);
 
-let thisSellerData = {};
-let productList = [];
-let pickupList = [];
-let latLong = [];
+// let producer.data = {};
+// let producersProducts.data = [];
+// let producersPickups.data = [];
+// let latLong = [];
 
 const SellerPage = (props) => {
 	const [showMore, setShowMore] = useState(false);
@@ -29,52 +36,40 @@ const SellerPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	const [mapIsLoaded, setMapIsLoaded] = useState(false);
 	const params = useParams();
-	useEffect(() => {
-		const fetchListedProducersProducts = async function () {
-			//CREATE EXCEPTION FOR LOADING MANY PRODUCTS
-			const responseProducts = await client
-				.collection('products')
-				.getList(1, 100, {
-					filter: `producer_id = '${params.sellerId}'`,
-				});
-			productList = responseProducts.items;
-		};
 
-		const fetchProducersPickups = async function () {
-			const responseProducts = await client
-				.collection('pickup_meetups')
-				.getList(1, 10, {
-					filter: `producer_id = '${params.sellerId}'`,
-				});
-			pickupList = responseProducts.items;
-		};
-
-		const fetchSeller = async function () {
-			const responseSeller = await client
-				.collection('producers')
-				.getOne(params.sellerId, {});
-			thisSellerData = responseSeller;
-		};
-
-		const initFetch = async function () {
-			const allFetches = async function () {
-				await fetchListedProducersProducts();
-				await fetchProducersPickups();
-				await fetchSeller();
-			};
-			await allFetches();
-
-			setLoaded(true);
-		};
-
-		if (isLoaded) return;
-		if (!isLoaded) {
-			initFetch();
-		}
+	const producersProducts = useQuery({
+		queryKey: ['producersProducts', params.sellerId],
+		queryFn: () => {
+			fetchListedProducersProducts(params.sellerId);
+		},
+	});
+	const producersPickups = useQuery({
+		queryKey: ['producersPickups', params.sellerId],
+		queryFn: () => {
+			fetchListedProducersProducts(params.sellerId);
+		},
+	});
+	const producer = useQuery({
+		queryKey: ['producer', params.sellerId],
+		queryFn: () => {
+			fetchListedProducersProducts(params.sellerId);
+		},
 	});
 
-	if (!isLoaded) {
+	if (
+		producer.isLoading ||
+		producersProducts.isLoading ||
+		producersPickups.isLoading
+	) {
 		return <LoadingSpinner />;
+	}
+
+	if (producer.isError) {
+		return (
+			<ErrorMessage
+				errorMessage={producer.error.toString()}
+			/>
+		);
 	}
 
 	if (isLoaded) {
@@ -85,21 +80,21 @@ const SellerPage = (props) => {
 				<div className={classes.title}>
 					<div className={classes.titleAndReviews}>
 						<h2 className={classes.name}>
-							{thisSellerData.producer_name}
+							{producer.data.producer_name}
 						</h2>
 						<ul className={classes.reviewStarsContainer}>
 							<ReviewStars
 								className={classes.reviewStars}
-								stars={thisSellerData.reviews}
+								stars={producer.data.reviews}
 							/>
 						</ul>
 					</div>
 					<h3 className={classes.subtitle}>
-						{thisSellerData.tagline}
+						{producer.data.tagline}
 					</h3>
 				</div>
 
-				<ImgDragSlider seller={thisSellerData} />
+				<ImgDragSlider seller={producer.data} />
 
 				<button
 					className={`wide ${classes.firstBtn}`}
@@ -110,10 +105,10 @@ const SellerPage = (props) => {
 					About
 				</button>
 				{showAbout ? (
-					thisSellerData.avout_description ? (
+					producer.data.about_description ? (
 						<>
 							<AboutSection
-								aboutText={thisSellerData.about_description}
+								aboutText={producer.data.about_description}
 								edit={false}
 							/>
 							<button
@@ -138,7 +133,9 @@ const SellerPage = (props) => {
 					Pickup / Meetup Times
 				</button>
 				{showPickup ? (
-					<PickupSection pickupMeetups={pickupList} />
+					<PickupSection
+						pickupMeetups={producersPickups.data}
+					/>
 				) : null}
 				<button
 					className="wide"
@@ -150,8 +147,8 @@ const SellerPage = (props) => {
 				</button>
 				{showContact ? (
 					<ContactInfoSection
-						email={thisSellerData.public_email}
-						phone={thisSellerData.public_phone}
+						email={producer.data.public_email}
+						phone={producer.data.public_phone}
 					/>
 				) : null}
 
@@ -159,15 +156,17 @@ const SellerPage = (props) => {
 					id="products-container"
 					className={classes.productsContainer}
 				>
-					{productList.length > 0 ? (
-						productList.slice(0, 2).map((product) => (
-							<Link to={`/product/${product.id}`}>
-								<ProductSnapshot
-									product={product}
-									key={product.id}
-								/>
-							</Link>
-						))
+					{producersProducts.data.length > 0 ? (
+						producersProducts.data
+							.slice(0, 2)
+							.map((product) => (
+								<Link to={`/product/${product.id}`}>
+									<ProductSnapshot
+										product={product}
+										key={product.id}
+									/>
+								</Link>
+							))
 					) : (
 						<p className={classes.productWarning}>
 							No Products yet.
@@ -175,14 +174,16 @@ const SellerPage = (props) => {
 					)}
 
 					{showMore &&
-						productList.slice(2).map((product) => (
-							<Link to={`/product/${product.id}`}>
-								<ProductSnapshot
-									product={product}
-									key={product.id}
-								/>
-							</Link>
-						))}
+						producersProducts.data
+							.slice(2)
+							.map((product) => (
+								<Link to={`/product/${product.id}`}>
+									<ProductSnapshot
+										product={product}
+										key={product.id}
+									/>
+								</Link>
+							))}
 				</ul>
 				<button
 					onClick={() => {
@@ -194,7 +195,7 @@ const SellerPage = (props) => {
 				</button>
 
 				<MapSection
-					latLong={thisSellerData.lat_long}
+					latLong={producer.data.lat_long}
 				></MapSection>
 			</main>
 		);
