@@ -30,7 +30,7 @@ You may also see any lint errors in the console.
 I wanted the app to allow buyers to easily find sellers close to them.  I solved this by intigrating the [Leaflet Library](https://github.com/Leaflet/Leaflet) for displaying mapping features.  Each seller location is stored in the database and those are all mapped on the main page.  
 
 In order to protect privacy for sellers who might use thier home as the selling point, before the lat long is stored in the database 
-### ` 	
+###  	
 			let indexOf = lat.indexOf('.');
 			lat = lat.slice(0, indexOf + 3);
-			lat = lat.concat('5');`
+			lat = lat.concat('5');
