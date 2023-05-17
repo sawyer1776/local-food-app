@@ -29,8 +29,9 @@ You may also see any lint errors in the console.
 ## Features
 I wanted the app to allow buyers to easily find sellers close to them.  I solved this by intigrating the [Leaflet Library](https://github.com/Leaflet/Leaflet) for displaying mapping features.  Each seller location is stored in the database and those are all mapped on the main page.  
 
-In order to protect privacy for sellers who might use thier home as the selling point, before the lat long is stored in the database 
+In order to protect privacy for sellers who might use thier home as the selling point. Before the lat long is stored in the database the final digits are scrambled and rounded to only provide a general location not a specific place until the seller is willing to share it with the buyer.
 ###  	
-			let indexOf = lat.indexOf('.');
-			lat = lat.slice(0, indexOf + 3);
-			lat = lat.concat('5');
+		let indexOf = lat.indexOf('.');
+		lat = lat.slice(0, indexOf + 3);
+		lat = lat.concat('5');
+Routing is handled through the react-router-dom and the useParams() hook is used to pull data from the URL for dynamic routing of infinite products and sellers.  When a user navigates to a product page or seller page the final part of the URL is the seller ID or product ID, on loading the page a database call brings back the info to populate the page with data and images.
