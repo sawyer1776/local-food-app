@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Route, Switch, useParams } from 'react-router-dom';
 import AuthContext from './components/storage/auth-context';
 import Header from './components/sections/Header';
@@ -26,34 +26,39 @@ import OrdersAdminPage from './components/pages/OrdersAdminPage';
 function App() {
 	const authCtx = useContext(AuthContext);
 	const params = useParams();
+	const [selected, setSelected] = useState(null);
+
+	const selectIcon = function (arg) {
+		setSelected(arg);
+	};
 
 	return (
 		<main>
-			<Header></Header>
+			<Header selected={selected}></Header>
 
 			<Switch>
 				<Route path="/" exact>
-					<LandingPage />
+					<LandingPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path={`/seller-page/:sellerId`}>
-					<SellerPage />
+					<SellerPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path={`/product/:productId`}>
-					<ProductPage />
+					<ProductPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path="/search-results">
-					<SearchResultsPage />
+					<SearchResultsPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path="/checkout">
-					<CheckoutPage />
+					<CheckoutPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path="/all-sellers">
-					<AllSellersPage />
+					<AllSellersPage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path="/login">
@@ -94,11 +99,11 @@ function App() {
 				</Route>
 
 				<Route path={`/profile`}>
-					<ProfilePage />
+					<ProfilePage selectIconFunc={selectIcon} />
 				</Route>
 
 				<Route path="/basket">
-					<BasketPage />
+					<BasketPage selectIconFunc={selectIcon} />
 				</Route>
 			</Switch>
 		</main>

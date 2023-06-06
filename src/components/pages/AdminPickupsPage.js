@@ -74,6 +74,7 @@ const AdminContactPage = (props) => {
 							<PickupSection
 								pickupMeetups={pickupsList}
 								editFunction={editClickHandler}
+								editing={true}
 							/>
 						</li>
 

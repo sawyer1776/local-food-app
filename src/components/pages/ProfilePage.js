@@ -63,6 +63,7 @@ const ProfilePage = (props) => {
 	};
 
 	useEffect(() => {
+		props.selectIconFunc('profile');
 		console.log('fetching orders');
 		const fetchOrders = async function () {
 			console.log('authCtx.user.id', authCtx.user.id);

@@ -59,15 +59,16 @@ const PickupMeetupItem = (props) => {
 					? 'pm'
 					: 'am'}
 			</p>
-
-			<button
-				className={classes.editButton}
-				onClick={() => {
-					props.editFunction(props.info.id);
-				}}
-			>
-				<BsPencil />
-			</button>
+			{props.editing && (
+				<button
+					className={classes.editButton}
+					onClick={() => {
+						props.editFunction(props.info.id);
+					}}
+				>
+					<BsPencil />
+				</button>
+			)}
 		</div>
 	);
 };

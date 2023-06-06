@@ -142,6 +142,7 @@ const BasketPage = (props) => {
 	};
 
 	useEffect(() => {
+		props.selectIconFunc('basket');
 		console.log('useEffect is called');
 		if (!authCtx.isLoggedIn) return;
 		if (isLoaded) return;

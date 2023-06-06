@@ -13,6 +13,7 @@ let allSellersData = [];
 const AllSellers = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	useEffect(() => {
+		props.selectIconFunc('home');
 		const fetchProducers = async function () {
 			//PAGINATE with PARAMS
 			const responseProducersData = await client

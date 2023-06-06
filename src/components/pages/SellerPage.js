@@ -138,7 +138,11 @@ const SellerPage = (props) => {
 					Pickup / Meetup Times
 				</button>
 				{showPickup ? (
-					<PickupSection pickupMeetups={pickupList} />
+					<PickupSection
+						pickupMeetups={pickupList}
+						editing={false}
+						key={params.sellerId}
+					/>
 				) : null}
 				<button
 					className="wide"
