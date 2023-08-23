@@ -87,12 +87,16 @@
 }
 
 @media (min-width: 1025px) {
+	.header {
+		max-width: 950px;
+	}
 	.headerContainer {
 		flex-direction: row;
 		justify-content: space-between;
-		max-width: 1550px;
+		width: 100%;
 		padding: 2rem 2rem 1rem;
 	}
+
 	.headerNavBar {
 		justify-content: flex-end;
 		gap: 6rem;
