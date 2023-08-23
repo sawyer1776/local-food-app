@@ -96,10 +96,6 @@
 	.moreBtn {
 		margin-right: 5rem;
 	}
-	.sellerContainer {
-		width: calc(100vw - 12rem);
-		max-width: 48rem;
-	}
 }
 
 @media (min-width: 1025px) {
@@ -122,10 +118,7 @@
 		align-self: flex-start;
 		text-align: left;
 	}
-	.sellerContainer {
-		width: calc(100vw - 12rem);
-		max-width: 55rem;
-	}
+
 	.firstBtn {
 		margin-top: 3rem;
 	}

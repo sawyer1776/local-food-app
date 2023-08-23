@@ -83,10 +83,6 @@
 }
 
 @media (min-width: 1025px) {
-	.productContainer {
-		width: calc(100vw - 12rem);
-		max-width: 50rem;
-	}
 	.title {
 		font-size: 2.5rem;
 	}

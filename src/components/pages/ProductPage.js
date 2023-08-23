@@ -77,9 +77,7 @@ const ProductPage = (props) => {
 
 	if (isLoaded)
 		return (
-			<main
-				className={`container ${classes.productContainer}`}
-			>
+			<main className={`container `}>
 				<div className={classes.titleReviews}>
 					<h2 className={classes.title}>
 						{thisProduct.title}
