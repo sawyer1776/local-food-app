@@ -22,8 +22,16 @@ const ProductPage = (props) => {
 	const [isLoaded, setLoaded] = useState(false);
 	let [addQty, setQty] = useState(1);
 	const [showPickup, setShowPickup] = useState(false);
+	const [showAdded, setShowAdded] = useState(false);
 	const params = useParams();
 	const authCtx = useContext(AuthContext);
+	const showAddedToCart = () => {
+		console.log('Added to cart');
+		setShowAdded(true);
+		setTimeout(() => {
+			setShowAdded(false);
+		}, 1750);
+	};
 
 	useEffect(() => {
 		const fetchThisProduct = async function () {
@@ -129,6 +137,15 @@ const ProductPage = (props) => {
 							-
 						</button>
 					</div>
+					<p
+						className={
+							showAdded
+								? classes.addedToCart
+								: ` ${classes.addedToCart} ${classes.hidden}`
+						}
+					>
+						Added to cart!
+					</p>
 
 					<button
 						onClick={() => {
@@ -142,6 +159,7 @@ const ProductPage = (props) => {
 									authCtx.user.cart.items,
 									authCtx.user.id
 								);
+								showAddedToCart();
 							} else {
 								console.log('Not available add this to UI');
 							}

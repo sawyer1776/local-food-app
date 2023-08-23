@@ -4,6 +4,20 @@
 	justify-content: space-between;
 }
 
+.addedToCart {
+	position: absolute;
+	right: 0.75rem;
+	background-color: rgba(20, 58, 0, 0.737);
+	padding: 1.5rem;
+	color: white;
+	font-size: 2rem;
+	top: -7rem;
+	z-index: 100;
+}
+.hidden {
+	display: none;
+}
+
 .title {
 	margin: 0;
 	padding: 0;
@@ -29,6 +43,7 @@
 	display: flex;
 	gap: 0.5rem;
 	justify-content: space-between;
+	position: relative;
 }
 
 .qtyCounter {
