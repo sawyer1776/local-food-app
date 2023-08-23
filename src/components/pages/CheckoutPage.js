@@ -7,7 +7,7 @@ const CheckoutPage = (props) => {
 	};
 
 	return (
-		<div className="container">
+		<main className="container">
 			<h1>This is an example page</h1>
 			<p>
 				You will not be Charged. Thank you for visiting,
@@ -44,7 +44,7 @@ const CheckoutPage = (props) => {
 					Pay With Venmo
 				</button>
 			</NavLink> */}
-		</div>
+		</main>
 	);
 };
 export default CheckoutPage;

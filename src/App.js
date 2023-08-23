@@ -33,7 +33,7 @@ function App() {
 	};
 
 	return (
-		<main>
+		<>
 			<Header selected={selected}></Header>
 
 			<Switch>
@@ -106,7 +106,7 @@ function App() {
 					<BasketPage selectIconFunc={selectIcon} />
 				</Route>
 			</Switch>
-		</main>
+		</>
 	);
 }
 

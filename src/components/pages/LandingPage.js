@@ -50,11 +50,7 @@ const LandingPage = (props) => {
 						Browse the food products they offer
 					</h4>
 
-					<NavLink
-						className="wide"
-						className="wide"
-						to="/profile"
-					>
+					<NavLink className="wide" to="/profile">
 						<ButtonElement buttonText="Sign Up" />
 					</NavLink>
 				</li>

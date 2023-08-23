@@ -1,11 +1,15 @@
-@import url(https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;700&family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap);
+/* @import url(https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400&display=swap); */
 
 :root {
-	--light-color: #f6f4ef;
-	--main-color: #4e7741;
-	--secondary-color: #395d2d;
-	--text-color: rgb(0, 0, 0);
-	--grey-color: rgb(174, 174, 171);
+	--light-color: #ffffff;
+	/* #f6f4ef */
+	--main-color: #38690d;
+	/* #4e7741 */
+	--secondary-color: #1e4709;
+	/* #395d2d */
+	--text-color: rgb(56, 56, 56);
+	--grey-color: rgb(174, 171, 171);
 }
 
 * {
@@ -15,11 +19,11 @@
 }
 
 body {
-	background-color: var(--light-color);
+	background-color: rgb(227, 224, 218);
 	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
-	font-family: 'Cantarell', sans-serif;
+	font-family: 'Alegreya Sans', sans-serif;
 }
 
 h1,
@@ -29,6 +33,12 @@ p {
 	padding: 0;
 	margin: 0;
 	color: var(--text-color);
+}
+
+h1,
+h2 {
+	font-family: 'Alegreya', serif;
+	letter-spacing: 0.075rem;
 }
 
 p {
@@ -44,9 +54,10 @@ button {
 	color: white;
 	background-color: var(--main-color);
 	border: none;
-	border-radius: 12px;
+	border-radius: 10rem;
 	font-weight: 600;
-	box-shadow: 0rem 0rem 0.3rem rgba(28, 28, 28, 0.545);
+	box-shadow: 0rem 0rem 0.1rem rgba(28, 28, 28, 0.514);
+	font-family: 'Alegreya Sans', sans-serif;
 }
 button:hover {
 	cursor: pointer;
@@ -62,8 +73,7 @@ button.buttonOutline {
 	background-color: transparent;
 	background-color: white;
 	color: var(--text-color);
-	border: 2px solid rgb(207, 207, 207);
-	box-shadow: 0rem 0.1rem 0.5rem rgb(204, 203, 203);
+	border: 1px solid rgb(207, 207, 207);
 }
 
 .wide {
@@ -107,7 +117,7 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding-bottom: 5rem;
+	background-color: var(--light-color);
 }
 
 section {
@@ -118,15 +128,18 @@ section {
 }
 
 .container {
-	margin: 1rem;
-	width: 85vw;
-	max-width: 1024px;
-	padding: 0;
+	width: 100vw;
+	max-width: 750px;
+	padding: 0.75rem;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	background-color: var(--light-color);
+	box-shadow: 0rem 0rem 0.75rem 0.2rem rgba(0, 0, 0, 0.1);
+	min-height: calc(100dvh - 9rem);
+	padding-bottom: 4rem;
 }
 
 .card {
@@ -145,6 +158,12 @@ a {
 @media (min-width: 1025px) {
 	.container {
 		width: calc(100vw - 12rem);
-		max-width: 1550px;
+		min-height: calc(100dvh - 6rem);
+		max-width: 950px;
+		padding: 2rem;
+	}
+	main {
+		margin-top: 6rem;
+		padding-bottom: 0;
 	}
 }

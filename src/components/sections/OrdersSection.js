@@ -1,4 +1,4 @@
-import OrderItem from '../UI/OrderItem';
+import OrderBuyItem from '../UI/OrderBuyItem';
 import classes from './OrdersSection.module.css';
 
 const OrderSection = (props) => {
@@ -16,7 +16,7 @@ const OrderSection = (props) => {
 					</thead>
 					<tbody className={classes.tbody}>
 						{props.orders.map((order, index) => (
-							<OrderItem order={order} key={index} />
+							<OrderBuyItem order={order} key={index} />
 						))}
 					</tbody>
 				</table>

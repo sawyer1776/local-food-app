@@ -30,46 +30,45 @@ const BasketItem = (props) => {
 							<h3>{props.product.unit}</h3>
 						</div>
 					</div>
+					<ul className={classes.basketBtns}>
+						<li>
+							<button
+								className={classes.trashItem}
+								onClick={() => {
+									props.deleteFunc(props.index);
+								}}
+							>
+								<BsTrash />
+							</button>
+						</li>
+
+						<li className={classes.qtyBtns}>
+							<button
+								className={classes.qtyBtn}
+								onClick={() => {
+									if (isCount > 1) {
+										setCount(isCount - 1);
+										props.editCountFunc('-', props.index);
+									}
+								}}
+							>
+								-
+							</button>
+							<p className={classes.qtyNumber}>{isCount}</p>
+							<button
+								className={classes.qtyBtn}
+								onClick={() => {
+									//ADD control for available qty
+									setCount(isCount + 1);
+									props.editCountFunc('+', props.index);
+								}}
+							>
+								+
+							</button>
+						</li>
+					</ul>
 				</div>
 			</div>
-
-			<ul className={classes.basketBtns}>
-				<li>
-					<button
-						className={classes.trashItem}
-						onClick={() => {
-							props.deleteFunc(props.index);
-						}}
-					>
-						<BsTrash />
-					</button>
-				</li>
-
-				<li className={classes.qtyBtns}>
-					<button
-						className={classes.qtyBtn}
-						onClick={() => {
-							if (isCount > 1) {
-								setCount(isCount - 1);
-								props.editCountFunc('-', props.index);
-							}
-						}}
-					>
-						-
-					</button>
-					<p className={classes.qtyNumber}>{isCount}</p>
-					<button
-						className={classes.qtyBtn}
-						onClick={() => {
-							//ADD control for available qty
-							setCount(isCount + 1);
-							props.editCountFunc('+', props.index);
-						}}
-					>
-						+
-					</button>
-				</li>
-			</ul>
 		</li>
 	);
 };

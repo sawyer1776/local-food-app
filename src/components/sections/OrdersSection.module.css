@@ -1,17 +1,15 @@
 .ordersContainer {
-	/* background-color: red; */
 	width: 100%;
-	outline: 3px solid rgb(163, 163, 163);
+	outline: 3px solid var(--main-color);
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
-	border-radius: 7px;
 }
 
 .title {
 	font-weight: 500;
 	font-size: 1.4rem;
 	width: 100%;
-	background-color: lightgray;
+	background-color: rgb(239, 241, 236);
 	padding: 0.5rem 0.25rem;
 }
 
@@ -30,7 +28,7 @@
 }
 
 .tbody tr:nth-child(odd) {
-	background-color: rgb(163, 163, 163);
+	background-color: rgb(239, 241, 236);
 }
 
 .tbody tr td {

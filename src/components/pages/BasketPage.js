@@ -166,17 +166,6 @@ const BasketPage = (props) => {
 			<main className="container">
 				<ul className={classes.list}>
 					{isBasketContents.length > 0 ? (
-						//q: what will cause this to rerender?
-						//a: the editCountFunc
-						//q: what else will cause this to rerender?
-						//a: the deleteItem function
-						//q: what are all the things that will cause this to rerender?
-						//a: the editCountFunc, the deleteItem function, the loadContent function
-						//q: will changing the state of the basket contents cause this to rerender?
-						//q: will changing isBasketContents cause this to rerender?
-						//q: when I change isbasketcontents this does not rerender, why?
-						//a: because the state is not changed, the state is changed in the tempBasketContent
-
 						isBasketContents.map((item, index) => (
 							<BasketItem
 								product={item.product}

@@ -262,6 +262,11 @@ const LoginPage = (props) => {
 			) : (
 				<LoadingSpinner />
 			)}
+			<div>
+				<p>Test Login to see the site</p>
+				<p>email: willowrun@me.com</p>
+				<p>password: 1234567890</p>
+			</div>
 
 			<button onClick={submitHandler}>Submit</button>
 			<p className={classes.endTitle}>

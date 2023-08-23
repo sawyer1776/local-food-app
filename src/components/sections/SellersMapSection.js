@@ -22,7 +22,7 @@ const SellersMapSection = (props) => {
 	return (
 		<MapContainer
 			className={classes.map}
-			center={[35.58, -82.1]}
+			center={[35.58, -81.0]}
 			zoom={4.5}
 			scrollWheelZoom={false}
 		>

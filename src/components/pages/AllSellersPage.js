@@ -34,22 +34,24 @@ const AllSellers = (props) => {
 	}
 	if (isLoaded) {
 		return (
-			<section className="container">
-				<h1 className={classes.title}>
-					Find A Seller Near You
-				</h1>
-				<SellersMapSection sellers={allSellersData} />
-				<h1 className={classes.title}>All Sellers</h1>
-				<div className={classes.sellerLinks}>
-					{allSellersData.map((seller) => (
-						<SellerLink
-							seller={seller}
-							id={seller.id}
-							key={seller.id}
-						/>
-					))}
-				</div>
-			</section>
+			<main>
+				<section className="container">
+					<h1 className={classes.title}>
+						Find A Seller Near You
+					</h1>
+					<SellersMapSection sellers={allSellersData} />
+					<h1 className={classes.title}>All Sellers</h1>
+					<div className={classes.sellerLinks}>
+						{allSellersData.map((seller) => (
+							<SellerLink
+								seller={seller}
+								id={seller.id}
+								key={seller.id}
+							/>
+						))}
+					</div>
+				</section>
+			</main>
 		);
 	}
 };

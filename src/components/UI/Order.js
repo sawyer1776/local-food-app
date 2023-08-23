@@ -4,6 +4,7 @@ import OrderItem from './OrderItem';
 import { useState } from 'react';
 
 const Order = (props) => {
+	console.log('props.order', props.order);
 	const [isExpanded, setExpanded] = useState(false);
 	console.log(props.order.products);
 	let total = 0;
